@@ -51,17 +51,21 @@ def load_File():
         create_New()
         FL = open("storage.txt","r", encoding='UTF-8')
     for i in FL.readlines():
+        print(i)
         try:
             eval(i)
         except Exception:
+            print("wrongtype 1")
             FL.close()
             wrongFile()
             break
         if isinstance(eval(i), list) == 0:
+            print("wrongtype 2")
             FL.close()
             wrongFile()
             break
         if(len(eval(i)) != 7):
+            print("wrongtype 3")
             FL.close()
             wrongFile()
             break
