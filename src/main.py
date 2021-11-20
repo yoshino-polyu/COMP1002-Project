@@ -87,6 +87,10 @@ def load_File():
     
     
     """
+def read_password():
+    FL = open("password.txt", "r", encoding= "UTF-8")
+    for i in FL.readlines():
+        pass_info.append(eval(i))
 
 def print_File():
     FL = open("storage.txt","w")
@@ -106,28 +110,32 @@ def print_File():
     """
     Store the read content in the middle of memory, write according to the format
     """
-
-def read_password():
-    FL = open("password.txt", "r", encoding= "UTF-8")
-    for i in FL.readlines():
-        pass_info.append(i)
-        tmp = eval(i)
-        password[tmp[0]] = tmp[1]
     
-# def update_password():
+
     
 def init():
     load_File()
     read_password()
-    for i in info[1:]:
+    for j in enumerate(info[1:]):
+        i = j[1]
         id[i[0]].append(i)
         nme[i[1]+i[2]].append(i)
         dpt[i[3]].append(i)
         isInjected[i[4]].append(i)
         isStu[i[6]].append(i)
+        
+        userIndex[i[0]].append(j[0])
+    for j in enumerate(pass_info):
+        i = j[1]
+        password[i[0]] = i[1]
+        userIndex[i[0]].append(j[0])
     """
     Initialize the file and write the contents to the list
     """
+def update_password():
+    new_secret = str(input("Please enter the new password : "))
+    password[id] = new_secret
+    pass_info[userIndex[id][1]][1] = new_secret
 
 def id_validation():
     while True:
@@ -166,10 +174,7 @@ def main():
                     print(page)
                     user_manner = str(input())
                     if user_manner == 'a':
-                        print("Please enter the new password")
-                        new_secret = str(input())
-                        password[id] = new_secret
-                        # update_password()
+                        update_password()
                     elif user_manner == 'b':
                             
                         # change password
@@ -197,3 +202,4 @@ def main():
 # for i in range(5):
 #     q.write("append line %d\r\n" % (i + 1 + 10))
 # q.close()
+#
