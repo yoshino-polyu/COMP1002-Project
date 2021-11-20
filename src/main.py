@@ -98,6 +98,11 @@ def print_File():
                 FL.write("'"+str(j)+"'"+',')
         FL.write(']\n')
     FL.close()
+       
+    """
+    Store the read content in the middle of memory, write according to the format
+    """
+
 
 def init():
     load_File()
@@ -107,6 +112,9 @@ def init():
         dpt[i[3]] = i
         isInjected[i[4]] = i
         isStu[i[6]] = i
+    """
+    Initialize the file and write the contents to the list
+    """
 
 
 
