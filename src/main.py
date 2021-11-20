@@ -12,6 +12,7 @@ nme = defaultdict(list)
 dpt = defaultdict(list)
 isInjected = defaultdict(list)
 isStu = defaultdict(list)
+password = dict()
 
 def create_New():
     print("Create new file")
@@ -104,7 +105,15 @@ def print_File():
     Store the read content in the middle of memory, write according to the format
     """
 
+def read_password():
+    FL = open("password.txt", "r", encoding= "UTF-8")
+    for i in FL.readlines():
+        tmp = eval(i)
+        password[tmp[0]] = tmp[1]
+        
 
+def update_password():
+    
 def init():
     load_File()
     for i in info[1:]:
@@ -120,7 +129,8 @@ def init():
 
 
 def main():
-    init()
+    read_password()
+    init() # read all info from txt, and store it into storage.
     while True:
         option = str(input("Choose C for using command line interface, choose G for useing graphic user interface"))
         if option == 'G':
@@ -128,14 +138,34 @@ def main():
             return 0
         elif option == 'C':
             while True:
-                # read all info from txt, and store it into storage.
                 who = str(input("Input u to enter the user login page. Input a to enter the administrator login page. Input b to go back to the last menu."))
                 if who == 'u':
-                    id = str(input("Please input your user id").split())
-                    password = str(input("Please input your password").split())
-                    
-                    # change password
-                    # 
+                    while True:
+                        id = str(input("Please input your user id").split())
+                        if id not in password:
+                            print("id does not exist, please try again")
+                            continue
+                        secret = str(input("Please input your password").split())
+                        if secret != password[id]:
+                            print("Incorrect password, please try again")
+                            continue
+                        f_list = """
+                        Please select a function you want to use:
+                        a. change password
+                        b. see current vaccination record
+                        c. input vaccination information
+                        """
+                        print(f_list)
+                        user_manner = str(input())
+                        if user_manner == 'a':
+                            print("Please enter the new password")
+                            new_secret = str(input())
+                            password[id] = new_secret
+                            update_password()
+                        elif user_manner == 'b':
+                            
+                        # change password
+                        # 
                 if who == 'a':
                     
                     
