@@ -82,8 +82,11 @@
 
 # main()
 
-import sys
 
+"""
+a list to store the user information, 
+user id, last name, first name, department, 
+"""
 info = []
 
 id = dict()
@@ -153,6 +156,7 @@ def main():
                 if who == 'u':
                     id = str(input("Please input your user id").split())
                     password = str(input("Please input your password").split())
+                    
                     # change password
                     # 
                 if who == 'a':
