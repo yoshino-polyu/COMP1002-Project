@@ -114,7 +114,7 @@ def read_password():
         tmp = eval(i)
         password[tmp[0]] = tmp[1]
     
-def update_password():
+# def update_password():
     
 def init():
     load_File()
@@ -129,6 +129,17 @@ def init():
     Initialize the file and write the contents to the list
     """
 
+def id_validation():
+    while True:
+        id = str(input("Please input your user id").split())
+        if id not in password:
+            print("id does not exist, please try again")
+            continue
+        secret = str(input("Please input your password").split())
+        if secret != password[id]:
+            print("Incorrect password, please try again")
+            continue
+        return [id, secret]
 
 
 def main():
@@ -142,45 +153,40 @@ def main():
             while True:
                 who = str(input("Input u to enter the user login page. Input a to enter the administrator login page. Input b to go back to the last menu."))
                 if who == 'u':
-                    while True:
-                        id = str(input("Please input your user id").split())
-                        if id not in password:
-                            print("id does not exist, please try again")
-                            continue
-                        secret = str(input("Please input your password").split())
-                        if secret != password[id]:
-                            print("Incorrect password, please try again")
-                            continue
-                        f_list = """
-                        Please select a function you want to use:
-                        a. change password
-                        b. see current vaccination record
-                        c. input vaccination information
-                        """
-                        print(f_list)
-                        user_manner = str(input())
-                        if user_manner == 'a':
-                            print("Please enter the new password")
-                            new_secret = str(input())
-                            password[id] = new_secret
-                            update_password()
-                        elif user_manner == 'b':
+                    id_list = id_validation()
+                    id = id_list[0]
+                    page = """
+                    Please select a function you want to use:
+                    a. change password
+                    b. see current vaccination record
+                    c. input vaccination information
+                    d. back
+                    e. exit program
+                    """
+                    print(page)
+                    user_manner = str(input())
+                    if user_manner == 'a':
+                        print("Please enter the new password")
+                        new_secret = str(input())
+                        password[id] = new_secret
+                        # update_password()
+                    elif user_manner == 'b':
                             
                         # change password
                         # 
-                if who == 'a':
+                # if who == 'a':
                     
                     
-                    break
-                if who == 'b':
-                    break
-        else:
+                #     break
+                # if who == 'b':
+                #     break
+        # else:
             # try catch needed
-            return 0
+            # return 0
 
-init()
-for i in dpt['COMP']:
-    print(i,type(i))
+# init()
+# for i in dpt['COMP']:
+#     print(i,type(i))
 
 # f = open("test.txt", "w+")
 # for i in range(10):
@@ -191,4 +197,3 @@ for i in dpt['COMP']:
 # for i in range(5):
 #     q.write("append line %d\r\n" % (i + 1 + 10))
 # q.close()
-
