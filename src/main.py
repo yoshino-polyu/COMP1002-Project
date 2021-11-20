@@ -82,10 +82,27 @@
 
 # main()
 
+import sys
+
 info = []
 
+id = dict()
+nme = dict()
+dpt = dict()
+isInjected = dict()
+
+def create_New():
+    FL = open("storage.txt","x")
+    FL.write("['ID','LAST NAME','FIRST NAME','DEPARTMENT','Number of Injection',['Injection Information',],'isStudent']\n")
+    FL.close()
+
+
 def load_File():
-    FL = open("storage.txt","r")
+    try:
+        FL = open("storage.txt","r")
+    except IOError:
+        create_New()
+        FL = open("storage.txt","r")
     for i in FL.readlines():
         print(i)
         info.append(eval(i))
@@ -105,6 +122,22 @@ def print_File():
                 FL.write("'"+str(j)+"'"+',')
         FL.write(']\n')
     FL.close()
+
+def init():
+    load_File()
+    for i in info:
+        if(len(i) != 7):
+            s = input("Unexcepted information in storage file, create a new file? [y/n]")
+            if(s == 'y' or s == 'Y'):
+                FL = open("storage.txt","w")
+                FL.write("['ID','LAST NAME','FIRST NAME','DEPARTMENT','Number of Injection',['Injection Information',],'isStudent']\n")
+                FL.close()
+            else:
+                print('Program Exit')
+                sys.exit()
+        i[0]
+
+
 
 def main():
     while True:
