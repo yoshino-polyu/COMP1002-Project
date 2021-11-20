@@ -83,6 +83,7 @@
 # main()
 
 
+import sys
 """
 a list to store the user information, 
 user id, last name, first name, department, 
