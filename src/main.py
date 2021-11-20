@@ -57,6 +57,15 @@ def load_File():
             FL.close()
             wrongFile()
             break
+        if isinstance(i, list) == 0:
+            FL.close()
+            wrongFile()
+            break
+        if(len(i) != 7):
+            FL.close()
+            wrongFile()
+            break
+        
         info.append(eval(i))
     FL.close()
     """
@@ -87,9 +96,6 @@ def print_File():
 def init():
     load_File()
     for i in info[1:]:
-        if(len(i) != 7):
-            wrongFile()
-            break
         id[i[0]] = i
         nme[i[1]+i[2]] = i
         dpt[i[3]] = i
