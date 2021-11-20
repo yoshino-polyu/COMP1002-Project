@@ -17,6 +17,13 @@ def create_New():
     FL = open("storage.txt","x")
     FL.write("['ID','LAST NAME','FIRST NAME','DEPARTMENT','Number of Injection',['Injection Information',],'isStudent']\n")
     FL.close()
+    """
+    Transfer data into the system and writes the specified string to a file. 
+    The string content is stored in the buffer until the file is closed or the buffer is flushed
+    
+    Returns:
+    None
+    """
 
 def wrongFile():
     s = input("Unexcepted information in storage file, create a new file? [y/n]")
