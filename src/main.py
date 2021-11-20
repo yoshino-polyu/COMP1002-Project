@@ -57,11 +57,11 @@ def load_File():
             FL.close()
             wrongFile()
             break
-        if isinstance(i, list) == 0:
+        if isinstance(eval(i), list) == 0:
             FL.close()
             wrongFile()
             break
-        if(len(i) != 7):
+        if(len(eval(i)) != 7):
             FL.close()
             wrongFile()
             break
