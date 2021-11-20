@@ -28,6 +28,7 @@ def create_New():
 def wrongFile():
     s = input("Unexcepted information in storage file, create a new file? [y/n]")
     if(s == 'y' or s == 'Y'):
+        info.clear()
         FL = open("storage.txt","w")
         FL.write("['ID','LAST NAME','FIRST NAME','DEPARTMENT','Number of Injection',['Injection Information',],'isStudent']\n")
         FL.close()
@@ -87,7 +88,6 @@ def init():
     load_File()
     for i in info[1:]:
         if(len(i) != 7):
-            info.clear()
             wrongFile()
             break
         id[i[0]] = i
