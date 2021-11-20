@@ -1,3 +1,4 @@
+from os import error
 import sys
 """
 a list to store the user information, 
@@ -12,18 +13,36 @@ isInjected = dict()
 isStu = dict()
 
 def create_New():
+    print("Create new file")
     FL = open("storage.txt","x")
     FL.write("['ID','LAST NAME','FIRST NAME','DEPARTMENT','Number of Injection',['Injection Information',],'isStudent']\n")
     FL.close()
 
+def wrongFile():
+    s = input("Unexcepted information in storage file, create a new file? [y/n]")
+    if(s == 'y' or s == 'Y'):
+        FL = open("storage.txt","w")
+        FL.write("['ID','LAST NAME','FIRST NAME','DEPARTMENT','Number of Injection',['Injection Information',],'isStudent']\n")
+        FL.close()
+        init()
+    else:
+        print('Program Exit')
+        sys.exit()
+        
 
 def load_File():
     try:
         FL = open("storage.txt","r")
-    except IOError:
+    except Exception:
         create_New()
         FL = open("storage.txt","r")
     for i in FL.readlines():
+        try:
+            eval(i)
+        except Exception:
+            FL.close()
+            wrongFile()
+            break
         info.append(eval(i))
     FL.close()
 
@@ -46,14 +65,9 @@ def init():
     load_File()
     for i in info[1:]:
         if(len(i) != 7):
-            s = input("Unexcepted information in storage file, create a new file? [y/n]")
-            if(s == 'y' or s == 'Y'):
-                FL = open("storage.txt","w")
-                FL.write("['ID','LAST NAME','FIRST NAME','DEPARTMENT','Number of Injection',['Injection Information',],'isStudent']\n")
-                FL.close()
-            else:
-                print('Program Exit')
-                sys.exit()
+            info.clear()
+            wrongFile()
+            break
         id[i[0]] = i
         nme[i[1]+i[2]] = i
         dpt[i[3]] = i
