@@ -6,12 +6,14 @@ a list to store the user information,
 user id, last name, first name, department, 
 """
 info = []
+pass_info = [] # stores the list of password
 
 id = defaultdict(list)
 nme = defaultdict(list)
 dpt = defaultdict(list)
 isInjected = defaultdict(list)
 isStu = defaultdict(list)
+userIndex = defaultdict(list)
 password = dict()
 
 def create_New():
@@ -108,14 +110,15 @@ def print_File():
 def read_password():
     FL = open("password.txt", "r", encoding= "UTF-8")
     for i in FL.readlines():
+        pass_info.append(i)
         tmp = eval(i)
         password[tmp[0]] = tmp[1]
-        
-
+    
 def update_password():
     
 def init():
     load_File()
+    read_password()
     for i in info[1:]:
         id[i[0]].append(i)
         nme[i[1]+i[2]].append(i)
@@ -129,7 +132,6 @@ def init():
 
 
 def main():
-    read_password()
     init() # read all info from txt, and store it into storage.
     while True:
         option = str(input("Choose C for using command line interface, choose G for useing graphic user interface"))
