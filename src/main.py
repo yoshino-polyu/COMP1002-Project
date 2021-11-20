@@ -71,6 +71,9 @@ def load_File():
     """
     Open the TXT document and call create_New() if encounter a IOE error
     Try evall the stored personnel information and call wrongFile () if error occurs
+    Check if it is a known type list and call wrongFile () if is not list
+    When the length of info is not 7, the wrongFile() is invoked if the length is illegal
+    
       
     Returns:
     None
