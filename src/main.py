@@ -94,6 +94,7 @@ id = dict()
 nme = dict()
 dpt = dict()
 isInjected = dict()
+isStu = dict()
 
 def create_New():
     FL = open("storage.txt","x")
@@ -108,7 +109,6 @@ def load_File():
         create_New()
         FL = open("storage.txt","r")
     for i in FL.readlines():
-        print(i)
         info.append(eval(i))
     FL.close()
 
@@ -129,7 +129,7 @@ def print_File():
 
 def init():
     load_File()
-    for i in info:
+    for i in info[1:]:
         if(len(i) != 7):
             s = input("Unexcepted information in storage file, create a new file? [y/n]")
             if(s == 'y' or s == 'Y'):
@@ -139,11 +139,16 @@ def init():
             else:
                 print('Program Exit')
                 sys.exit()
-        i[0]
+        id[i[0]] = i
+        nme[i[1]+i[2]] = i
+        dpt[i[3]] = i
+        isInjected[i[4]] = i
+        isStu[i[6]] = i
 
 
 
 def main():
+    init()
     while True:
         option = str(input("Choose C for using command line interface, choose G for useing graphic user interface"))
         if option == 'G':
@@ -169,7 +174,9 @@ def main():
         else:
             # try catch needed
             return 0
-                
+
+init()
+
 # f = open("test.txt", "w+")
 # for i in range(10):
 #     f.write("This is line %d\r\n" % (i + 1))
