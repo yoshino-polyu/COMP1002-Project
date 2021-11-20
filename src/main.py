@@ -70,12 +70,15 @@ def load_File():
     FL.close()
     """
     Open the TXT document and call create_New() if encounter a IOE error
+    Try evall the stored personnel information and call wrongFile () if error occurs
       
     Returns:
     None
    
     Raises:
-    IOError: An error occurred accessing the text.
+    Exception: An error occurred accessing the text.
+    
+    
     """
 
 def print_File():
