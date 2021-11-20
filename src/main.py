@@ -106,6 +106,13 @@ def print_File():
                 FL.write("'"+str(j)+"'"+',')
         FL.write(']\n')
     FL.close()
+    FL = open("password.txt","w")
+    for i in pass_info:
+        FL.write('[')
+        for j in i:
+            FL.write("'"+str(j)+"'"+',')
+        FL.write(']\n')
+    FL.close()
        
     """
     Store the read content in the middle of memory, write according to the format
