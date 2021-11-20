@@ -1,16 +1,17 @@
 from os import error
 import sys
+from collections import defaultdict
 """
 a list to store the user information, 
 user id, last name, first name, department, 
 """
 info = []
 
-id = dict()
-nme = dict()
-dpt = dict()
-isInjected = dict()
-isStu = dict()
+id = defaultdict(list)
+nme = defaultdict(list)
+dpt = defaultdict(list)
+isInjected = defaultdict(list)
+isStu = defaultdict(list)
 
 def create_New():
     print("Create new file")
@@ -51,21 +52,17 @@ def load_File():
         create_New()
         FL = open("storage.txt","r", encoding='UTF-8')
     for i in FL.readlines():
-        print(i)
         try:
             eval(i)
         except Exception:
-            print("wrongtype 1")
             FL.close()
             wrongFile()
             break
         if isinstance(eval(i), list) == 0:
-            print("wrongtype 2")
             FL.close()
             wrongFile()
             break
         if(len(eval(i)) != 7):
-            print("wrongtype 3")
             FL.close()
             wrongFile()
             break
@@ -111,11 +108,11 @@ def print_File():
 def init():
     load_File()
     for i in info[1:]:
-        id[i[0]] = i
-        nme[i[1]+i[2]] = i
-        dpt[i[3]] = i
-        isInjected[i[4]] = i
-        isStu[i[6]] = i
+        id[i[0]].append(i)
+        nme[i[1]+i[2]].append(i)
+        dpt[i[3]].append(i)
+        isInjected[i[4]].append(i)
+        isStu[i[6]].append(i)
     """
     Initialize the file and write the contents to the list
     """
@@ -150,8 +147,8 @@ def main():
             return 0
 
 init()
-for i in dpt['EIE']:
-    print(i)
+for i in dpt['COMP']:
+    print(i,type(i))
 
 # f = open("test.txt", "w+")
 # for i in range(10):
