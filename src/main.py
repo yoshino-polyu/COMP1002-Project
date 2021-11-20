@@ -128,11 +128,11 @@ def main():
         elif option == 'C':
             while True:
                 # read all info from txt, and store it into storage.
-                storage = dict()
                 who = str(input("Input u to enter the user login page. Input a to enter the administrator login page. Input b to go back to the last menu."))
                 if who == 'u':
                     id = str(input("Please input your user id").split())
                     password = str(input("Please input your password").split())
+                    
                     # change password
                     # 
                 if who == 'a':
