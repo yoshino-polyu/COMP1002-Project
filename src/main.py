@@ -37,7 +37,7 @@ def wrongFile():
         print('Program Exit')
         sys.exit()
     """
-    When an error occurs in the read data, a new new file is generated.
+    When an error occurs in the read data, a new file is generated.
     
     Returns:
     None
@@ -47,7 +47,7 @@ def wrongFile():
 def load_File():
     try:
         FL = open("storage.txt","r")
-    except Exception:
+    except FileNotFoundError:
         create_New()
         FL = open("storage.txt","r")
     for i in FL.readlines():
@@ -133,7 +133,6 @@ def main():
                 if who == 'u':
                     id = str(input("Please input your user id").split())
                     password = str(input("Please input your password").split())
-                    
                     # change password
                     # 
                 if who == 'a':
