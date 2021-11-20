@@ -46,10 +46,10 @@ def wrongFile():
 
 def load_File():
     try:
-        FL = open("storage.txt","r")
+        FL = open("storage.txt","r", encoding='UTF-8')
     except FileNotFoundError:
         create_New()
-        FL = open("storage.txt","r")
+        FL = open("storage.txt","r", encoding='UTF-8')
     for i in FL.readlines():
         try:
             eval(i)
@@ -146,6 +146,8 @@ def main():
             return 0
 
 init()
+for i in dpt['EIE']:
+    print(i)
 
 # f = open("test.txt", "w+")
 # for i in range(10):
