@@ -52,6 +52,15 @@ def load_File():
             break
         info.append(eval(i))
     FL.close()
+    """
+    Open the TXT document and call create_New() if encounter a IOE error
+      
+    Returns:
+    None
+   
+    Raises:
+    IOError: An error occurred accessing the text.
+    """
 
 def print_File():
     FL = open("storage.txt","w")
