@@ -5,7 +5,7 @@ from collections import defaultdict
 a list to store the user information, 
 user id, last name, first name, department, 
 """
-info = []
+info = []   # stores the list of user information
 pass_info = [] # stores the list of password
 
 id = defaultdict(list)
