@@ -8,7 +8,10 @@ Administrator -> V
 
 21096101d, 8 个数字 + 小写char
 
+Specification:
 
+- 不管输入是什么, 存的时候统一处理成小写
+- 
 
 Information of students:
 
@@ -26,7 +29,7 @@ users的权限:
 查询关键字: 
 
 1. Id, name, department
-2. -1 -> 完全接种, 0, 1, 2, 3接种针数
+2. -1 -> 完全接种, 0, 1, 2, 3接种针数 (但是还有jizheng没打)
 
 
 
