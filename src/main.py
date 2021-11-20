@@ -35,6 +35,12 @@ def wrongFile():
     else:
         print('Program Exit')
         sys.exit()
+    """
+    When an error occurs in the read data, a new new file is generated.
+    
+    Returns:
+    None
+    """
         
 
 def load_File():
