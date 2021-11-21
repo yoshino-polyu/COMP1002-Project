@@ -96,7 +96,9 @@ class Model:
                 FL.close()
                 self.wrong_file()
                 break
-            
+            for j in enumerate(i):
+                if isinstance(j[1],str) == 1:
+                    i[j[0]] = j[1].lower()
             self.info.append(eval(i))
         FL.close()
         """
@@ -119,7 +121,7 @@ class Model:
             self.pass_info.append(eval(i))
     
     
-    def update_password(self):
+    def update_password(self, id):
         new_secret = str(input("Please enter the new password : "))
         self.password[id] = new_secret
         self.pass_info[self.userIndex[id][1]][1] = new_secret
