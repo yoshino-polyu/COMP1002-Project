@@ -5,7 +5,6 @@ import sys
 
 def main():
     model = Model()
-    model.init() # read all info from txt, and store it into storage.
     view = View(model)
     controller = Controller(model, view)
     try:
