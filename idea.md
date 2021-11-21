@@ -55,12 +55,9 @@ View:
     - List all: 
       - student and staff in a specific department with indentation
       - and their vaccination information
-    - Find students
-    - Find teaching staff
     - List an information of a specific department
     - Information Analysis
   - If students and teaching staff:
-
 - Only the administrator can open the txt file
 
 
