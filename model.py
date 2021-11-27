@@ -128,7 +128,7 @@ class Model:
             for j in enumerate(i):
                 if isinstance(j[1],str) == 1:
                     i[j[0]] = j[1].lower()
-            self.info.append(eval(i))
+            self.info.append(i)
     """
     read lines for initialising self.info where all users' information is stored.
     """
