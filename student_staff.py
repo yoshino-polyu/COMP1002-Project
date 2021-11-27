@@ -51,3 +51,7 @@ class User:
     returns the full name of this student or staff
     """
     
+    @id.setter
+    def id(self, value):
+        self.id = value
+    

@@ -78,13 +78,32 @@ class Model:
     def load_file(self):
         try:
             FL = open("storage.txt","r", encoding = 'UTF-8')
+            self.read_lines(FL)
         except FileNotFoundError:
             self.create_new()
             FL = open("storage.txt","r", encoding = 'UTF-8')
+            self.read_lines(FL)
+        finally:
+            FL.close()
+        """
+        Open the TXT document and call create_new() if encounter a IOE error
+        Try evall the stored personnel information and call wrong_file () if error occurs
+        Check if it is a known type list and call wrong_file () if is not list
+        When the length of info is not 7, the wrong_file() is invoked if the length is illegal
+        
+        
+        Returns:
+        None
+    
+        Raises:
+        Exception: An error occurred accessing the text.
+        """
+
+    def read_lines(self, FL):
         for i in FL.readlines():
             try:
                 eval(i)
-            except Exception:
+            except SyntaxError:
                 FL.close()
                 self.wrong_file()
                 break
@@ -100,21 +119,10 @@ class Model:
                 if isinstance(j[1],str) == 1:
                     i[j[0]] = j[1].lower()
             self.info.append(eval(i))
-        FL.close()
-        """
-        Open the TXT document and call create_new() if encounter a IOE error
-        Try evall the stored personnel information and call wrong_file () if error occurs
-        Check if it is a known type list and call wrong_file () if is not list
-        When the length of info is not 7, the wrong_file() is invoked if the length is illegal
         
-        
-        Returns:
-        None
+    """
     
-        Raises:
-        Exception: An error occurred accessing the text.
-        """
-
+    """
     def read_password(self):
         FL = open("password.txt", "r", encoding = "UTF-8")
         for i in FL.readlines():
