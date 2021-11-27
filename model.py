@@ -109,7 +109,6 @@ class Model:
         """
 
     def read_lines(self, FL : TextIOWrapper):
-        print(self._info)
         for i in FL.readlines():
             try:
                 eval(i)

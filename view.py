@@ -70,6 +70,13 @@ class View:
     def update_record():
         print("Please input your ")
 
-    def record(self, id):
-        
+    def record(self, ID):
+        tmp = self.model.id(ID)
+        if(tmp[4] == -1):
+            print("Vaccination has been completed.")
+        else:
+            print((tmp[4]) + " vaccinations have already been given.")
+        print("Vaccination record: ")
+        for i in tmp[5]:
+            print("--------------------\n"+i+"--------------------")
         pass # once finish the implementation, comment out the pass
