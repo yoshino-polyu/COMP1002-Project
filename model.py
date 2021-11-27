@@ -13,7 +13,7 @@ class Model:
 
     NUM_FILES = 7
     
-    def _init_(self):
+    def __init__(self):
         self.info = []   # [user id, last name, first name, department, number of injection,[injection info],'studentornot']
         self.pass_info = [] # [user id, password]
         # self.stu_list = []
@@ -109,6 +109,7 @@ class Model:
         """
 
     def read_lines(self, FL : TextIOWrapper):
+        print(self._info)
         for i in FL.readlines():
             try:
                 eval(i)
