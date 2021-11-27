@@ -9,16 +9,16 @@ class View:
     
     def id_validation(self):
         while True:
-            id = str(input("Please input your user id").split())
-            if id not in self.model.password:
+            ID = input("Please input your user id: ")
+            if ID not in self.model.password:
                 print("id does not exist, please try again")
                 continue
-            secret = str(input("Please input your password").split())
-            if secret != self.model.password[id]:
+            secret = input("Please input your password: ")
+            if secret != self.model.password[ID]:
                 print("Incorrect password, please try again")
                 continue
             print("login successfully")
-            return id
+            return ID
     
     def read_input(self):
         return str(input())
@@ -78,12 +78,13 @@ class View:
         print("Please input your ")
 
     def record(self, ID):
-        tmp = self.model.id(ID)
-        if(tmp[4] == -1):
+        tmp = self.model.id[ID]
+        if(str(tmp[4]) == '-1'):
             print("Vaccination has been completed.")
         else:
-            print((tmp[4]) + " vaccinations have already been given.")
+            print(str(tmp[4]) + " vaccinations have already been given.")
         print("Vaccination record: ")
         for i in tmp[5]:
-            print("--------------------\n"+i+"--------------------")
+            print("------------------------\n"+i)
+        print("------------------------")
         pass # once finish the implementation, comment out the pass
