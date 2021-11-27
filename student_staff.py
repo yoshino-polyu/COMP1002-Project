@@ -18,19 +18,19 @@ class Student:
         return self.id
 
     @property
-    def password(self):
+    def pswrd(self):
         return self.pswrd
    
     @property
-    def lastname(self):
+    def last_n(self):
         return self.last_n
 
     @property
-    def firstname(self):
+    def first_n(self):
         return self.first_n
 
     @property
-    def depat(self):
+    def dpt(self):
         return self.dpt
     
     @property
