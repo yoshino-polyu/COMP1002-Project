@@ -24,8 +24,20 @@ class View:
         return str(input())
         
     def new_pass(self):
-        a = str(input("Please enter the new password formed by 10 bits of numbers and alphabet"))
-        
+        a = ''
+        ifligal = 0
+        while(ifligal == 0):
+            a = str(input("Please enter the new password formed by 10 ~ 20 bits of numbers and letters"))
+            if(len(a) < 10 or len(a) > 20):
+                print("Password is too Short or too long, please ensure it only contains 10 ~ 20 bits of numbers or letters")
+                continue
+            ifligal = 1
+            for i in a:
+                if (i.lower() > 'z' or i.lower() < 'a') and (i > '9' or i < '0'):
+                    print("Password has unexpected characters, please ensure it only contains 10 ~ 20 bits of numbers or letters")
+                    ifligal = 0
+                    break
+        return a
 
     def entry_page(self):
         page = """
