@@ -24,7 +24,8 @@ class View:
         return str(input())
         
     def new_pass(self):
-        return str(input("Please enter the new password: "))
+        a = str(input("Please enter the new password formed by 10 bits of numbers and alphabet"))
+        
 
     def entry_page(self):
         page = """
@@ -61,5 +62,6 @@ class View:
     def valid(self):
         print("action succeed!")
     
-    def regis(self):
+    def record(self, id):
         
+        pass # once finish the implementation, comment out the pass

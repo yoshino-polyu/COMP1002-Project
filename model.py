@@ -136,7 +136,6 @@ class Model:
             self.dpt[i[3]].append(i)
             self.isInjected[i[4]].append(i)
             self.isStu[i[6]].append(i)
-            
             self.userIndex[i[0]].append(j[0])
         for j in enumerate(self.pass_info):
             i = j[1]

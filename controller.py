@@ -27,8 +27,8 @@ class Controller:
                             new = self.view.new_pass() # password analysis???
                             self.model.update_password(id, new)
                             self.view.valid()
-                            # self.model.update_password()
                         if manner == '2': # check current vaccination record
+                            
                             return 0
                         if manner == '3':
                             return 0
