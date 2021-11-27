@@ -7,6 +7,7 @@ from io import TextIOWrapper
 from os import error
 import sys
 from collections import defaultdict
+from student_staff import User
 
 class Model:
 
@@ -160,6 +161,7 @@ class Model:
             self.isInjected[i[4]].append(i)
             self.isStu[i[6]].append(i)
             self.userIndex[i[0]].append(j[0])
+            tmp = User()
         for j in enumerate(self.pass_info):
             i = j[1]
             self.password[i[0]] = i[1]

@@ -1,6 +1,6 @@
 class User:
     
-    def __init__(self, id : str, last_n : str, first_n : str, dpt : str, num_inj : str, inj_info : str, is_stu : str, pswrd : str) -> None:
+    def __init__(self, id : str, last_n : str, first_n : str, dpt : str, num_inj : str, inj_info : list, is_stu : str, pswrd : str) -> None:
         self.id = id
         self.last_n = last_n
         self.first_n = first_n
@@ -68,11 +68,11 @@ class User:
     def inj_info(self):
         return self.inj_info
 
-    @inj_info.setter
-    def inj_info(self, value):
-        self.inj_info = value
-        
-
+    def add_info(self, value):
+        self.inj_info.append(value)
+    """
+    appends a vaccination information entry to the end of info_list. 
+    """
     @property
     def is_stu(self):
         return self.is_stu
