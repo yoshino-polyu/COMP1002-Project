@@ -3,6 +3,7 @@ The model
     includes user information being represented, and will be acted upon latter. 
     determine the system state
 """
+from io import TextIOWrapper
 from os import error
 import sys
 from collections import defaultdict
@@ -14,6 +15,7 @@ class Model:
     def _init_(self):
         self.info = []   # [user id, last name, first name, department, number of injection,[injection info],'studentornot']
         self.pass_info = [] # [user id, password]
+        self.stu_list = []
 
         self.id = defaultdict(list)
         self.nme = defaultdict(list)
@@ -43,8 +45,15 @@ class Model:
     c.password
     """
     
+    @property
+    def stu_list(self):
+        return self.stu_list
+    """
+    getter of list of student object
+    """
+    
     def create_new(self):
-        print("Create new file")
+        print("Create a new file")
         FL = open("storage.txt","x")
         FL.write("['ID','LAST NAME','FIRST NAME','DEPARTMENT','Number of Injection',['Injection Information',],'isStudent']\n")
         FL.close()
@@ -56,10 +65,9 @@ class Model:
         None
         """
     
-    
     def wrong_file(self):
         s = input("Unexcepted information in storage file, create a new file? [y/n]")
-        if(s == 'y' or s == 'Y'):
+        if (s == 'y' or s == 'Y'):
             self.info.clear()
             FL = open("storage.txt","w")
             FL.write("['ID','LAST NAME','FIRST NAME','DEPARTMENT','Number of Injection',['Injection Information',],'isStudent']\n")
@@ -74,7 +82,7 @@ class Model:
         Returns:
         None
         """
-
+        
     def load_file(self):
         try:
             FL = open("storage.txt","r", encoding = 'UTF-8')
@@ -99,7 +107,7 @@ class Model:
         Exception: An error occurred accessing the text.
         """
 
-    def read_lines(self, FL):
+    def read_lines(self, FL : TextIOWrapper):
         for i in FL.readlines():
             try:
                 eval(i)
@@ -111,7 +119,7 @@ class Model:
                 FL.close()
                 self.wrong_file()
                 break
-            if(len(eval(i)) != Model.NUM_FILES):
+            if (len(eval(i)) != Model.NUM_FILES):
                 FL.close()
                 self.wrong_file()
                 break
@@ -119,15 +127,22 @@ class Model:
                 if isinstance(j[1],str) == 1:
                     i[j[0]] = j[1].lower()
             self.info.append(eval(i))
-        
     """
-    
+    read lines for initialising self.info where all users' information is stored.
     """
+
     def read_password(self):
-        FL = open("password.txt", "r", encoding = "UTF-8")
-        for i in FL.readlines():
-            self.pass_info.append(eval(i))
-    
+        try:
+            FL = open("password.txt", "r", encoding = "UTF-8")
+            for i in FL.readlines():
+                self.pass_info.append(eval(i))
+        except FileNotFoundError:
+            print("password.txt not found, please check whether it is in the current directory")
+        finally:
+            FL.close()
+    """
+    read lines for initialising self.pass_info where all users' passwords are stored.
+    """
     
     def update_password(self, id, new):
         self.password[id] = new

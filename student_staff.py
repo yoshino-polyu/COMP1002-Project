@@ -9,9 +9,6 @@ class User:
         self.inj_info = inj_info
         self.is_stu = is_stu
         self.pswrd = pswrd
-    """
-    id, last 
-    """
     
     @property
     def id(self):
@@ -85,13 +82,8 @@ class User:
         self.is_stu = value
 
 
-    @property
     def full_n(self):
         return self.last_n + " " + self.first_n
-
-    @full_n.setter
-    def full_n(self, value):
-        self.last_n + " " + self.first_n = value
     """
     returns the full name of this student or staff
     """
