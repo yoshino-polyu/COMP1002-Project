@@ -121,10 +121,9 @@ class Model:
             self.pass_info.append(eval(i))
     
     
-    def update_password(self, id):
-        new_secret = str(input("Please enter the new password : "))
-        self.password[id] = new_secret
-        self.pass_info[self.userIndex[id][1]][1] = new_secret
+    def update_password(self, id, new):
+        self.password[id] = new
+        self.pass_info[self.userIndex[id][1]][1] = new
     
     
     def init(self):
