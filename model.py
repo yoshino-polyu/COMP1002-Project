@@ -27,7 +27,7 @@ class Model:
         self.password = dict()
     
     @property
-    def info(self):
+    def _info(self):
         return self.info
     """
     getter of info.
@@ -37,7 +37,7 @@ class Model:
     """
     
     @property
-    def password(self):
+    def _password(self):
         return self.password
     """
     getter of password
@@ -47,7 +47,7 @@ class Model:
     """
     
     @property
-    def stu_list(self):
+    def _stu_list(self):
         return self.stu_list
     """
     getter of list of student object
