@@ -39,8 +39,9 @@ class View:
         Please input a number:
         1. user login
         2. administrator login
-        3. go back to the last page
-        4. exit program
+        3. register an account
+        4. go back to the last page
+        5. exit program
         """
         print(page)
 
@@ -59,3 +60,6 @@ class View:
         
     def valid(self):
         print("action succeed!")
+    
+    def regis(self):
+        

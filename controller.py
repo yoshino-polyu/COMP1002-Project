@@ -40,9 +40,19 @@ class Controller:
                             self.view.inv_info()
                     if which == '2': # admin login
                         return 0
-                    if which == '3':
-                        break
+                    if which == '3': # registration
+                        print("are you a student or staff?, 1 -> student, 0 -> staff")
+                        who = input()
+                        if who == '1':
+                            print("Please input your student identity card nuber: ")
+                            id_num = input().strip()
+                            # format checking, 8 bits of number and 1 bit of alphabet
+                            
+                            
+                        return 0
                     if which == '4':
+                        break
+                    if which == '5':
                         sys.exit()
                     else:
                         self.view.inv_info()
