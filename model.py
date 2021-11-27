@@ -16,7 +16,7 @@ class Model:
     def _init_(self):
         self.info = []   # [user id, last name, first name, department, number of injection,[injection info],'studentornot']
         self.pass_info = [] # [user id, password]
-        self.stu_list = []
+        # self.stu_list = []
 
         self.id = defaultdict(list)
         self.nme = defaultdict(list)

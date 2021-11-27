@@ -7,11 +7,11 @@ def main():
     model = Model()
     view = View(model)
     controller = Controller(model, view)
-    try:
-        controller.run()
-    except Exception:
-        print("Internal error exists!")
-        sys.exit()
+    # try:
+    controller.run()
+    # except Exception:
+    #     print("Internal error exists!")
+    #     sys.exit()
     # gui = new GUI(args)
     # gui.display(true)
     
