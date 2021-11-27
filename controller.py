@@ -28,7 +28,7 @@ class Controller:
                             self.model.update_password(id, new)
                             self.view.valid()
                         if manner == '2': # check current vaccination record
-                            self.view.record()
+                            self.view.record(id)
                             self.view.valid()
                         if manner == '3': # update vaccination record
                             self.view.update_record()
