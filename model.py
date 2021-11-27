@@ -157,13 +157,13 @@ class Model:
         self.read_password()
         for j in enumerate(self.info[1:]):
             i = j[1]
-            id[i[0]].append(i)
+            self.id[i[0]].append(i)
             self.nme[i[1] + i[2]].append(i)
             self.dpt[i[3]].append(i)
             self.isInjected[i[4]].append(i)
             self.isStu[i[6]].append(i)
             self.userIndex[i[0]].append(j[0])
-            tmp = User()
+            #tmp = User()
         for j in enumerate(self.pass_info):
             i = j[1]
             self.password[i[0]] = i[1]
