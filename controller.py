@@ -28,14 +28,16 @@ class Controller:
                             self.model.update_password(id, new)
                             self.view.valid()
                         if manner == '2': # check current vaccination record
+                            self.view.record()
+                            self.view.valid()
+                        if manner == '3': # update vaccination record
+                            self.view.update_record()
                             
-                            return 0
-                        if manner == '3':
                             return 0
                         if manner == '4':
                             break
                         if manner == '5':
-                            sys.exit()
+                            return 0
                         else:
                             self.view.inv_info()
                     if which == '2': # admin login

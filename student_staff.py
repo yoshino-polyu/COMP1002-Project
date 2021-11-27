@@ -1,4 +1,4 @@
-class Student:
+class User:
     
     def __init__(self, id : str, last_n : str, first_n : str, dpt : str, num_inj : str, inj_info : str, is_stu : str, pswrd : str) -> None:
         self.id = id
@@ -45,4 +45,9 @@ class Student:
     def is_stu(self):
         return self.is_stu
 
+    def full_n(self):
+        return self.last_n + " " + self.first_n
+    """
+    returns the full name of this student or staff
+    """
     

@@ -74,6 +74,9 @@ class View:
     def valid(self):
         print("action succeed!")
     
+    def update_record():
+        print("Please input your ")
+
     def record(self, id):
         
         pass # once finish the implementation, comment out the pass
