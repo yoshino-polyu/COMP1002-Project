@@ -18,7 +18,7 @@ class Model:
         self.pass_info = [] # [user id, password]
         # self.stu_list = []
 
-        self.id = defaultdict(list)
+        self.id = dict()
         self.nme = defaultdict(list)
         self.dpt = defaultdict(list)
         self.isInjected = defaultdict(list)
@@ -156,7 +156,7 @@ class Model:
         self.read_password()
         for j in enumerate(self.info[1:]):
             i = j[1]
-            self.id[i[0]].append(i)
+            self.id[i[0]] = i
             self.nme[i[1] + i[2]].append(i)
             self.dpt[i[3]].append(i)
             self.isInjected[i[4]].append(i)
