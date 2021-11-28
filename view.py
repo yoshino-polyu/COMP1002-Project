@@ -10,21 +10,28 @@ class View:
         self.model = model
     
     def id_validation(self):
+        res = ""
         while True:
             print("Please input your user id: (input 0 for exit this manu)")
             ID = input()
             if ID == '0':
                 return '0'
-            if ID not in self.model.password:
+            elif ID not in self.model.password:
                 print("id does not exist, please try again")
                 continue
-            secret = self.model.encode(input("Please input your password: "))
+            else:
+                res = ID
+                break
+        while True:
+            print("Please input your password: ")
+            secret = self.model.encode(input())
             if secret != self.model.password[ID]:
                 print("Incorrect password, please try again")
                 continue
-            print("\nlogin successfully\n")
-            return ID
-            
+            else:
+                print("\nlogin successfully\n")
+                return res
+    
     def admin_id_valid(self):
         while True:
             if(input("return to last page? [y/n]: ").lower == 'y'):

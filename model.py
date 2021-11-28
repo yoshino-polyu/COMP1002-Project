@@ -292,4 +292,3 @@ class Model:
         """
         Store the read content in the middle of memory, write according to the format
         """
-    

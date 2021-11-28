@@ -45,14 +45,15 @@ class Controller:
                                 self.view.inv_info()
                     elif which == '2': # admin login
                         admin_id = self.view.admin_id_valid()
-                        if admin_id == '1':
+                        if admin_id == '0':
                             continue
                         while True:
                             self.view.admin_page()
                             ad_ac = self.view.read_input()
                             if ad_ac == '1': # list out all information with indentation
                                 self.view.list_all()
-                            elif ad_ac == '2':
+                            elif ad_ac == '2': # 
+                                
                                 pass
                     elif which == '3': # registration
                         u_id = self.view.get_id()
