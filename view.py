@@ -10,7 +10,8 @@ class View:
     
     def id_validation(self):
         while True:
-            ID = input("Please input your user id: \ninput 0 for exit this manu:")
+            print("Please input your user id: (input 0 for exit this manu)")
+            ID = input()
             if ID == '0':
                 return '0'
             if ID not in self.model.password:
@@ -20,7 +21,7 @@ class View:
             if secret != self.model.password[ID]:
                 print("Incorrect password, please try again")
                 continue
-            print("login successfully")
+            print("\nlogin successfully\n")
             return ID
             
     def admin_id_valid(self):
@@ -42,7 +43,6 @@ class View:
         Student Cao, cao has the vaccination reocrd AZ_30/07/2021, AZ_22/08/2021
     BME
         Staff Qin Ke wen, Qin has the vacination record AZ_17/04/2021, AZ_15/05/2021
-        
     COMP
         Staff Wang Dan has the vacination record BTN_20/04/2021, BTN_22/05/2021
         Student Son King  has the vacination record BTN_21/04/2021, BTN_21/05/2021, BTN_21/06/2021
@@ -51,10 +51,8 @@ class View:
         Student Wu Song has the vacination record BTN_20/06/2021
     EIE
         Student Chen Daweneie has the vacination record  BTN_30/08/2021, BTN_22/09/2021
-        
     ISE
         Student Lin Daiyu has the vacination record MOD_03/06/2021, MOD_12/07/2021
-        
     ME
         Staff Jiang Qingwen has the vacination record BTN_22/04/2021, BTN_27/05/2021
     """
@@ -63,17 +61,12 @@ class View:
 
 
     def get_name(self):
-        last_n = input("Last Name:")
-        first_n = input("First Name:")
+        print("Last Name: ")
+        last_n = input()
+        print("First Name: ")
+        first_n = input()
         return [last_n.lower(), first_n.lower()]
 
-
-        pass
-        # while True:
-        # L = input("Please input your last name and first name separate by comma. (i.e. Chen,Dawen)").split(',')
-            
-        # return ['last', 'fi']
-        
     def get_id(self):
         enums = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
         while True:
@@ -102,7 +95,8 @@ class View:
     def get_who(self):
         res = ""
         while True:
-            who = input("are you a student or staff?, 1 -> student, 0 -> staff: ")
+            print("are you a student or staff?, 1 -> student, 0 -> staff: ")
+            who = input()
             if who == '1':
                 res = who
             elif who == '0':
@@ -115,10 +109,10 @@ class View:
     return a str indicating the user type, 1 -> student, 0 -> staff
     """
     def choose_dpt(self):
-        print("Witch department are you from?")
         res = ""
         while True:
-            c = input("Please input a number\n1. AAE 2. BME 3. COMP 4. EE 5. EIE 6. ISE 7. ME")
+            print("Which department are you from?\nPlease input a number\n1. AAE 2. BME 3. COMP 4. EE 5. EIE 6. ISE 7. ME")
+            c = input()
             if c == '1':
                 res = "AAE"
             elif c == '2':
@@ -143,7 +137,7 @@ class View:
     """
 
     def get_inj_info(self):
-        num_inj = input("Please input how many injections you have received (if full injection, please input -1): ")
+        num_inj = input("Please input how many injections you have received: ")
         print("Below are some of the vaccines recognized by the Hong Kong government:")
         for i in enumerate(self.model.rec_vac[1:]):
                 print(str(i[0])+'. '+i[1])
@@ -187,7 +181,8 @@ class View:
         a = ''
         ifligal = 0
         while(ifligal == 0):
-            a = input("Please enter the new password formed by 10 ~ 20 bits of numbers and letters: ")
+            print("Please enter the new password formed by 10 ~ 20 bits of numbers and letters: ")
+            a = input()
             if(len(a) < 10 or len(a) > 20):
                 print("Password is too Short or too long, please ensure it only contains 10 ~ 20 bits of numbers or letters")
                 continue
@@ -231,21 +226,24 @@ class View:
         print("3. display the percentage of fully vaccinated users in a specific department")
         print("4. display the percentage of non-vaccinated users in a specific department")
         print("5. change password of administrator")
-        print("6. go back to the last page")
-        print("7. exit program")
-        
+        print("6. update the list of recognised vaccines")
+        print("7. go back to the last page")
+        print("8. exit program")
+
     def inv_info(self):
-        print("invalid input, please try again!")
+        print("\ninvalid input, please try again!\n")
         
     def valid(self):
-        print("action succeed!")
+        print("\naction succeed!\n")
     
     def update_record(self, ID):
         self.record(ID)
         num_inj = self.model.id[ID][4]
         rd = self.model.id[ID][5]
         if(input("Edit the number of injections? [y/n]: ").lower() == 'y'):
-            num_inj = input("Please input how many injections you have received (if full injection, please input -1): ")
+            print("Please input how many injections you have received:")
+            num_inj = input()
+            print()
         if(input("Edit the record of injections? [y/n]: ").lower() == 'n'):
             return [num_inj,rd]
         print("Below are some of the vaccines recognized by the Hong Kong government:")
@@ -278,11 +276,7 @@ class View:
                     rd.pop()
             else:
                 self.inv_info()
-        return [num_inj,rd]
-        # format checking -> until user input the correct formate
-        # format checking -> until user input the correct formate
-        # return the record string
-        pass # comment out pass once finishing this function
+        return [num_inj,rd] # number of injections : str, vaccination record : str
     """
     returns the string of vaccination record input by user
     """
