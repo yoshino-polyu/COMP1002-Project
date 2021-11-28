@@ -173,7 +173,9 @@ class View:
                     ifligal = 0
                     break
         return a
-
+    """
+    force user to input a valid password for creating or updating password.
+    """
     def entry_page(self):
         print("Please input a number:")
         print("1. using command line interface")
