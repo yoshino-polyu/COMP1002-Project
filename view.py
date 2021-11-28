@@ -158,7 +158,7 @@ class View:
     def admin_page(self):
         print("Please input a number:")
         print("1. list all information, sorted by department with alphabetical order and proper indentation")
-        print("2. display a vaccination information of a specific student or teaching staff according to his or ")
+        print("2. display a vaccination information of a specific student or teaching staff according to his or her id")
         print("3. ")
         
         

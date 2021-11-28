@@ -14,5 +14,4 @@
 # a = View(m)
 # b = a.choose_dpt()
 # print(b)
-
 print("%s\n" % ("pealse input your identity card number formed by 8 bits of number and 1 bit of alphabet"))
