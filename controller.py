@@ -56,20 +56,18 @@ class Controller:
                             elif ad_ac == '2': # list out all the teaching staffs and students, who haven't been vaccinated, in the faculty of Engineering.
                                 self.view.list_all_nova()
                             elif ad_ac == '3':
-                                self.view.show_per_fully()
+                                self.view.show_dep() # displays the percentage of fully vaccinated, and non-vaccinated users in a specific department
                             elif ad_ac == '4':
-                                self.view.show_per_nvaci()
-                            elif ad_ac == '5':
                                 secr = self.view.admin_change()
                                 self.model.update_admin(secr)
                                 self.view.valid()
-                            elif ad_ac == '6': #add new recognised vaccines into the the of recognised vaccines
+                            elif ad_ac == '5':
                                 recg = self.view.new_vacc()
                                 self.model.update_vacc(recg)
                                 self.view.valid()
-                            elif ad_ac == '7':
+                            elif ad_ac == '6': #add new recognised vaccines into the the of recognised vaccines
                                 break
-                            elif ad_ac == '8':
+                            elif ad_ac == '7':
                                 return
                             else:
                                 self.view.inv_info()

@@ -105,18 +105,11 @@ class View:
     lists out all the teaching staffs and students, who haven't been vaccinated, in the faculty of Engineering.
     """
 
-    def show_per_fully(self):
+    def show_dep(self):
 
         pass
     """
-    displays the percentage of fully vaccinated users in a specific department
-    """
-
-    def show_per_nvaci(self):
-
-        pass
-    """
-    displays the percentage of non-vaccinated users in a specific department.
+    displays the percentage of fully vaccinated, and non-vaccinated users in a specific department
     """
     
     def admin_change(self):
@@ -301,12 +294,11 @@ class View:
         print("Please input a number:")
         print("1. list out all information, sorted by department with alphabetical order and proper indentation.")
         print("2. list out all the teaching staffs and students, who haven't been vaccinated, in the faculty of Engineering.")
-        print("3. display the percentage of fully vaccinated users in a specific department")
-        print("4. display the percentage of non-vaccinated users in a specific department")
-        print("5. change password of administrator")
-        print("6. add new recognised vaccines into the the of recognised vaccines")
-        print("7. go back to the last page")
-        print("8. exit program")
+        print("3. displays the percentage of fully vaccinated, and non-vaccinated users in a specific department")
+        print("4. change password of administrator")
+        print("5. add new recognised vaccines into the the of recognised vaccines")
+        print("6. go back to the last page")
+        print("7. exit program")
 
     def inv_info(self):
         print("\ninvalid input, please try again!\n")
