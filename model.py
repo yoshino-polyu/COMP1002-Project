@@ -62,8 +62,8 @@ class Model:
             h3 = (h3 * 3001 + ord(i)) % 10000000019
         return str(h1) + str(h2) + str(h3)
 
-    def add_tuple(self):
-        pass
+    def add_tuple(self, id : str, last : str, first : str, dep : str, inj_info : list, who : str):
+        self.info.append([id, last, first, dep, inj_info[0], inj_info[1], who])
     """
     update all the instance fields of model according to the input information of a specific user. 
     """
