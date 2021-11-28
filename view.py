@@ -35,6 +35,11 @@ class View:
 
 
     def get_name(self):
+        last_n = input("Last Name:")
+        first_n = input("First Name:")
+        return [last_n, first_n]
+
+
         pass
         # while True:
         # L = input("Please input your last name and first name separate by comma. (i.e. Chen,Dawen)").split(',')
@@ -114,7 +119,10 @@ class View:
                 print(str(i[0])+'. '+i[1])
         record = []
         while(1):
-            print(record)
+            print("Current Record: \n")
+            for i in enumerate(record):
+                print(str(i[0])+'. '+i[1])
+            print("-------------------\n")
             s = input("1. create a new record\n2. delete the last record\n3. stop editing\n")
             if(s == '3'):
                 break
