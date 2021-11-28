@@ -135,7 +135,7 @@ class View:
             # e.g., print("1.   2. BTN 3. MOD")
         return [num_inj,record]
     """
-    returns a ??? of injection information
+    returns number of injection and the injection information in the format of string.
     """
     
     def new_pass(self):
@@ -178,10 +178,12 @@ class View:
     
     def admin_page(self):
         print("Please input a number:")
-        print("1. list all information, sorted by department with alphabetical order and proper indentation")
-        print("2. display a vaccination information of a specific student or teaching staff according to his or her id")
-        print("3. ")
-        
+        print("1. list out all information, sorted by department with alphabetical order and proper indentation.")
+        print("2. list out all the teaching staffs and students, who haven't been vaccinated, in the faculty of Engineering.")
+        print("3. display the percentage of fully vaccinated users in a specific department")
+        print("4. display the percentage of non-vaccinated users in a specific department")
+        print("5. go back to the last page")
+        print("6. exit program")
         
     def inv_info(self):
         print("invalid input, please try again!")
