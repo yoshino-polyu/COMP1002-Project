@@ -15,6 +15,7 @@ class Model:
     def __init__(self):
         self.info = []   # [user id, last name, first name, department, number of injection,[injection info],'studentornot']
         self.pass_info = [] # [user id, password]
+        self.rec_vac = [] # [recognized vaccination name, ... ]
 
         self.id = dict()
         self.nme = defaultdict(list)
@@ -65,8 +66,8 @@ class Model:
     return a list of regonized vaccines
     """
     
-    def create_new(self):
-        print("Create a new file")
+    def create_new_storage(self):
+        print("Create a new storage file")
         FL = open("storage.txt","x")
         FL.write("['ID','LAST NAME','FIRST NAME','DEPARTMENT','Number of Injection',['Injection Information',],'isStudent']\n")
         FL.close()
@@ -78,7 +79,7 @@ class Model:
         None
         """
     
-    def wrong_file(self):
+    def wrong_file_storage(self):
         s = input("Unexcepted information in storage file, create a new file? [y/n]")
         if (s == 'y' or s == 'Y'):
             self.info.clear()
@@ -101,7 +102,7 @@ class Model:
             FL = open("storage.txt","r", encoding = 'UTF-8')
             self.read_lines(FL)
         except FileNotFoundError:
-            self.create_new()
+            self.create_new_storage()
             FL = open("storage.txt","r", encoding = 'UTF-8')
             self.read_lines(FL)
         finally:
@@ -126,15 +127,15 @@ class Model:
                 eval(i)
             except SyntaxError:
                 FL.close()
-                self.wrong_file()
+                self.wrong_file_storage()
                 break
             if isinstance(eval(i), list) == 0:
                 FL.close()
-                self.wrong_file()
+                self.wrong_file_storage()
                 break
             if (len(eval(i)) != Model.NUM_FILES):
                 FL.close()
-                self.wrong_file()
+                self.wrong_file_storage()
                 break
             i = eval(i)
             for j in enumerate(i):
@@ -144,6 +145,13 @@ class Model:
     """
     read lines for initialising self.info where all users' information is stored.
     """
+    
+    def create_new_password(self):
+        print("create a new password file")
+        FL = open("password.txt","x")
+        FL.write("['user','password']\n")
+        FL.close()
+
 
     def read_password(self):
         try:
@@ -167,10 +175,28 @@ class Model:
     """
     appends the vaccination record to the end of vaccination information list
     """
+    
+    def create_new_vaccination(self):
+        print("create a new vaccination file")
+        FL = open("vaccination.txt","x")
+        FL.write("'vaccination name'\n")
+        FL.close()
+
+    def read_vaccination(self):
+        try:
+            FL = open("vaccination.txt", "r", encoding = "UTF-8")
+        except FileNotFoundError:
+            self.create_new_vaccination()
+            FL = open("vaccination.txt", "r", encoding = "UTF-8")
+        finally:
+            for i in FL.readlines():
+                self.rec_vac.append(i)
+            FL.close()
 
     def init(self):
         self.load_file()
         self.read_password()
+        self.read_vaccination()
         for j in enumerate(self.info[1:]):
             i = j[1]
             self.id[i[0]] = i
@@ -180,7 +206,7 @@ class Model:
             self.isStu[i[6]].append(i)
             self.userIndex[i[0]].append(j[0])
             #tmp = User()
-        for j in enumerate(self.pass_info):
+        for j in enumerate(self.pass_info[1:]):
             i = j[1]
             self.password[i[0]] = i[1]
             self.userIndex[i[0]].append(j[0])
