@@ -93,7 +93,7 @@ class Model:
     """
 
     def update_vacc(self, list_vacc : list):
-        self.rec_vac = ['vaccination name'] + list_vacc
+        self.rec_vac = list_vacc
         pass
     """
     adds the newly recognised vaccines into existing recognised vaccines

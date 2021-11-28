@@ -133,7 +133,8 @@ class View:
                 print(" (Haven't been vaccinated)")
             else:
                 print(" (Have "+str(j[4])+" vaccinations)")
-        print(str(vcnt/cnt * 100)+"%"+" students/stuffs had been fully vaccinated")
+        print(str(vcnt/cnt * 100)+"%"+" students/stuffs have been fully vaccinated")
+        print(str(ncnt/cnt * 100)+"%"+" students/stuffs haven't been vaccinated")
         print("---------------------------------")
         pass
     """
@@ -145,7 +146,7 @@ class View:
         vac = self.model.rec_vac
         while True:
             print("Current recognised vaccines: ")
-            for i in enumerate(vac):
+            for i in enumerate(vac[1:]):
                 print(str(i[0]+1)+". "+i[1])
             print("----------------------")
             s = input("1. add a new recognised vaccines\n2. delete one vaccines\n3. quit\n")
