@@ -37,7 +37,7 @@ class View:
     def get_name(self):
         last_n = input("Last Name:")
         first_n = input("First Name:")
-        return [last_n, first_n]
+        return [last_n.lower(), first_n.lower()]
 
 
         pass

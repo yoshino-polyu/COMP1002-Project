@@ -1,5 +1,5 @@
 # from view import View
-# from model import Model
+from model import Model
 # b = Model()
 # a = View(b)
 # c = a.get_id()
@@ -14,4 +14,6 @@
 # a = View(m)
 # b = a.choose_dpt()
 # print(b)
-print("%s\n" % ("pealse input your identity card number formed by 8 bits of number and 1 bit of alphabet"))
+#print("%s\n" % ("pealse input your identity card number formed by 8 bits of number and 1 bit of alphabet"))
+M = Model()
+print(M.encode('123456'))
