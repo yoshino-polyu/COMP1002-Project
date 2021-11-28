@@ -10,8 +10,7 @@ class View:
     
     def id_validation(self):
         while True:
-            ID = input("Please input your user id: ")
-            print("input 0 for exit this manu")
+            ID = input("Please input your user id: \ninput 0 for exit this manu")
             if ID == '0':
                 return '0'
             if ID not in self.model.password:
