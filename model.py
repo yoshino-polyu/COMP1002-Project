@@ -52,6 +52,16 @@ class Model:
     getter of list of student object
     """
 
+    def encode(self, p):
+        h1 = 0
+        h2 = 0
+        h3 = 0
+        for i in p:
+            h1 = (h1 * 2333 + ord(i)) % 1000000007
+            h2 = (h2 * 9973 + ord(i)) % 998244353
+            h3 = (h3 * 3001 + ord(i)) % 10000000019
+        return str(h1) + str(h2) + str(h3)
+
     def add_tuple(self):
         pass
     """

@@ -14,7 +14,7 @@ class View:
             if ID not in self.model.password:
                 print("id does not exist, please try again")
                 continue
-            secret = input("Please input your password: ")
+            secret = self.model.encode(input("Please input your password: "))
             if secret != self.model.password[ID]:
                 print("Incorrect password, please try again")
                 continue

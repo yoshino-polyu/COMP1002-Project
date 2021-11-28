@@ -25,7 +25,7 @@ class Controller:
                             self.view.user_page()
                             manner = self.view.read_input()
                             if manner == '1': # change password
-                                new = self.view.new_pass() # password analysis???
+                                new = self.model.encode(self.view.new_pass()) # password analysis???
                                 self.model.update_password(id, new)
                                 self.view.valid()
                             if manner == '2': # check current vaccination record
