@@ -21,26 +21,27 @@ class Controller:
                     which = self.view.read_input()
                     if which == '1': # user login
                         id = self.view.id_validation()
-                        self.view.user_page()
-                        manner = self.view.read_input()
-                        if manner == '1': # change password
-                            new = self.view.new_pass() # password analysis???
-                            self.model.update_password(id, new)
-                            self.view.valid()
-                        if manner == '2': # check current vaccination record
-                            self.view.record(id)
-                            self.view.valid()
-                        if manner == '3': # update vaccination record
-                            record = self.view.update_record()
-                            self.model.append_record(record)
-                            self.view.valid()
-                            return 0
-                        if manner == '4':
-                            break
-                        if manner == '5':
-                            return 0
-                        else:
-                            self.view.inv_info()
+                        while True:
+                            self.view.user_page()
+                            manner = self.view.read_input()
+                            if manner == '1': # change password
+                                new = self.view.new_pass() # password analysis???
+                                self.model.update_password(id, new)
+                                self.view.valid()
+                            if manner == '2': # check current vaccination record
+                                self.view.record(id)
+                                self.view.valid()
+                            if manner == '3': # update vaccination record
+                                record = self.view.update_record()
+                                self.model.append_record(record)
+                                self.view.valid()
+                                return 0
+                            if manner == '4':
+                                break
+                            if manner == '5':
+                                return 0
+                            else:
+                                self.view.inv_info()
                     if which == '2': # admin login
                         id = self.view.id_validation()
                         self.view.admin_page()
