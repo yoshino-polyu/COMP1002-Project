@@ -41,12 +41,22 @@ class View:
     AAE
         Student Cao, cao has the vaccination reocrd AZ_30/07/2021, AZ_22/08/2021
     BME
+        Staff Qin Ke wen, Qin has the vacination record AZ_17/04/2021, AZ_15/05/2021
         
     COMP
+        Staff Wang Dan has the vacination record BTN_20/04/2021, BTN_22/05/2021
+        Student Son King  has the vacination record BTN_21/04/2021, BTN_21/05/2021, BTN_21/06/2021
     EE
+        Student Wim Link has the vacination record AZ_10/05/2021, AZ_10/06/2021, AZ_11/07/2021
+        Student Wu Song has the vacination record BTN_20/06/2021
     EIE
+        Student Chen Daweneie has the vacination record  BTN_30/08/2021, BTN_22/09/2021
+        
     ISE
+        Student Lin Daiyu has the vacination record MOD_03/06/2021, MOD_12/07/2021
+        
     ME
+        Staff Jiang Qingwen has the vacination record BTN_22/04/2021, BTN_27/05/2021
     """
     def read_input(self):
         return str(input())
