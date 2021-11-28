@@ -8,6 +8,10 @@ from os import TMP_MAX, error
 import sys
 from collections import defaultdict
 
+class WrongFileError(Exception):
+    """ Raised when the format of storage.txt is incorrect"""
+    pass
+
 class Model:
 
     NUM_FILES = 7
@@ -30,8 +34,11 @@ class Model:
 
     def encode(self, p):
         """
-        Motivation: When others access password.txt, they do not know what a particular user's password is.
         Encrypts the string (actual password) entered by the user and returns the encrypted string.
+        Motivation: 
+        1. When others access password.txt, they do not know what a particular user's password is.
+        2. Verifying wther the password entered by the user is correct is to determine whether encode(input) is equal to 
+        the encrpted string in password.txt
         """
         h1 = 0
         h2 = 0
@@ -73,11 +80,8 @@ class Model:
         FL.write("['ID','LAST NAME','FIRST NAME','DEPARTMENT','Number of Injection',['Injection Information',],'isStudent']\n")
         FL.close()
         """
-        Transfer data into the system and writes the specified string to a file. 
+        Transfers data into the system and writes the specified string to a file. 
         The string content is stored in the buffer until the file is closed or the buffer is flushed
-        
-        Returns:
-        None
         """
     
     def update_admin(self, word : str):
@@ -96,26 +100,24 @@ class Model:
     Param: list_vacc -> the newly recognised vaccines from admin
     """
     def wrong_file_storage(self):
-        """ When an error occurs in the read data, a new file is generated. """
+        """
+        This function is called to create a new storage.txt file if the storage format of the storage.txt file 
+        does not conform to the storage specification we defined when reading each line.
+        """
         s = input("Unexcepted information in storage file, create a new file? [y/n]")
         if (s == 'y' or s == 'Y'):
             self.info.clear()
             FL = open("storage.txt","w")
             FL.write("['ID','LAST NAME','FIRST NAME','DEPARTMENT','Number of Injection',['Injection Information',],'isStudent']\n")
             FL.close()
-            self.init()
+            raise WrongFileError # go to self.init()
         else:
             print('Program Exit')
             sys.exit()
         
         
     def load_file(self):
-        """
-        Open the TXT document and call create_new() if encounter a IOE error
-        Try evall the stored personnel information and call wrong_file () if error occurs
-        Check if it is a known type list and call wrong_file () if is not list
-        When the length of info is not 7, the wrong_file() is invoked if the length is illegal.
-        """
+        """ Open the txt file for reading, and create a new one if the txt file cannot be found. """
         try:
             FL = open("storage.txt","r", encoding = 'UTF-8')
             self.read_lines(FL)
@@ -128,6 +130,10 @@ class Model:
 
 
     def read_lines(self, FL : TextIOWrapper):
+        """ 
+        read lines for initialising self.info where all users' information is stored.
+        Param: FL -> A file that has been opened and is in a readable state.
+        """
         for i in FL.readlines():
             try:
                 eval(i)
@@ -148,10 +154,7 @@ class Model:
                 if isinstance(j[1],str) == 1:
                     i[j[0]] = j[1].lower()
             self.info.append(i)
-    """
-    read lines for initialising self.info where all users' information is stored.
-    """
-    
+            
     def create_new_password(self):
         print("create a new password file")
         FL = open("password.txt","x")
@@ -230,7 +233,14 @@ class Model:
             FL.close()
 
     def init(self):
-        self.load_file()
+        """
+        Initialize the file and write the contents to the list
+        """
+        try:
+            self.load_file()
+        except WrongFileError:
+            print("the format of storage.txt is wrong, and a new one is created!")
+            return 0
         self.read_password()
         self.read_vaccination()
         self.read_admin()
@@ -247,9 +257,8 @@ class Model:
             i = j[1]
             self.password[i[0]] = i[1]
             self.userIndex[i[0]].append(j[0]+1)
-        """
-        Initialize the file and write the contents to the list
-        """
+        return 1
+
     
     
     def write_file(self):

@@ -170,7 +170,6 @@ class View:
     def read_input(self):
         return str(input())
 
-
     def get_name(self):
         print("Last Name: ")
         last_n = input()

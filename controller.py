@@ -11,7 +11,8 @@ class Controller:
         self.view = view
     
     def run(self):
-        self.model.init() # read all info from txt, and store it into storage.
+        if (self.model.init() == 0): # read all info from txt, and store it into storage.
+            self.model.init()
         while True:
             self.view.entry_page()
             x = self.view.read_input()
