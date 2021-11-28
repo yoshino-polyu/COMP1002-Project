@@ -21,6 +21,8 @@ class Controller:
                     which = self.view.read_input()
                     if which == '1': # user login
                         id = self.view.id_validation()
+                        if id == '0':
+                            continue
                         while True:
                             self.view.user_page()
                             manner = self.view.read_input()
@@ -45,7 +47,6 @@ class Controller:
                     if which == '2': # admin login
                         id = self.view.id_validation()
                         self.view.admin_page()
-                        
                         return 0
                     if which == '3': # registration
                         u_id = self.view.get_id()

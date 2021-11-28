@@ -126,7 +126,7 @@ class Model:
         
         Returns:
         None
-    
+        
         Raises:
         Exception: An error occurred accessing the text.
         """

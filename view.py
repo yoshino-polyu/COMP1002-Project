@@ -11,6 +11,9 @@ class View:
     def id_validation(self):
         while True:
             ID = input("Please input your user id: ")
+            print("input 0 for exit this manu")
+            if ID == '0':
+                return '0'
             if ID not in self.model.password:
                 print("id does not exist, please try again")
                 continue
@@ -20,10 +23,13 @@ class View:
                 continue
             print("login successfully")
             return ID
-    
+            
     def admin_id_valid(self):
+        cnt = 0
         while True:
-            ID = input("Please input your user id: ")
+            secret = input("please input the password")
+            cnt += 1
+            
             
         # do not return anything, only allow at most 3 tries
         
@@ -182,8 +188,9 @@ class View:
         print("2. list out all the teaching staffs and students, who haven't been vaccinated, in the faculty of Engineering.")
         print("3. display the percentage of fully vaccinated users in a specific department")
         print("4. display the percentage of non-vaccinated users in a specific department")
-        print("5. go back to the last page")
-        print("6. exit program")
+        print("5. change password of administrator")
+        print("6. go back to the last page")
+        print("7. exit program")
         
     def inv_info(self):
         print("invalid input, please try again!")
