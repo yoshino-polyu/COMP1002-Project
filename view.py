@@ -38,9 +38,9 @@ class View:
             if(secret == '-1'):
                 break
             if(self.model.encode(secret) == self.model.admin_password):
-                return 1
+                return '1'
             print("incorret password, please try again\n")
-        return 0
+        return '0'
         # returns 0 if the user want to exit this manu
         # do not return anything, only allow at most 3 tries
     """

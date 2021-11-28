@@ -46,7 +46,7 @@ class Controller:
                                 continue
                     elif which == '2': # admin login
                         admin_id = self.view.admin_id_valid()
-                        if admin_id != 1:
+                        if admin_id != '1':
                             continue
                         while True:
                             self.view.admin_page()
