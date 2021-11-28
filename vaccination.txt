@@ -1,6 +1,4 @@
 vaccination name
-vaccination name
-'vaccination name'
 AZ
 BTN
 MOD
