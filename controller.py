@@ -46,7 +46,8 @@ class Controller:
                                 continue
                     elif which == '2': # admin login
                         admin_id = self.view.admin_id_valid()
-                        if admin_id != '1':
+                        print(admin_id)
+                        if admin_id != 1:
                             continue
                         while True:
                             self.view.admin_page()
@@ -58,7 +59,7 @@ class Controller:
                             elif ad_ac == '3':
                                 self.view.show_dep('-1') # displays the percentage of fully vaccinated, and non-vaccinated users in a specific department
                             elif ad_ac == '4':
-                                secr = self.view.admin_change()
+                                secr = self.model.encode(self.view.new_pass())
                                 self.model.update_admin(secr)
                                 self.view.valid()
                             elif ad_ac == '5':

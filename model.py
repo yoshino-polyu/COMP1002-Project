@@ -81,6 +81,7 @@ class Model:
         """
     
     def update_admin(self, word : str):
+        self.admin_password = word
         pass
     """
     updates the password of admin
@@ -88,7 +89,7 @@ class Model:
     """
 
     def update_vacc(self, list_vacc : list):
-        
+        self.rec_vac = ['vaccination name'] + list_vacc
         pass
     """
     adds the newly recognised vaccines into existing recognised vaccines
@@ -265,12 +266,22 @@ class Model:
                     FL.write("'" + str(j) + "'" + ',')
             FL.write(']\n')
         FL.close()
+
         FL = open("password.txt", "w")
         for i in self.pass_info:
             FL.write('[')
             for j in i:
                 FL.write("'" + str(j) + "'" + ',')
             FL.write(']\n')
+        FL.close()
+
+        FL = open("admin.txt", "w")
+        FL.write(self.admin_password)
+        FL.close()
+
+        FL = open("vaccination.txt", "w")
+        for i in self.rec_vac:
+            FL.write(i+'\n')
         FL.close()
         """
         Store the read content in the middle of memory, write according to the format

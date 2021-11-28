@@ -38,9 +38,10 @@ class View:
             if(secret == '-1'):
                 break
             if(self.model.encode(secret) == self.model.admin_password):
-                return '1'
-            print("incorret password, please try again\n")
-        return '0'
+                print("Login Successfully")
+                return 1
+            print("Incorret password, please try again\n")
+        return 0
         # returns 0 if the user want to exit this manu
         # do not return anything, only allow at most 3 tries
     """
@@ -138,16 +139,28 @@ class View:
     """
     displays the percentage of fully vaccinated, and non-vaccinated users in a specific department
     """
-    
-    def admin_change(self):
-        pass
-    """
-    changes the password of the admin
-    Return: str
-    """
+
     
     def new_vacc(self):
-        pass
+        vac = self.model.rec_vac
+        while True:
+            print("Current recognised vaccines: ")
+            for i in enumerate(vac):
+                print(str(i[0]+1)+". "+i[1])
+            print("----------------------")
+            s = input("1. add a new recognised vaccines\n2. delete one vaccines\n3. quit\n")
+            if(s == '1'):
+                vac.append(input("Add Vaccination: ").upper())
+            elif (s == '2'):
+                try:
+                    vac.remove(input("Delete Vaccination: ").upper())
+                except Exception:
+                    self.inv_info()
+            elif (s == '3'):
+                break
+            else:
+                self.inv_info()
+        return vac
     """
     ask admin to add some recognised vaccines newly issued by gov
     Return: the list of the added recognised vaccines
@@ -279,7 +292,7 @@ class View:
         a = ''
         ifligal = 0
         while(ifligal == 0):
-            print("Please enter the new password formed by 6 ~ 20 bits of numbers and letters: ")
+            print("Please enter the password formed by 6 ~ 20 bits of numbers and letters: ")
             a = input()
             if(len(a) < 6 or len(a) > 20):
                 print("Password is too Short or too long, please ensure it only contains 6 ~ 20 bits of numbers or letters")
