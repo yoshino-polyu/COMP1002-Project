@@ -48,27 +48,7 @@ class View:
     """
     def list_all(self):
         for i in ['AAE', 'BME', 'COMP','EE', 'EIE', 'ISE', 'ME']:
-            print("Department: "+i.upper())
-            cnt = 0
-            vcnt = 0
-            if(j not in self.model.dpt):
-                print("---------------------------------")
-                continue
-            for j in self.model.dpt[i]:
-                if(str(j[6]) == '1'):
-                    print("    Student", end = ' ')
-                else:
-                    print("    Stuff", end = ' ')
-                print(j[1].upper()+" "+j[2]+" ("+j[0]+")"+" has the vaccination record ", end = '')
-                for k in j[5]:
-                    print(k, end=', ')
-                print()
-                cnt += 1
-                if(str(j[4]) == '-1'):
-                    vcnt += 1
-            print(str(vcnt/cnt * 100)+"%"+" students/stuffs had been full vaccinated")
-            print("---------------------------------")
-        pass
+            self.show_dep(i)
     """
     lists out all information, sorted by department with alphabetical order and proper indentation, like the following:
     AAE
@@ -105,8 +85,55 @@ class View:
     lists out all the teaching staffs and students, who haven't been vaccinated, in the faculty of Engineering.
     """
 
-    def show_dep(self):
-
+    def show_dep(self, dep):
+        if(dep == '-1'):
+            while(1):
+                print("Which department are you from?\nPlease input a number\n1. AAE 2. BME 3. COMP 4. EE 5. EIE 6. ISE 7. ME : ")
+                c = input()
+                if c == '1':
+                    dep = "AAE"
+                elif c == '2':
+                    dep = "BME"
+                elif c == '3':
+                    dep = "COMP"
+                elif c == '4':
+                    dep = "EE"
+                elif c == '5':
+                    dep = "EIE"
+                elif c == '6':
+                    dep = "ISE"
+                elif c == '7':
+                    dep = "ME"
+                else:
+                    self.inv_info()
+                    continue
+                break
+        print("Department: "+dep.upper())
+        cnt = 0
+        vcnt = 0
+        ncnt = 0
+        if(dep.lower() not in self.model.dpt):
+            print("---------------------------------")
+            return 
+        for j in self.model.dpt[dep.lower()]:
+            if(str(j[6]) == '1'):
+                print("    Student", end = ' ')
+            else:
+                print("    Stuff", end = ' ')
+            print(j[1].upper()+" "+j[2]+" ("+j[0]+")"+" has the vaccination record ", end = '')
+            for k in j[5]:
+                print(k, end=', ')
+            cnt += 1
+            if(str(j[4]) == '-1'):
+                vcnt += 1
+                print(" (Fully vaccinated)")
+            elif(str(j[4]) == '0'):
+                ncnt += 1
+                print(" (Haven't been vaccinated)")
+            else:
+                print(" (Have "+str(j[4])+" vaccinations)")
+        print(str(vcnt/cnt * 100)+"%"+" students/stuffs had been fully vaccinated")
+        print("---------------------------------")
         pass
     """
     displays the percentage of fully vaccinated, and non-vaccinated users in a specific department
