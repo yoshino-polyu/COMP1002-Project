@@ -109,9 +109,11 @@ class View:
 
     def get_inj_info(self):
         print("Please input the type of vaccine you have received:\nBelow are some of the vaccines recognized by the Hong Kong government:")
+        for i in enumerate(self.model.rec_vac[1:]):
+            print(str(i[0])+'. '+i[1])
         # get a list of recognised vaccines from model, and print it out one by one
         # self.model.vaccines
-        # e.g., print("1. AZ 2. BTN 3. MOD")
+        # e.g., print("1.   2. BTN 3. MOD")
         return 0
     """
     returns a ??? of injection information
