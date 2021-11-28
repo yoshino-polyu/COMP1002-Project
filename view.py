@@ -115,7 +115,7 @@ class View:
     def choose_dpt(self):
         res = ""
         while True:
-            print("Which department are you from?\nPlease input a number\n1. AAE 2. BME 3. COMP 4. EE 5. EIE 6. ISE 7. ME")
+            print("Which department are you from?\nPlease input a number\n1. AAE 2. BME 3. COMP 4. EE 5. EIE 6. ISE 7. ME : ")
             c = input()
             if c == '1':
                 res = "AAE"
@@ -155,7 +155,7 @@ class View:
             if(s == '3'):
                 break
             elif(s == '1'):
-                rc = input("Please input the vaccination record: (vaccination_day_month_year, example: AZ_01_09_2021)\n")
+                rc = input("Please input the vaccination record: (vaccination_day_month_year, example: AZ_01_09_2021)\n").upper()
                 ck = rc.split('_')
                 if(len(ck) != 4):
                     self.inv_info()
