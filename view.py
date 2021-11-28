@@ -22,7 +22,90 @@ class View:
     
     def read_input(self):
         return str(input())
+
+
+    def get_name(self):
+        pass
+        # while True:
+        # L = input("Please input your last name and first name separate by comma. (i.e. Chen,Dawen)").split(',')
+            
+        # return ['last', 'fi']
         
+    def get_id(self):
+        res = ""
+        while True:
+            id = input("pealse input your identity card number formed by 8 bits of number and 1 bit of alphabet").strip()
+            if (len(id) != 9):
+                self.inv_info()
+                continue
+            ok = 1
+            for i, item in enumerate(id):
+                if (i <= 7):
+                    if (int(item) not in range(10)):
+                        ok = 0
+                        break
+                elif (ord(item) < ord('a') or ord(item) > ord('z')):
+                    ok = 0
+            if (ok == 0):
+                self.inv_info()
+                continue
+            return res
+    """
+    gets a valid id from user
+    """
+    def get_who(self):
+        res = ""
+        while True:
+            who = input("are you a student or staff?, 1 -> student, 0 -> staff")
+            if who == '1':
+                res = who
+            elif who == '0':
+                res = who
+            else:
+                self.inv_info()
+                continue
+            return res
+    """
+    return a str indicating the user type, 1 -> student, 0 -> staff
+    """
+    def choose_dpt(self):
+        print("Witch department are you from?")
+        res = ""
+        while True:
+            c = input("Please input a number\n1. AAE 2. BME 3. COMP 4. EE 5. EIE 6. ISE 7. ME")
+            if c == '1':
+                res = "AAE"
+            elif c == '2':
+                res = "BME"
+            elif c == '3':
+                res = "COMP"
+            elif c == '4':
+                res = "EE"
+            elif c == '5':
+                res = "EIE"
+            elif c == '6':
+                res = "ISE"
+            elif c == '7':
+                res = "ME"
+            else:
+                self.inv_info()
+                continue
+            break
+        return res
+    """
+    returns a string of department name with upper case
+    """
+
+    def get_inj_info(self):
+        print("Please input the type of vaccine you have received:\nBelow are some of the vaccines recognized by the Hong Kong government:")
+        # get a list of recognised vaccines from model, and print it out one by one
+        # self.model.vaccines
+        # e.g., print("1. AZ 2. BTN 3. MOD")
+        return 0
+    """
+    returns a ??? of injection information
+    """
+    
     def new_pass(self):
         a = ''
         ifligal = 0
@@ -68,8 +151,15 @@ class View:
         print("action succeed!")
     
     def update_record():
-        print("Please input your ")
-
+        print("Please input the date of your most recent vaccination in the format of dd/mm/yyyy")
+        # format checking -> until user input the correct formate
+        print("Please enter the type of vaccine you have taken in upper case")
+        # format checking -> until user input the correct formate
+        # return the record string
+        pass # comment out pass once finishing this function
+    """
+    returns the string of vaccination record input by user
+    """
     def record(self, ID):
         tmp = self.model.id[ID]
         if(str(tmp[4]) == '-1'):
@@ -80,4 +170,6 @@ class View:
         for i in tmp[5]:
             print("------------------------\n"+i)
         print("------------------------")
-        pass # once finish the implementation, comment out the pass
+    """
+    displays the vaccination record of a specific user.
+    """

@@ -7,7 +7,6 @@ from io import TextIOWrapper
 from os import error
 import sys
 from collections import defaultdict
-from student_staff import User
 
 class Model:
 
@@ -16,7 +15,6 @@ class Model:
     def __init__(self):
         self.info = []   # [user id, last name, first name, department, number of injection,[injection info],'studentornot']
         self.pass_info = [] # [user id, password]
-        # self.stu_list = []
 
         self.id = dict()
         self.nme = defaultdict(list)
@@ -51,6 +49,20 @@ class Model:
         return self.stu_list
     """
     getter of list of student object
+    """
+
+    def add_tuple(self):
+        pass
+    """
+    update all the instance fields of model according to the input information of a specific user. 
+    """
+    
+    
+    def get_vaccines(self):
+        
+        return 0
+    """
+    return a list of regonized vaccines
     """
     
     def create_new(self):
@@ -150,7 +162,12 @@ class Model:
         self.password[id] = new
         self.pass_info[self.userIndex[id][1]][1] = new
     
-    
+    def append_record(self, record : str):
+        return 0
+    """
+    appends the vaccination record to the end of vaccination information list
+    """
+
     def init(self):
         self.load_file()
         self.read_password()
