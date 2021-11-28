@@ -15,9 +15,9 @@ class Model:
     def __init__(self):
         self.info = []   # [user id, last name, first name, department, number of injection,[injection info],'studentornot']
         self.pass_info = [] # [user id, password]
-        self.rec_vac = [] # [recognized vaccination name, ... ]
+        self.rec_vac = [] # [the name of recognized vaccines, ... ]
 
-        self.admin_password = ''
+        self.admin_password = '' # password of admin
 
         self.id = dict()
         self.nme = defaultdict(list)
@@ -26,35 +26,13 @@ class Model:
         self.isStu = defaultdict(list)
         self.userIndex = defaultdict(list)
         self.password = dict()
-    
-    @property
-    def _info(self):
-        return self.info
-    """
-    getter of info.
-    Use it by 
-    c = Model()
-    c.info
-    """
-    
-    # @property
-    # def _password(self):
-    #     return self.password
-    """
-    getter of password
-    use it by
-    c = Model()
-    c.password
-    """
-    
-    @property
-    def _stu_list(self):
-        return self.stu_list
-    """
-    getter of list of student object
-    """
+
 
     def encode(self, p):
+        """
+        Motivation: When others access password.txt, they do not know what a particular user's password is.
+        Encrypts the string (actual password) entered by the user and returns the encrypted string.
+        """
         h1 = 0
         h2 = 0
         h3 = 0
@@ -64,7 +42,9 @@ class Model:
             h3 = (h3 * 3001 + ord(i)) % 10000000019
         return str(h1) + str(h2) + str(h3)
 
+    
     def add_tuple(self, ID : str, LAST : str, FIRST : str, DEP : str, INJ_INFO : list, WHO : str, SEC : str):
+        """ Adds all the information about the newly registered user to instance variables. """
         temp = [ID, LAST, FIRST, DEP, INJ_INFO[0], INJ_INFO[1], WHO]
         self.info.append(temp)
         self.id[ID] = temp
@@ -77,16 +57,14 @@ class Model:
         self.pass_info.append([ID, SEC])
         self.password[ID] = SEC
         self.userIndex[ID].append(len(self.pass_info)-1)
-    """
-    update all the instance fields of model according to the input information of a specific user. 
-    """
-    
+
     
     def get_vaccines(self):
         
         return 0
     """
-    return a list of regonized vaccines
+    Returns a current list (instance field) of regonized vaccines.
+    Note: Only the vaccine recognized by HK gov is the vaccine that can be successfully written into the vaccine record.
     """
     
     def create_new_storage(self):
@@ -117,6 +95,7 @@ class Model:
     Param: list_vacc -> the newly recognised vaccines from admin
     """
     def wrong_file_storage(self):
+        """ When an error occurs in the read data, a new file is generated. """
         s = input("Unexcepted information in storage file, create a new file? [y/n]")
         if (s == 'y' or s == 'Y'):
             self.info.clear()
@@ -127,14 +106,15 @@ class Model:
         else:
             print('Program Exit')
             sys.exit()
-        """
-        When an error occurs in the read data, a new file is generated.
         
-        Returns:
-        None
-        """
         
     def load_file(self):
+        """
+        Open the TXT document and call create_new() if encounter a IOE error
+        Try evall the stored personnel information and call wrong_file () if error occurs
+        Check if it is a known type list and call wrong_file () if is not list
+        When the length of info is not 7, the wrong_file() is invoked if the length is illegal.
+        """
         try:
             FL = open("storage.txt","r", encoding = 'UTF-8')
             self.read_lines(FL)
@@ -144,19 +124,7 @@ class Model:
             self.read_lines(FL)
         finally:
             FL.close()
-        """
-        Open the TXT document and call create_new() if encounter a IOE error
-        Try evall the stored personnel information and call wrong_file () if error occurs
-        Check if it is a known type list and call wrong_file () if is not list
-        When the length of info is not 7, the wrong_file() is invoked if the length is illegal
-        
-        
-        Returns:
-        None
-        
-        Raises:
-        Exception: An error occurred accessing the text.
-        """
+
 
     def read_lines(self, FL : TextIOWrapper):
         for i in FL.readlines():
