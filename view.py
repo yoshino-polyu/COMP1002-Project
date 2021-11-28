@@ -108,13 +108,24 @@ class View:
     """
 
     def get_inj_info(self):
-        print("Please input the type of vaccine you have received:\nBelow are some of the vaccines recognized by the Hong Kong government:")
+        num_inj = input("Please input how many injections you have received (if full injection, please input -1): ")
+        print("Below are some of the vaccines recognized by the Hong Kong government:")
         for i in enumerate(self.model.rec_vac[1:]):
-            print(str(i[0])+'. '+i[1])
-        # get a list of recognised vaccines from model, and print it out one by one
-        # self.model.vaccines
-        # e.g., print("1.   2. BTN 3. MOD")
-        return 0
+                print(str(i[0])+'. '+i[1])
+        record = []
+        while(1):
+            print(record)
+            s = input("1. create a new record\n2. delete the last record\n3. stop editing\n")
+            if(s == '3'):
+                break
+            if(s == '1'):
+                record.append(input("Please input the vaccination record: (vaccination_day_month_year, example: AZ_01_09_2021)\n"))
+            if(s == '2'):
+                record.pop()
+            # get a list of recognised vaccines from model, and print it out one by one
+            # self.model.vaccines
+            # e.g., print("1.   2. BTN 3. MOD")
+        return [num_inj,record]
     """
     returns a ??? of injection information
     """
