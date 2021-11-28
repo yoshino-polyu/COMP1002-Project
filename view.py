@@ -54,7 +54,6 @@ class View:
         
     def get_id(self):
         enums = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
-        res = ""
         while True:
             id = input("pealse input your identity card number formed by 8 bits of number and 1 bit of alphabet ")
             if (len(id) != 9):
@@ -71,7 +70,7 @@ class View:
             if (ok == 0):
                 self.inv_info()
                 continue
-            return res
+            return id
     """
     gets a valid id from user
     """
@@ -163,7 +162,7 @@ class View:
         a = ''
         ifligal = 0
         while(ifligal == 0):
-            a = str(input("Please enter the new password formed by 10 ~ 20 bits of numbers and letters"))
+            a = input("Please enter the new password formed by 10 ~ 20 bits of numbers and letters")
             if(len(a) < 10 or len(a) > 20):
                 print("Password is too Short or too long, please ensure it only contains 10 ~ 20 bits of numbers or letters")
                 continue

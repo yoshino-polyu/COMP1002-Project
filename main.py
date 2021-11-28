@@ -7,13 +7,13 @@ def main():
     model = Model()
     view = View(model)
     controller = Controller(model, view)
-    try:
-        controller.run()
-    except Exception:
-        print("Internal error exists!")
-        sys.exit()
-    finally:
-        model.write_file()
+    # try:
+    controller.run()
+    # except Exception:
+    #     print("Internal error exists!")
+    #     sys.exit()
+    # finally:
+    model.write_file()
     # gui = new GUI(args)
     # gui.display(true)
 
