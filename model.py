@@ -102,6 +102,20 @@ class Model:
         None
         """
     
+    def update_admin(self, word : str):
+        pass
+    """
+    updates the password of admin
+    Param: word -> the new password of admin
+    """
+
+    def update_vacc(self, list_vacc : list):
+        
+        pass
+    """
+    adds the newly recognised vaccines into existing recognised vaccines
+    Param: list_vacc -> the newly recognised vaccines from admin
+    """
     def wrong_file_storage(self):
         s = input("Unexcepted information in storage file, create a new file? [y/n]")
         if (s == 'y' or s == 'Y'):

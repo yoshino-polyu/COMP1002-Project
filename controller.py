@@ -43,6 +43,7 @@ class Controller:
                                 return 0
                             else:
                                 self.view.inv_info()
+                                continue
                     elif which == '2': # admin login
                         admin_id = self.view.admin_id_valid()
                         if admin_id == '0':
@@ -52,9 +53,27 @@ class Controller:
                             ad_ac = self.view.read_input()
                             if ad_ac == '1': # list out all information with indentation
                                 self.view.list_all()
-                            elif ad_ac == '2': # 
-                                
-                                pass
+                            elif ad_ac == '2': # list out all the teaching staffs and students, who haven't been vaccinated, in the faculty of Engineering.
+                                self.view.list_all_nova()
+                            elif ad_ac == '3':
+                                self.view.show_per_fully()
+                            elif ad_ac == '4':
+                                self.view.show_per_nvaci()
+                            elif ad_ac == '5':
+                                secr = self.view.admin_change()
+                                self.model.update_admin(secr)
+                                self.view.valid()
+                            elif ad_ac == '6': #add new recognised vaccines into the the of recognised vaccines
+                                recg = self.view.new_vacc()
+                                self.model.update_vacc(recg)
+                                self.view.valid()
+                            elif ad_ac == '7':
+                                break
+                            elif ad_ac == '8':
+                                return
+                            else:
+                                self.view.inv_info()
+                                continue
                     elif which == '3': # registration
                         u_id = self.view.get_id()
                         # format checking, 8 bits of number + 1 bit of alphabet
@@ -74,13 +93,14 @@ class Controller:
                         return
                     else:
                         self.view.inv_info()
+                        continue
             elif x == '2': # GUI
                 return 0
             elif x == '3':
                 return 0
             else:
                 self.view.inv_info()
-                
+                continue
             
         
         

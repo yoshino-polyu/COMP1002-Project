@@ -67,6 +67,40 @@ class View:
     ME
         Staff Jiang Qingwen has the vacination record BTN_22/04/2021, BTN_27/05/2021
     """
+
+    def list_all_nova(self):
+        pass
+    """
+    lists out all the teaching staffs and students, who haven't been vaccinated, in the faculty of Engineering.
+    """
+
+    def show_per_fully(self):
+        pass
+    """
+    displays the percentage of fully vaccinated users in a specific department
+    """
+
+    def show_per_nvaci(self):
+        pass
+    """
+    displays the percentage of non-vaccinated users in a specific department.
+    """
+    
+    def admin_change(self):
+        pass
+    """
+    changes the password of the admin
+    Return: str
+    """
+    
+    def new_vacc(self):
+        pass
+    """
+    ask admin to add some recognised vaccines newly issued by gov
+    Return: the list of the added recognised vaccines
+    """
+    
+    
     def read_input(self):
         return str(input())
 
@@ -237,7 +271,7 @@ class View:
         print("3. display the percentage of fully vaccinated users in a specific department")
         print("4. display the percentage of non-vaccinated users in a specific department")
         print("5. change password of administrator")
-        print("6. update the list of recognised vaccines")
+        print("6. add new recognised vaccines into the the of recognised vaccines")
         print("7. go back to the last page")
         print("8. exit program")
 
