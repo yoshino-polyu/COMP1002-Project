@@ -30,25 +30,25 @@ class Controller:
                                 new = self.model.encode(self.view.new_pass()) # password analysis???
                                 self.model.update_password(id, new)
                                 self.view.valid()
-                            if manner == '2': # check current vaccination record
+                            elif manner == '2': # check current vaccination record
                                 self.view.record(id)
                                 self.view.valid()
-                            if manner == '3': # update vaccination record
+                            elif manner == '3': # update vaccination record
                                 record = self.view.update_record()
                                 self.model.append_record(record)
                                 self.view.valid()
                                 return 0
-                            if manner == '4':
+                            elif manner == '4':
                                 break
-                            if manner == '5':
+                            elif manner == '5':
                                 return 0
                             else:
                                 self.view.inv_info()
-                    if which == '2': # admin login
+                    elif which == '2': # admin login
                         id = self.view.id_validation()
                         self.view.admin_page()
                         return 0
-                    if which == '3': # registration
+                    elif which == '3': # registration
                         u_id = self.view.get_id()
                         # format checking, 8 bits of number + 1 bit of alphabet
                         l_n, f_n = self.view.get_name()
@@ -59,16 +59,15 @@ class Controller:
                         #n_inj = len(inj_info) # the len of inj_info is the number of injection
                         who = self.view.get_who()
                         secret = self.model.encode(self.view.new_pass())
-
                         self.model.add_tuple(u_id, l_n, f_n, dep, inj_info, who, secret) # append all the information of this user to model fileds
                         self.view.valid()
-                    if which == '4':
+                    elif which == '4':
                         break
-                    if which == '5':
-                        sys.exit()
+                    elif which == '5':
+                        return
                     else:
                         self.view.inv_info()
-            if x == '2': # GUI
+            elif x == '2': # GUI
                 return 0
             elif x == '3':
                 return 0
