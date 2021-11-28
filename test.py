@@ -2,6 +2,8 @@
 # from model import Model
 # b = Model()
 # a = View(b)
+# c = a.get_id()
+# print(c)
 # print(type(a).__name__)
 # FL = open("storage.txt","w")
 # print(type(FL).__name__)
@@ -12,10 +14,5 @@
 # a = View(m)
 # b = a.choose_dpt()
 # print(b)
-k = "fdagear"
-for i, item in enumerate(k):
-    if i == 4:
-        print(item)
-ok = 1
-if (ok):
-    print("fdahkjgdha")
+
+print("%s\n" % ("pealse input your identity card number formed by 8 bits of number and 1 bit of alphabet"))

@@ -1,3 +1,4 @@
+from typing import Tuple
 from model import Model
 """
 The View is an observer of the Mddel, and it can observe the state of Model and then display it to user. 
@@ -20,6 +21,15 @@ class View:
             print("login successfully")
             return ID
     
+    def admin_id_valid(self):
+        while True:
+            ID = input("Please input your user id: ")
+            
+        # do not return anything, only allow at most 3 tries
+        
+    """
+    check whether the user is the admin, and we only have one admin in this system. 
+    """
     def read_input(self):
         return str(input())
 
@@ -32,16 +42,17 @@ class View:
         # return ['last', 'fi']
         
     def get_id(self):
+        enums = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
         res = ""
         while True:
-            id = input("pealse input your identity card number formed by 8 bits of number and 1 bit of alphabet").strip()
+            id = input("pealse input your identity card number formed by 8 bits of number and 1 bit of alphabet ")
             if (len(id) != 9):
                 self.inv_info()
                 continue
             ok = 1
             for i, item in enumerate(id):
                 if (i <= 7):
-                    if (int(item) not in range(10)):
+                    if (item not in enums):
                         ok = 0
                         break
                 elif (ord(item) < ord('a') or ord(item) > ord('z')):
@@ -143,6 +154,13 @@ class View:
         print("3. update vaccination record")
         print("4. go back to the last page")
         print("5. exit program")
+    
+    def admin_page(self):
+        print("Please input a number:")
+        print("1. list all information, sorted by department with alphabetical order and proper indentation")
+        print("2. display a vaccination information of a specific student or teaching staff according to his or ")
+        print("3. ")
+        
         
     def inv_info(self):
         print("invalid input, please try again!")
