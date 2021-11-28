@@ -69,6 +69,8 @@ class View:
             if (ok == 0):
                 self.inv_info()
                 continue
+            if(id in self.model.password):
+                continue
             return id
     """
     gets a valid id from user
