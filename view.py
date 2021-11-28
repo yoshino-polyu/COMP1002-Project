@@ -99,7 +99,7 @@ class View:
             else:
                 print("Stuff", end = ' ')
             print(i[1] + " " + i[2] + " ("+ i[0]+") haven't been vaccinated.")
-        print(str(vcnt/cnt * 100) + "%" + " students/stuffs haven't been vaccinated.")
+        print(str(ncnt/cnt * 100) + "%" + " students/stuffs haven't been vaccinated.")
         pass
     """
     lists out all the teaching staffs and students, who haven't been vaccinated, in the faculty of Engineering.
@@ -113,7 +113,7 @@ class View:
     """
 
     def show_per_nvaci(self):
-        
+
         pass
     """
     displays the percentage of non-vaccinated users in a specific department.
