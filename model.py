@@ -211,7 +211,7 @@ class Model:
             FL = open("vaccination.txt", "r", encoding = "UTF-8")
         finally:
             for i in FL.readlines():
-                self.rec_vac.append(i)
+                self.rec_vac.append(i.strip('\n'))
             FL.close()
 
     def init(self):
