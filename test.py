@@ -16,4 +16,4 @@ from model import Model
 # print(b)
 #print("%s\n" % ("pealse input your identity card number formed by 8 bits of number and 1 bit of alphabet"))
 M = Model()
-print(M.encode('123456'))
+print(M.encode('cjr123456'))

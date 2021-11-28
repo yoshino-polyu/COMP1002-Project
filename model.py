@@ -4,7 +4,7 @@ The model
     determine the system state
 """
 from io import TextIOWrapper
-from os import error
+from os import TMP_MAX, error
 import sys
 from collections import defaultdict
 
@@ -62,8 +62,19 @@ class Model:
             h3 = (h3 * 3001 + ord(i)) % 10000000019
         return str(h1) + str(h2) + str(h3)
 
-    def add_tuple(self, id : str, last : str, first : str, dep : str, inj_info : list, who : str):
-        self.info.append([id, last, first, dep, inj_info[0], inj_info[1], who])
+    def add_tuple(self, ID : str, LAST : str, FIRST : str, DEP : str, INJ_INFO : list, WHO : str, SEC : str):
+        temp = [ID, LAST, FIRST, DEP, INJ_INFO[0], INJ_INFO[1], WHO]
+        self.info.append(temp)
+        self.id[ID] = temp
+        self.nme[LAST + FIRST].append(temp)
+        self.dpt[DEP].append(temp)
+        self.isInjected[INJ_INFO[0]].append(temp)
+        self.isStu[WHO].append(temp)
+        self.userIndex[ID].append(len(self.info))
+
+        self.pass_info.append([ID, SEC])
+        self.password[ID] = SEC
+        self.userIndex[ID].append(len(self.pass_info))
     """
     update all the instance fields of model according to the input information of a specific user. 
     """

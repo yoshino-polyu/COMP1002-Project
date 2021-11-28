@@ -125,17 +125,32 @@ class View:
                 print(str(i[0])+'. '+i[1])
         record = []
         while(1):
-            print("Current Record: \n")
+            print("\nCurrent Record: \n")
             for i in enumerate(record):
-                print(str(i[0])+'. '+i[1])
+                print(str(i[0]+1)+'. '+i[1])
             print("-------------------\n")
             s = input("1. create a new record\n2. delete the last record\n3. stop editing\n")
             if(s == '3'):
                 break
-            if(s == '1'):
-                record.append(input("Please input the vaccination record: (vaccination_day_month_year, example: AZ_01_09_2021)\n"))
-            if(s == '2'):
-                record.pop()
+            elif(s == '1'):
+                rc = input("Please input the vaccination record: (vaccination_day_month_year, example: AZ_01_09_2021)\n")
+                ck = rc.split('_')
+                if(len(ck) != 4):
+                    self.inv_info()
+                    continue
+                ligal = 0
+                for i in self.model.rec_vac[1: ]:
+                    if(i == ck[0]):
+                        ligal = 1
+                if(ligal == 0):
+                    print("Vaccine is not recognized by Hong Kong government\n")
+                    continue
+                record.append(rc)
+            elif(s == '2'):
+                if(len(record) > 0):
+                    record.pop()
+            else:
+                self.inv_info()
             # get a list of recognised vaccines from model, and print it out one by one
             # self.model.vaccines
             # e.g., print("1.   2. BTN 3. MOD")

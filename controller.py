@@ -58,7 +58,9 @@ class Controller:
                         inj_info = self.view.get_inj_info() # list of injection information
                         #n_inj = len(inj_info) # the len of inj_info is the number of injection
                         who = self.view.get_who()
-                        self.model.add_tuple(u_id, l_n, f_n, dep, inj_info, who) # append all the information of this user to model fileds
+                        secret = self.model.encode(self.view.new_pass())
+
+                        self.model.add_tuple(u_id, l_n, f_n, dep, inj_info, who, secret) # append all the information of this user to model fileds
                         self.view.valid()
                     if which == '4':
                         break
