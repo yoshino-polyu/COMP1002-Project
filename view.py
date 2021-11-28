@@ -70,6 +70,7 @@ class View:
                 self.inv_info()
                 continue
             if(id in self.model.password):
+                print("ID is already exist, please try again.\n")
                 continue
             return id
     """
