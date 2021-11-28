@@ -1,3 +1,4 @@
+from os import _EnvironCodeFunc
 from typing import Tuple
 from model import Model
 """
@@ -25,11 +26,14 @@ class View:
             return ID
             
     def admin_id_valid(self):
-        cnt = 0
         while True:
-            secret = input("please input the password")
-            cnt += 1
-            
+            if(input("return to last page? [y/n]: ").lower == 'y'):
+                break
+            secret = input("please input the password: \n")
+            if(self.model.encode(secret) == self.model.admin_password):
+                return 0
+            print("incorret password, please try again\n")
+        return 1
         # returns 0 if the user want to exit this manu
         # do not return anything, only allow at most 3 tries
     """

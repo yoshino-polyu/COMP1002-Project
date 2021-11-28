@@ -17,6 +17,8 @@ class Model:
         self.pass_info = [] # [user id, password]
         self.rec_vac = [] # [recognized vaccination name, ... ]
 
+        self.admin_password = ''
+
         self.id = dict()
         self.nme = defaultdict(list)
         self.dpt = defaultdict(list)
@@ -35,9 +37,9 @@ class Model:
     c.info
     """
     
-    @property
-    def _password(self):
-        return self.password
+    # @property
+    # def _password(self):
+    #     return self.password
     """
     getter of password
     use it by
@@ -177,15 +179,33 @@ class Model:
     def read_password(self):
         try:
             FL = open("password.txt", "r", encoding = "UTF-8")
+        except FileNotFoundError:
+            self.create_new_password()
+            FL = open("password.txt", "r", encoding= 'UTF-8')
+        finally:
             for i in FL.readlines():
                 self.pass_info.append(eval(i))
-        except FileNotFoundError:
-            print("password.txt not found, please check whether it is in the current directory")
-        finally:
             FL.close()
     """
     read lines for initialising self.pass_info where all users' passwords are stored.
     """
+    def create_new_admin(self):
+        print("create a new admin file")
+        FL = open("admin.txt","x")
+        FL.write("password\n")
+        FL.close()
+
+
+    def read_admin(self):
+        try:
+            FL = open("admin.txt", "r", encoding = "UTF-8")
+        except FileNotFoundError:
+            self.create_new_admin()
+            FL = open("admin.txt","r", encoding = "UTF-8")
+        finally:
+            for i in FL.readlines():
+                self.admin_password = i.strip('\n')
+            FL.close()
     
     def update_password(self, id, new):
         self.password[id] = new
