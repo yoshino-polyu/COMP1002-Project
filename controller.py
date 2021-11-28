@@ -34,10 +34,9 @@ class Controller:
                                 self.view.record(id)
                                 self.view.valid()
                             elif manner == '3': # update vaccination record
-                                record = self.view.update_record()
-                                self.model.append_record(record)
+                                record = self.view.update_record(id)
+                                self.model.append_record(id, record)
                                 self.view.valid()
-                                return 0
                             elif manner == '4':
                                 break
                             elif manner == '5':

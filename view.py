@@ -240,10 +240,46 @@ class View:
     def valid(self):
         print("action succeed!")
     
-    def update_record():
-        print("Please input the date of your most recent vaccination in the format of dd/mm/yyyy")
+    def update_record(self, ID):
+        self.record(ID)
+        num_inj = self.model.id[ID][4]
+        rd = self.model.id[ID][5]
+        if(input("Edit the number of injections? [y/n]: ").lower() == 'y'):
+            num_inj = input("Please input how many injections you have received (if full injection, please input -1): ")
+        if(input("Edit the record of injections? [y/n]: ").lower() == 'n'):
+            return [num_inj,rd]
+        print("Below are some of the vaccines recognized by the Hong Kong government:")
+        for i in enumerate(self.model.rec_vac[1:]):
+                print(str(i[0])+'. '+i[1])
+        while(1):
+            print("\nCurrent Record: \n")
+            for i in enumerate(rd):
+                print(str(i[0]+1)+'. '+i[1])
+            print("-------------------\n")
+            s = input("1. create a new record\n2. delete the last record\n3. stop editing\n")
+            if(s == '3'):
+                break
+            elif(s == '1'):
+                rc = input("Please input the vaccination record: (vaccination_day_month_year, example: AZ_01_09_2021)\n")
+                ck = rc.split('_')
+                if(len(ck) != 4):
+                    self.inv_info()
+                    continue
+                ligal = 0
+                for i in self.model.rec_vac[1: ]:
+                    if(i == ck[0]):
+                        ligal = 1
+                if(ligal == 0):
+                    print("Vaccine is not recognized by Hong Kong government\n")
+                    continue
+                rd.append(rc)
+            elif(s == '2'):
+                if(len(rd) > 0):
+                    rd.pop()
+            else:
+                self.inv_info()
+        return [num_inj,rd]
         # format checking -> until user input the correct formate
-        print("Please enter the type of vaccine you have taken in upper case")
         # format checking -> until user input the correct formate
         # return the record string
         pass # comment out pass once finishing this function

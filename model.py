@@ -191,7 +191,19 @@ class Model:
         self.password[id] = new
         self.pass_info[self.userIndex[id][1]][1] = new
     
-    def append_record(self, record : str):
+    def append_record(self, ID, record : list):
+        x = self.info[self.userIndex[ID][0]]
+        self.nme[x[1] + x[2]].remove(x)
+        self.dpt[x[3]].remove(x)
+        self.isInjected[x[4]].remove(x)
+        self.isStu[x[6]].remove(x)
+        x[4] = record[0]
+        x[5] = record[1]
+        self.id[x[0]] = x
+        self.nme[x[1] + x[2]].append(x)
+        self.dpt[x[3]].append(x)
+        self.isInjected[x[4]].append(x)
+        self.isStu[x[6]].append(x)
         return 0
     """
     appends the vaccination record to the end of vaccination information list
@@ -225,12 +237,12 @@ class Model:
             self.dpt[i[3]].append(i)
             self.isInjected[i[4]].append(i)
             self.isStu[i[6]].append(i)
-            self.userIndex[i[0]].append(j[0])
+            self.userIndex[i[0]].append(j[0]+1)
             #tmp = User()
         for j in enumerate(self.pass_info[1:]):
             i = j[1]
             self.password[i[0]] = i[1]
-            self.userIndex[i[0]].append(j[0])
+            self.userIndex[i[0]].append(j[0]+1)
         """
         Initialize the file and write the contents to the list
         """
