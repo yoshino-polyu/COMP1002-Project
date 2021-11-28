@@ -156,7 +156,7 @@ class View:
     def choose_dpt(self):
         res = ""
         while True:
-            print("Which department are you from?\nPlease input a number\n1. AAE 2. BME 3. COMP 4. EE 5. EIE 6. ISE 7. ME")
+            print("Which department are you from?\nPlease input a number\n1. AAE 2. BME 3. COMP 4. EE 5. EIE 6. ISE 7. ME : ")
             c = input()
             if c == '1':
                 res = "AAE"
@@ -196,7 +196,7 @@ class View:
             if(s == '3'):
                 break
             elif(s == '1'):
-                rc = input("Please input the vaccination record: (vaccination_day_month_year, example: AZ_01_09_2021)\n")
+                rc = input("Please input the vaccination record: (vaccination_day_month_year, example: AZ_01_09_2021)\n").upper()
                 ck = rc.split('_')
                 if(len(ck) != 4):
                     self.inv_info()
@@ -226,15 +226,15 @@ class View:
         a = ''
         ifligal = 0
         while(ifligal == 0):
-            print("Please enter the new password formed by 10 ~ 20 bits of numbers and letters: ")
+            print("Please enter the new password formed by 6 ~ 20 bits of numbers and letters: ")
             a = input()
-            if(len(a) < 10 or len(a) > 20):
-                print("Password is too Short or too long, please ensure it only contains 10 ~ 20 bits of numbers or letters")
+            if(len(a) < 6 or len(a) > 20):
+                print("Password is too Short or too long, please ensure it only contains 6 ~ 20 bits of numbers or letters")
                 continue
             ifligal = 1
             for i in a:
                 if (i.lower() > 'z' or i.lower() < 'a') and (i > '9' or i < '0'):
-                    print("Password has unexpected characters, please ensure it only contains 10 ~ 20 bits of numbers or letters")
+                    print("Password has unexpected characters, please ensure it only contains 6 ~ 20 bits of numbers or letters")
                     ifligal = 0
                     break
         return a
