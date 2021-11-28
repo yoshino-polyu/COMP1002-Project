@@ -70,11 +70,11 @@ class Model:
         self.dpt[DEP].append(temp)
         self.isInjected[INJ_INFO[0]].append(temp)
         self.isStu[WHO].append(temp)
-        self.userIndex[ID].append(len(self.info))
+        self.userIndex[ID].append(len(self.info)-1)
 
         self.pass_info.append([ID, SEC])
         self.password[ID] = SEC
-        self.userIndex[ID].append(len(self.pass_info))
+        self.userIndex[ID].append(len(self.pass_info)-1)
     """
     update all the instance fields of model according to the input information of a specific user. 
     """
