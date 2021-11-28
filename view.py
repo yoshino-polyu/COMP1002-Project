@@ -10,7 +10,7 @@ class View:
     
     def id_validation(self):
         while True:
-            ID = input("Please input your user id: \ninput 0 for exit this manu")
+            ID = input("Please input your user id: \ninput 0 for exit this manu:")
             if ID == '0':
                 return '0'
             if ID not in self.model.password:
@@ -29,11 +29,24 @@ class View:
             secret = input("please input the password")
             cnt += 1
             
-            
+        # returns 0 if the user want to exit this manu
         # do not return anything, only allow at most 3 tries
-        
     """
     check whether the user is the admin, and we only have one admin in this system. 
+    """
+    def list_all(self):
+        pass
+    """
+    lists out all information, sorted by department with alphabetical order and proper indentation, like the following:
+    AAE
+        Student Cao, cao has the vaccination reocrd AZ_30/07/2021, AZ_22/08/2021
+    BME
+        
+    COMP
+    EE
+    EIE
+    ISE
+    ME
     """
     def read_input(self):
         return str(input())
@@ -79,7 +92,7 @@ class View:
     def get_who(self):
         res = ""
         while True:
-            who = input("are you a student or staff?, 1 -> student, 0 -> staff")
+            who = input("are you a student or staff?, 1 -> student, 0 -> staff: ")
             if who == '1':
                 res = who
             elif who == '0':
@@ -164,7 +177,7 @@ class View:
         a = ''
         ifligal = 0
         while(ifligal == 0):
-            a = input("Please enter the new password formed by 10 ~ 20 bits of numbers and letters")
+            a = input("Please enter the new password formed by 10 ~ 20 bits of numbers and letters: ")
             if(len(a) < 10 or len(a) > 20):
                 print("Password is too Short or too long, please ensure it only contains 10 ~ 20 bits of numbers or letters")
                 continue
@@ -178,6 +191,7 @@ class View:
     """
     force user to input a valid password for creating or updating password.
     """
+    
     def entry_page(self):
         print("Please input a number:")
         print("1. using command line interface")
