@@ -1,4 +1,4 @@
-from os import _EnvironCodeFunc
+#from os import _EnvironCodeFunc
 from typing import Tuple
 from model import Model
 """
@@ -34,19 +34,40 @@ class View:
     
     def admin_id_valid(self):
         while True:
-            if(input("return to last page? [y/n]: ").lower == 'y'):
+            secret = input("please input the password: (input -1 to return to last page) \n")
+            if(secret == '-1'):
                 break
-            secret = input("please input the password: \n")
             if(self.model.encode(secret) == self.model.admin_password):
-                return 0
+                return 1
             print("incorret password, please try again\n")
-        return 1
+        return 0
         # returns 0 if the user want to exit this manu
         # do not return anything, only allow at most 3 tries
     """
     check whether the user is the admin, and we only have one admin in this system. 
     """
     def list_all(self):
+        for i in ['AAE', 'BME', 'COMP','EE', 'EIE', 'ISE', 'ME']:
+            print("Department: "+i.upper())
+            cnt = 0
+            vcnt = 0
+            if(j not in self.model.dpt):
+                print("---------------------------------")
+                continue
+            for j in self.model.dpt[i]:
+                if(str(j[6]) == '1'):
+                    print("    Student", end = ' ')
+                else:
+                    print("    Stuff", end = ' ')
+                print(j[1].upper()+" "+j[2]+" ("+j[0]+")"+" has the vaccination record ", end = '')
+                for k in j[5]:
+                    print(k, end=', ')
+                print()
+                cnt += 1
+                if(str(j[4]) == '-1'):
+                    vcnt += 1
+            print(str(vcnt/cnt * 100)+"%"+" students/stuffs had been full vaccinated")
+            print("---------------------------------")
         pass
     """
     lists out all information, sorted by department with alphabetical order and proper indentation, like the following:
@@ -69,18 +90,30 @@ class View:
     """
 
     def list_all_nova(self):
+        cnt = len(self.model.info) - 1
+        ncnt = 0
+        for i in self.model.isInjected[0]:
+            ncnt += 1
+            if(i[6] == 1):
+                print("Student", end = ' ')
+            else:
+                print("Stuff", end = ' ')
+            print(i[1] + " " + i[2] + " ("+ i[0]+") haven't been vaccinated.")
+        print(str(vcnt/cnt * 100) + "%" + " students/stuffs haven't been vaccinated.")
         pass
     """
     lists out all the teaching staffs and students, who haven't been vaccinated, in the faculty of Engineering.
     """
 
     def show_per_fully(self):
+
         pass
     """
     displays the percentage of fully vaccinated users in a specific department
     """
 
     def show_per_nvaci(self):
+        
         pass
     """
     displays the percentage of non-vaccinated users in a specific department.

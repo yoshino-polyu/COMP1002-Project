@@ -1,4 +1,4 @@
-['id','last name','first name','department','number of injection',['Injection Information',],'isstudent',]
+['id','last name','first name','department','number of injection',['Injection Information',],'1',]
 ['21072718d','chen','dawen','eie','2',['BTN_30/08/2021','BTN_22/09/2021',],'1',]
 ['21022391d','xu','le','comp','2',['AZ_10/08/2021','AZ_11/09/2021',],'1',]
 ['21101231d','lin','daiyu','ise','2',['MOD_03/06/2021','MOD_12/07/2021',],'1',]

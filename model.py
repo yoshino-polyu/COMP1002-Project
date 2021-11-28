@@ -206,7 +206,7 @@ class Model:
     def create_new_admin(self):
         print("create a new admin file")
         FL = open("admin.txt","x")
-        FL.write("password\n")
+        FL.write(str(self.encode("admin")))
         FL.close()
 
 
@@ -264,6 +264,7 @@ class Model:
         self.load_file()
         self.read_password()
         self.read_vaccination()
+        self.read_admin()
         for j in enumerate(self.info[1:]):
             i = j[1]
             self.id[i[0]] = i
