@@ -17,7 +17,7 @@ class Model:
     NUM_FILES = 7
     
     def __init__(self):
-        self.info = []   # [user id, last name, first name, department, number of injection,[injection info],'studentornot']
+        self.info = []   # [user id, last name, first name, department, number of injection (-1 means fully vaccinated),[injection info],'studentornot']
         self.pass_info = [] # [user id, password]
         self.rec_vac = [] # [the name of recognized vaccines, ... ]
 
@@ -64,15 +64,7 @@ class Model:
         self.pass_info.append([ID, SEC])
         self.password[ID] = SEC
         self.userIndex[ID].append(len(self.pass_info)-1)
-
     
-    def get_vaccines(self):
-        
-        return 0
-    """
-    Returns a current list (instance field) of regonized vaccines.
-    Note: Only the vaccine recognized by HK gov is the vaccine that can be successfully written into the vaccine record.
-    """
     
     def create_new_storage(self):
         print("Create a new storage file")
@@ -259,8 +251,6 @@ class Model:
             self.userIndex[i[0]].append(j[0]+1)
         return 1
 
-    
-    
     def write_file(self):
         FL = open("storage.txt", "w")
         for i in self.info:
