@@ -12,12 +12,13 @@ class GUIv:
     def main_page(self):
         global window_main
         window_main=Tk()
+        window_login_user.geometry('500x500')
         button1 = Button(window_main, text = "User", font = ('Arial', 15), command = self.user_login_page)
         button2 = Button(window_main, text = "Administrator", font = ('Arial', 15), command = self.admin_login_page)
         button3 = Button(window_main, text = "Register", font = ('Arial', 15), command = self.register_page)
         button1.place(x = 120, y = 210)
-        button2.place(x = 260, y = 210)
-        button3.place(x = 350, y = 210)
+        button2.place(x = 1700, y = 210)
+        button3.place(x = 320, y = 210)
         window_main.mainloop()
 
     def user_login_page(self):
@@ -28,10 +29,14 @@ class GUIv:
         labelID.place(x=65, y=120)
         labelPwd = Label(window_login_user, text='password  ', font=('Arial', 12), fg='grey', justify=RIGHT)
         labelPwd.place(x=50, y=160)
+        global verID
         varID = StringVar(window_login_user, value='')
+        global entryID
         entryID = Entry(window_login_user, textvariable=varID)
         entryID.place(x=120, y=124)
+        global varPwd
         varPwd = StringVar(window_login_user, value='')
+        global entryPwd
         entryPwd = Entry(window_login_user,show='*', textvariable=varPwd)
         entryPwd.place(x=120, y=164)
         res = 0
@@ -55,18 +60,18 @@ class GUIv:
         entryPwd.place(x=120, y=164)
         global judge
         judge = -1
-        buttonOk = Button(window_login_admin, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=self.log_in(judge))
+        buttonOk = Button(window_login_admin, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=lambda:self.log_in(judge))
         buttonOk.place(x=65, y=200, width=200, height=30)
         if judge == 1:
             self.admin_page()
-        window_login_admin.mainloop
+        window_login_admin.mainloop()
 
 
     def register_page(self):
         global window_register
         window_register=Tk()
         window_login_user('1002')
-        window_login_user.geometry('327x272')
+        window_login_user.geometry('500x500')
         self.get_who()
         self.get_id()
         self.get_name()
