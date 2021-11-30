@@ -153,7 +153,7 @@ class Model:
         """
         creates a new password.txt file
         """
-        print("create a new password file")
+        #print("create a new password file")
         FL = open("password.txt","x")
         FL.write("['user','password']\n")
         FL.close()
@@ -178,7 +178,7 @@ class Model:
         create a new admin.txt file for storing the password of admin, and the default password is "admin"
         this method will be invoked when previous admin.txt file is not found. 
         """
-        print("create a new admin file")
+        #print("create a new admin file")
         FL = open("admin.txt","x")
         FL.write(str(self.encode("admin")))
         FL.close()
@@ -224,7 +224,7 @@ class Model:
         """
         create a new vaccination file vaccination.txt with the first line is "vaccination name".
         """
-        print("create a new vaccination file")
+        #print("create a new vaccination file")
         FL = open("vaccination.txt","x")
         FL.write("'vaccination name'\n")
         FL.close()
