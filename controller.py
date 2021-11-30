@@ -2,8 +2,7 @@ import sys
 from model import Model
 from view import View
 """
-The Controller class translates user actions into operations on the Model,
-although it depends on command line interface to read keystrokes.
+The Controller class translates user actions into operations on the Model
 """
 class Controller:
     def __init__(self, model : Model, view : View) -> None:

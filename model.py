@@ -1,5 +1,5 @@
 """
-The model 
+The Model 
     includes user information being represented, and will be acted upon latter. 
     determine the system state
 """
@@ -70,30 +70,33 @@ class Model:
     
     
     def create_new_storage(self):
-        print("Create a new storage file")
-        FL = open("storage.txt","x")
-        FL.write("['ID','LAST NAME','FIRST NAME','DEPARTMENT','Number of Injection',['Injection Information',],'isStudent']\n")
-        FL.close()
         """
         Transfers data into the system and writes the specified string to a file. 
         The string content is stored in the buffer until the file is closed or the buffer is flushed
         """
+        print("Create a new storage file")
+        FL = open("storage.txt","x")
+        FL.write("['ID','LAST NAME','FIRST NAME','DEPARTMENT','Number of Injection',['Injection Information',],'isStudent']\n")
+        FL.close()
+
     
     def update_admin(self, word : str):
+        """
+        updates the password of admin
+        Param: word -> the new password of admin
+        """
         self.admin_password = word
         pass
-    """
-    updates the password of admin
-    Param: word -> the new password of admin
-    """
+
 
     def update_vacc(self, list_vacc : list):
+        """
+        adds the newly recognised vaccines into existing recognised vaccines
+        Param: list_vacc -> the newly recognised vaccines from admin
+        """
         self.rec_vac = list_vacc
         pass
-    """
-    adds the newly recognised vaccines into existing recognised vaccines
-    Param: list_vacc -> the newly recognised vaccines from admin
-    """
+
     def wrong_file_storage(self):
         """
         This function is called to create a new storage.txt file if the storage format of the storage.txt file 

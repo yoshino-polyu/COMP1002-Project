@@ -168,6 +168,7 @@ class View:
         return str(input())
 
     def get_name(self):
+        """ read user name for registration purpose. """
         print("Last Name: ")
         last_n = input()
         print("First Name: ")
@@ -202,9 +203,7 @@ class View:
             return id
 
     def get_who(self):
-        """
-        return a str indicating the user type, 1 -> student, 0 -> staff
-        """
+        """ return a str indicating the user type, 1 -> student, 0 -> staff """
         res = ""
         while True:
             print("are you a student or staff?, 1 -> student, 0 -> staff: ")
@@ -219,9 +218,7 @@ class View:
             return res
 
     def choose_dpt(self):
-        """
-        returns a string of department name with upper case
-        """
+        """ returns a string of department name with upper case """
         res = ""
         while True:
             print("Which department are you from?\nPlease input a number\n1. AAE 2. BME 3. COMP 4. EE 5. EIE 6. ISE 7. ME : ")
@@ -248,9 +245,7 @@ class View:
 
 
     def get_inj_info(self):
-        """
-        returns number of injection and the vaccination information in the format of string.
-        """
+        """ returns number of injection and the vaccination information in the format of string. """
         num_inj = input("Please input how many injections you have received: ")
         print("Below are some of the vaccines recognized by the Hong Kong government:")
         for i in enumerate(self.model.rec_vac[1:]):
@@ -283,16 +278,11 @@ class View:
                     record.pop()
             else:
                 self.inv_info()
-            # get a list of recognised vaccines from model, and print it out one by one
-            # self.model.vaccines
-            # e.g., print("1.   2. BTN 3. MOD")
         return [num_inj,record]
 
     
     def new_pass(self):
-        """
-        Ask user to input a valid password for creating or updating password.
-        """
+        """ Ask user to input a valid password for creating or updating password. """
         a = ''
         ifligal = 0
         while(ifligal == 0):
@@ -310,18 +300,14 @@ class View:
         return a
         
     def entry_page(self):
-        """
-        shows the entry page. 
-        """
+        """ shows the entry page."""
         print("Please input a number:")
         print("1. using command line interface")
         print("2. using graphic user interface")
         print("3. exit program")
 
     def command_line(self):
-        """
-        shows the login page.
-        """
+        """ shows the login page. """
         print("Please input a number:")
         print("1. user login")
         print("2. administrator login")
@@ -330,9 +316,7 @@ class View:
         print("5. exit program")
 
     def user_page(self):
-        """
-        shows the user manual.
-        """
+        """ shows the user manual. """
         print("Please input a number:")
         print("1. change the password")
         print("2. see current vaccination record")
@@ -341,9 +325,7 @@ class View:
         print("5. exit program")
     
     def admin_page(self):
-        """
-        shows the admin manual. 
-        """
+        """ shows the admin manual. """
         print("Please input a number:")
         print("1. list out all information, sorted by department with alphabetical order and proper indentation.")
         print("2. list out all the teaching staffs and students, who haven't been vaccinated, in the faculty of Engineering.")
