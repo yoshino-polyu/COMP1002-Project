@@ -257,7 +257,7 @@ class Model:
             self.load_file()
         except WrongFileError:
             print("the format of storage.txt is wrong, and a new one is created!")
-            return 0
+            return '0'
         self.read_password()
         self.read_vaccination()
         self.read_admin()
@@ -273,7 +273,7 @@ class Model:
             i = j[1]
             self.password[i[0]] = i[1]
             self.userIndex[i[0]].append(j[0]+1)
-        return 1
+        return '1'
 
     def write_file(self):
         """

@@ -11,7 +11,10 @@ class View:
     
     def id_validation(self):
         """
-        
+        Ask the user to input id and password, conduct the process of authentication.
+        Return: 
+        1. '0' when user want to exit this manu. 
+        2. the string of id when the user login successfully.
         """
         res = ""
         while True:
@@ -36,44 +39,36 @@ class View:
                 return res
     
     def admin_id_valid(self):
+        """
+        Check whether the user is the admin, and we only have one admin in this system, so we only need to check the password.
+        Return:
+        1. '0' when user want to exit this manu.
+        2. '1' when user login successfully.
+        """
         while True:
             secret = input("please input the password: (input -1 to return to last page) \n")
             if(secret == '-1'):
                 break
             if(self.model.encode(secret) == self.model.admin_password):
                 print("Login Successfully")
-                return 1
+                return '1'
             print("Incorret password, please try again\n")
-        return 0
+        return '0'
         # returns 0 if the user want to exit this manu
         # do not return anything, only allow at most 3 tries
-    """
-    check whether the user is the admin, and we only have one admin in this system. 
-    """
+
     def list_all(self):
+        """
+        lists out all information, sorted by department with alphabetical order and proper indentation.
+        indicates the percentage of fully vaccinated users, and that of ones who haven't been vaccinated, in a specific Department of Engineering faculty.
+        """
         for i in ['AAE', 'BME', 'COMP','EE', 'EIE', 'ISE', 'ME']:
             self.show_dep(i)
-    """
-    lists out all information, sorted by department with alphabetical order and proper indentation, like the following:
-    AAE
-        Student Cao, cao has the vaccination reocrd AZ_30/07/2021, AZ_22/08/2021
-    BME
-        Staff Qin Ke wen, Qin has the vacination record AZ_17/04/2021, AZ_15/05/2021
-    COMP
-        Staff Wang Dan has the vacination record BTN_20/04/2021, BTN_22/05/2021
-        Student Son King  has the vacination record BTN_21/04/2021, BTN_21/05/2021, BTN_21/06/2021
-    EE
-        Student Wim Link has the vacination record AZ_10/05/2021, AZ_10/06/2021, AZ_11/07/2021
-        Student Wu Song has the vacination record BTN_20/06/2021
-    EIE
-        Student Chen Daweneie has the vacination record  BTN_30/08/2021, BTN_22/09/2021
-    ISE
-        Student Lin Daiyu has the vacination record MOD_03/06/2021, MOD_12/07/2021
-    ME
-        Staff Jiang Qingwen has the vacination record BTN_22/04/2021, BTN_27/05/2021
-    """
 
     def list_all_nova(self):
+        """
+        lists out all the teaching staffs and students, who haven't been vaccinated, in the faculty of Engineering.
+        """
         cnt = len(self.model.info) - 1
         ncnt = 0
         for i in self.model.isInjected[0]:
@@ -84,12 +79,13 @@ class View:
                 print("Stuff", end = ' ')
             print(i[1] + " " + i[2] + " ("+ i[0]+") haven't been vaccinated.")
         print(str(ncnt/cnt * 100) + "%" + " students/stuffs haven't been vaccinated.")
-        pass
-    """
-    lists out all the teaching staffs and students, who haven't been vaccinated, in the faculty of Engineering.
-    """
+
 
     def show_dep(self, dep):
+        """
+        # displays all the student and staff, together with the percentage of 
+        # those fully vaccinated and haven't vaccinated, of a specific department. 
+        """
         if(dep == '-1'):
             while(1):
                 print("Which department are you from?\nPlease input a number\n1. AAE 2. BME 3. COMP 4. EE 5. EIE 6. ISE 7. ME : ")
@@ -139,13 +135,12 @@ class View:
         print(str(vcnt/cnt * 100)+"%"+" students/stuffs have been fully vaccinated")
         print(str(ncnt/cnt * 100)+"%"+" students/stuffs haven't been vaccinated")
         print("---------------------------------")
-        pass
-    """
-    displays the percentage of fully vaccinated, and non-vaccinated users in a specific department
-    """
-
     
     def new_vacc(self):
+        """
+        ask admin to add some recognised vaccines newly issued by gov
+        Return: the list of the added recognised vaccines
+        """
         vac = self.model.rec_vac
         while True:
             print("Current recognised vaccines: ")
@@ -165,13 +160,11 @@ class View:
             else:
                 self.inv_info()
         return vac
-    """
-    ask admin to add some recognised vaccines newly issued by gov
-    Return: the list of the added recognised vaccines
-    """
+
     
     
     def read_input(self):
+        """ read input from user. """
         return str(input())
 
     def get_name(self):
@@ -182,9 +175,13 @@ class View:
         return [last_n.lower(), first_n.lower()]
 
     def get_id(self):
+        """
+        gets a valid id from user.
+        Note: a id is valid when it consists of 8 bits leading numbers and 1 bit of alphabet.
+        """
         enums = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
         while True:
-            id = input("pealse input your identity card number formed by 8 bits of number and 1 bit of alphabet ")
+            id = input("pealse input your identity card number formed by 8 bits of number and 1 bit of alphabet.")
             if (len(id) != 9):
                 self.inv_info()
                 continue
@@ -203,10 +200,11 @@ class View:
                 print("ID is already exist, please try again.\n")
                 continue
             return id
-    """
-    gets a valid id from user
-    """
+
     def get_who(self):
+        """
+        return a str indicating the user type, 1 -> student, 0 -> staff
+        """
         res = ""
         while True:
             print("are you a student or staff?, 1 -> student, 0 -> staff: ")
@@ -219,10 +217,11 @@ class View:
                 self.inv_info()
                 continue
             return res
-    """
-    return a str indicating the user type, 1 -> student, 0 -> staff
-    """
+
     def choose_dpt(self):
+        """
+        returns a string of department name with upper case
+        """
         res = ""
         while True:
             print("Which department are you from?\nPlease input a number\n1. AAE 2. BME 3. COMP 4. EE 5. EIE 6. ISE 7. ME : ")
@@ -246,11 +245,12 @@ class View:
                 continue
             break
         return res
-    """
-    returns a string of department name with upper case
-    """
+
 
     def get_inj_info(self):
+        """
+        returns number of injection and the vaccination information in the format of string.
+        """
         num_inj = input("Please input how many injections you have received: ")
         print("Below are some of the vaccines recognized by the Hong Kong government:")
         for i in enumerate(self.model.rec_vac[1:]):
@@ -287,11 +287,12 @@ class View:
             # self.model.vaccines
             # e.g., print("1.   2. BTN 3. MOD")
         return [num_inj,record]
-    """
-    returns number of injection and the injection information in the format of string.
-    """
+
     
     def new_pass(self):
+        """
+        Ask user to input a valid password for creating or updating password.
+        """
         a = ''
         ifligal = 0
         while(ifligal == 0):
@@ -307,11 +308,11 @@ class View:
                     ifligal = 0
                     break
         return a
-    """
-    force user to input a valid password for creating or updating password.
-    """
-    
+        
     def entry_page(self):
+        """
+        shows the entry page. 
+        """
         print("Please input a number:")
         print("1. using command line interface")
         print("2. using graphic user interface")
@@ -319,7 +320,7 @@ class View:
 
     def command_line(self):
         """
-        shows the login page
+        shows the login page.
         """
         print("Please input a number:")
         print("1. user login")
@@ -329,6 +330,9 @@ class View:
         print("5. exit program")
 
     def user_page(self):
+        """
+        shows the user manual.
+        """
         print("Please input a number:")
         print("1. change the password")
         print("2. see current vaccination record")
@@ -337,22 +341,34 @@ class View:
         print("5. exit program")
     
     def admin_page(self):
+        """
+        shows the admin manual. 
+        """
         print("Please input a number:")
         print("1. list out all information, sorted by department with alphabetical order and proper indentation.")
         print("2. list out all the teaching staffs and students, who haven't been vaccinated, in the faculty of Engineering.")
         print("3. displays the percentage of fully vaccinated, and non-vaccinated users in a specific department")
         print("4. change password of administrator")
         print("5. add new recognised vaccines into the the of recognised vaccines")
-        print("6. go back to the last page")
+        print("6. logout")
         print("7. exit program")
 
     def inv_info(self):
+        """ alert the user that an illegal string has been entered, and ask user to re-enter it. """
         print("\ninvalid input, please try again!\n")
         
     def valid(self):
+        """ Prompt the user that the operation was successful. """
         print("\naction succeed!\n")
     
     def update_record(self, ID):
+        """
+        Param: id of the user that change his or her vaccination record.
+        Return:
+        1. the updated number of injection of the user
+        2. the updated vaccination record of the user
+        returns the string of vaccination record input by user
+        """
         self.record(ID)
         num_inj = self.model.id[ID][4]
         rd = self.model.id[ID][5]
@@ -393,10 +409,12 @@ class View:
             else:
                 self.inv_info()
         return [num_inj,rd] # number of injections : str, vaccination record : str
-    """
-    returns the string of vaccination record input by user
-    """
+
     def record(self, ID):
+        """
+        displays the vaccination record of a specific user.
+        Param: id of the user that want ot see his or her vaccination record.
+        """
         tmp = self.model.id[ID]
         if(str(tmp[4]) == '-1'):
             print("Vaccination has been completed.")
@@ -406,6 +424,3 @@ class View:
         for i in tmp[5]:
             print("------------------------\n"+i)
         print("------------------------")
-    """
-    displays the vaccination record of a specific user.
-    """

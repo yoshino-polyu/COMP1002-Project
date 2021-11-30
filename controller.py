@@ -11,7 +11,7 @@ class Controller:
         self.view = view
     
     def run(self):
-        if (self.model.init() == 0): # read all info from txt, and store it into storage.
+        if (self.model.init() == '0'): # read all info from txt, and store it into storage.
             self.model.init()
         while True:
             self.view.entry_page()
@@ -46,9 +46,8 @@ class Controller:
                                 self.view.inv_info()
                                 continue
                     elif which == '2': # admin login
-                        admin_id = self.view.admin_id_valid()
-                        print(admin_id)
-                        if admin_id != 1:
+                        suc = self.view.admin_id_valid()
+                        if suc != '1':
                             continue
                         while True:
                             self.view.admin_page()
@@ -58,7 +57,7 @@ class Controller:
                             elif ad_ac == '2': # list out all the teaching staffs and students, who haven't been vaccinated, in the faculty of Engineering.
                                 self.view.list_all_nova()
                             elif ad_ac == '3':
-                                self.view.show_dep('-1') # displays the percentage of fully vaccinated, and non-vaccinated users in a specific department
+                                self.view.show_dep('-1') # displays all the student and staff, together with the percentage of fully vaccinated and haven't vaccinated ones, of a specific department. 
                             elif ad_ac == '4':
                                 secr = self.model.encode(self.view.new_pass())
                                 self.model.update_admin(secr)
