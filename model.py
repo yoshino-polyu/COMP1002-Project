@@ -27,10 +27,8 @@ class Model:
         self.admin_password = '' # password of admin
 
         self.id = dict()
-        self.nme = defaultdict(list) # a dictionary which's key is student/stuff's name
         self.dpt = defaultdict(list) # a dictionary which's key is department, admin can search the department to get the information of its students and stuffs
         self.isInjected = defaultdict(list) # a dictionary which's key is number of injection, admin can get the information that who have not been inejected
-        self.isStu = defaultdict(list) # a dictionary which's key is if the person is student
         self.userIndex = defaultdict(list) # a dictionary help to get the one user's index of info[] and pass_info[], which can help update the information quickly
         self.password = dict() # a dictionary help to confirm the user's password
 
@@ -58,10 +56,8 @@ class Model:
         temp = [ID, LAST, FIRST, DEP, INJ_INFO[0], INJ_INFO[1], WHO]
         self.info.append(temp)
         self.id[ID] = temp
-        self.nme[LAST + FIRST].append(temp)
         self.dpt[DEP].append(temp)
         self.isInjected[INJ_INFO[0]].append(temp)
-        self.isStu[WHO].append(temp)
         self.userIndex[ID].append(len(self.info)-1)
 
         self.pass_info.append([ID, SEC])
@@ -215,17 +211,13 @@ class Model:
         rewrite the corresponding fields of a specific user according to the latest vaccination record.
         """
         x = self.info[self.userIndex[ID][0]]
-        self.nme[x[1] + x[2]].remove(x)
         self.dpt[x[3]].remove(x)
         self.isInjected[x[4]].remove(x)
-        self.isStu[x[6]].remove(x)
         x[4] = record[0]
         x[5] = record[1]
         self.id[x[0]] = x
-        self.nme[x[1] + x[2]].append(x)
         self.dpt[x[3]].append(x)
         self.isInjected[x[4]].append(x)
-        self.isStu[x[6]].append(x)
 
     
     def create_new_vaccination(self):
@@ -267,10 +259,8 @@ class Model:
         for j in enumerate(self.info[1:]):
             i = j[1]
             self.id[i[0]] = i
-            self.nme[i[1] + i[2]].append(i)
             self.dpt[i[3]].append(i)
             self.isInjected[i[4]].append(i)
-            self.isStu[i[6]].append(i)
             self.userIndex[i[0]].append(j[0]+1)
         for j in enumerate(self.pass_info[1:]):
             i = j[1]
