@@ -28,18 +28,14 @@ class GUIv:
         labelID.place(x=65, y=120)
         labelPwd = Label(window_login_user, text='password  ', font=('Arial', 12), fg='grey', justify=RIGHT)
         labelPwd.place(x=50, y=160)
-        global varID
         varID = StringVar(window_login_user, value='')
-        global entryID
         entryID = Entry(window_login_user, textvariable=varID)
         entryID.place(x=120, y=124)
-        global varPwd
         varPwd = StringVar(window_login_user, value='')
-        global entryPwd
         entryPwd = Entry(window_login_user,show='*', textvariable=varPwd)
         entryPwd.place(x=120, y=164)
         res = 0
-        buttonOk = Button(window_login_user, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=self.log_in(res))
+        buttonOk = Button(window_login_user, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command = lambda:self.log_in(res))
         buttonOk.place(x=65, y=200, width=200, height=30)
         if res == 1:
             self.user_page()
@@ -57,10 +53,11 @@ class GUIv:
         global entryPwd
         entryPwd = Entry(window_login_admin,show='*', textvariable=varPwd)
         entryPwd.place(x=120, y=164)
-        res = -1
-        buttonOk = Button(window_login_admin, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=self.log_in(res))
+        global judge
+        judge = -1
+        buttonOk = Button(window_login_admin, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=self.log_in(judge))
         buttonOk.place(x=65, y=200, width=200, height=30)
-        if res == 1:
+        if judge == 1:
             self.admin_page()
         window_login_admin.mainloop
 
@@ -120,12 +117,12 @@ class GUIv:
     def admin_page(self):
         global window_admin
         window_admin=Tk()
-        button1 = Button(window_admin, text = "User", font = ('Arial', 15), command = self.list_all_page)
-        button2 = Button(window_admin, text = "User", font = ('Arial', 15), command = self.list_unv_page)
-        button3 = Button(window_admin, text = "User", font = ('Arial', 15), command = self.display_page)
-        button4 = Button(window_admin, text = "User", font = ('Arial', 15), command = self.admin_change_page)
-        button5 = Button(window_admin, text = "User", font = ('Arial', 15), command = self.add_page)
-        button6 = Button(window_admin, text = "User", font = ('Arial', 15), command = self.log_out)
+        button1 = Button(window_admin, text = "list out all information", font = ('Arial', 15), command = self.list_all_page)
+        button2 = Button(window_admin, text = "list out all people who haven't been vaccinated", font = ('Arial', 15), command = self.list_unv_page)
+        button3 = Button(window_admin, text = " displays the percentage", font = ('Arial', 15), command = self.display_page)
+        button4 = Button(window_admin, text = "Change password", font = ('Arial', 15), command = self.admin_change_page)
+        button5 = Button(window_admin, text = "Add new vaccination", font = ('Arial', 15), command = self.add_page)
+        button6 = Button(window_admin, text = "Log out", font = ('Arial', 15), command = self.log_out)
         button1.place(x = 180, y = 210)
         button2.place(x = 180, y = 210)
         button3.place(x = 180, y = 210)
