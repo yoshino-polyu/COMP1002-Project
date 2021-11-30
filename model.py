@@ -19,7 +19,10 @@ class Model:
     def __init__(self):
         self.info = []   # [user id, last name, first name, department, number of injection (-1 means fully vaccinated),[injection info],'studentornot']
         self.pass_info = [] # [user id, password]
-        self.rec_vac = [] # [the name of recognized vaccines, ... ]
+
+        # [the name of recognized vaccines, ... ] the admin will update the list of recognized vaccines according to the latest information
+        # from Hong Kong government. Only the recognized vaccines can be recorded in the file system. 
+        self.rec_vac = [] 
 
         self.admin_password = '' # password of admin
 
@@ -144,10 +147,13 @@ class Model:
             i = eval(i)
             for j in enumerate(i):
                 if isinstance(j[1],str) == 1:
-                    i[j[0]] = j[1].lower()
+                    i[j[0]] = j[1].lower() # convert all characters to lowercase
             self.info.append(i)
             
     def create_new_password(self):
+        """
+        creates a new password.txt file
+        """
         print("create a new password file")
         FL = open("password.txt","x")
         FL.write("['user','password']\n")
@@ -155,6 +161,9 @@ class Model:
 
 
     def read_password(self):
+        """
+        read password.txt file and store it into self.pass_info.
+        """
         try:
             FL = open("password.txt", "r", encoding = "UTF-8")
         except FileNotFoundError:
@@ -164,10 +173,12 @@ class Model:
             for i in FL.readlines():
                 self.pass_info.append(eval(i))
             FL.close()
-    """
-    read lines for initialising self.pass_info where all users' passwords are stored.
-    """
+
     def create_new_admin(self):
+        """
+        create a new admin.txt file for storing the password of admin, and the default password is "admin"
+        this method will be invoked when previous admin.txt file is not found. 
+        """
         print("create a new admin file")
         FL = open("admin.txt","x")
         FL.write(str(self.encode("admin")))
@@ -175,6 +186,9 @@ class Model:
 
 
     def read_admin(self):
+        """
+        read admin.txt, and store it into self.admin_password. 
+        """
         try:
             FL = open("admin.txt", "r", encoding = "UTF-8")
         except FileNotFoundError:
@@ -186,10 +200,17 @@ class Model:
             FL.close()
     
     def update_password(self, id, new):
+        """
+        update the password dictionary and the list of password information. 
+        Param: id is the user id, new is the new changed password string with encryption.
+        """
         self.password[id] = new
         self.pass_info[self.userIndex[id][1]][1] = new
     
     def append_record(self, ID, record : list):
+        """
+        rewrite the corresponding fields of a specific user according to the latest vaccination record.
+        """
         x = self.info[self.userIndex[ID][0]]
         self.nme[x[1] + x[2]].remove(x)
         self.dpt[x[3]].remove(x)
@@ -202,18 +223,21 @@ class Model:
         self.dpt[x[3]].append(x)
         self.isInjected[x[4]].append(x)
         self.isStu[x[6]].append(x)
-        return 0
-    """
-    appends the vaccination record to the end of vaccination information list
-    """
+
     
     def create_new_vaccination(self):
+        """
+        create a new vaccination file vaccination.txt with the first line is "vaccination name".
+        """
         print("create a new vaccination file")
         FL = open("vaccination.txt","x")
         FL.write("'vaccination name'\n")
         FL.close()
 
     def read_vaccination(self):
+        """
+        read the list of recognized vaccines from vaccination.txt
+        """
         try:
             FL = open("vaccination.txt", "r", encoding = "UTF-8")
         except FileNotFoundError:
@@ -226,7 +250,8 @@ class Model:
 
     def init(self):
         """
-        Initialize the file and write the contents to the list
+        read data from the storage.txt, password.txt, admin.txt and vaccination.txt to store them into the state of this model object.
+        update the corresponding dictionary for subsequent queries.
         """
         try:
             self.load_file()
@@ -244,7 +269,6 @@ class Model:
             self.isInjected[i[4]].append(i)
             self.isStu[i[6]].append(i)
             self.userIndex[i[0]].append(j[0]+1)
-            #tmp = User()
         for j in enumerate(self.pass_info[1:]):
             i = j[1]
             self.password[i[0]] = i[1]
@@ -252,6 +276,10 @@ class Model:
         return 1
 
     def write_file(self):
+        """
+        write the state of model object (basic information list of users, users' password information, 
+        the encrypted password of the administrator, and the list of recognised vaccines) into our file system.
+        """
         FL = open("storage.txt", "w")
         for i in self.info:
             FL.write('[')
@@ -282,6 +310,3 @@ class Model:
         for i in self.rec_vac:
             FL.write(i+'\n')
         FL.close()
-        """
-        Store the read content in the middle of memory, write according to the format
-        """
