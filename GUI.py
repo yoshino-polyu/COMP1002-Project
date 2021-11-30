@@ -4,7 +4,7 @@ from tkinter import *
 import tkinter as tk
 import tkinter.messagebox
 from tkinter import messagebox
-from matplotlib import pyplot as plt
+#from matplotlib import pyplot as plt
 
 class GUIv:
     def __init__(self, model : Model) -> None: 
@@ -35,16 +35,17 @@ class GUIv:
         global entryID
         entryID = Entry(window_login_user, textvariable=varID)
         entryID.place(x=120, y=124)
+        global uid
+        uid=entryID.get()
         global varPwd
         varPwd = StringVar(window_login_user, value='')
         global entryPwd
         entryPwd = Entry(window_login_user,show='*', textvariable=varPwd)
         entryPwd.place(x=120, y=164)
-        res = 0
-        buttonOk = Button(window_login_user, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command = lambda:self.log_in(res))
+        global judge
+        judge = 0
+        buttonOk = Button(window_login_user, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command = lambda:self.log_in(judge))
         buttonOk.place(x=65, y=200, width=200, height=30)
-        if res == 1:
-            self.user_page()
         window_login_user.mainloop()
 
     def admin_login_page(self):
@@ -63,20 +64,21 @@ class GUIv:
         judge = -1
         buttonOk = Button(window_login_admin, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=lambda:self.log_in(judge))
         buttonOk.place(x=65, y=200, width=200, height=30)
-        if judge == 1:
-            self.admin_page()
         window_login_admin.mainloop()
 
 
     def register_page(self):
-        global window_register
         window_register=Tk()
-        window_register('1002')
+        window_register.title('1002')
         window_register.geometry('500x500')
-        lambda:self.get_who()
-        lambda:self.get_id()
-        lambda:self.get_name()
-        lambda:self.choose_dpt()
+        button1 = Button(window_register, text = "Who", font = ('Arial', 15), command = lambda:self.get_who())
+        button2 = Button(window_register, text = "ID", font = ('Arial', 15), command = lambda:self.get_id())
+        button3 = Button(window_register, text = "Name", font = ('Arial', 15), command = lambda:self.get_name())
+        button4 = Button(window_register, text = "Department", font = ('Arial', 15), command = lambda:self.choose_dpt())
+        button1.place(x = 80, y = 210)
+        button2.place(x = 160, y = 210)
+        button3.place(x = 220, y = 210)
+        button4.place(x = 320, y = 210)
         window_register.mainloop()
 
     def user_page(self):
@@ -98,8 +100,8 @@ class GUIv:
         window_login_user('1002')
         window_login_user.geometry('500x500')
         label =Label(window_user_change, text = "Please enter the password formed by 6 ~ 20 bits of numbers and letters: ")
-        varpass = tk.StringVar(window_user_change, value='')
-        entrypass = tk.Entry(window_user_change, textvariable=varpass)
+        varpass = StringVar(window_user_change, value='')
+        entrypass = Entry(window_user_change, textvariable=varpass)
         entrypass.place(x=120, y=124)
         a = entrypass.get()
         if(len(a) < 6 or len(a) > 20):
@@ -108,7 +110,8 @@ class GUIv:
             if (i.lower() > 'z' or i.lower() < 'a') and (i > '9' or i < '0'):
                 messagebox.showerror(title='Warning', message="Password has unexpected characters, please ensure it only contains 6 ~ 20 bits of numbers or letters")
         window_user_change.mainloop()
-        return a
+        
+        self.model.update_password(uid, a)
 
     def see_page(self):
         global window_see
@@ -125,18 +128,20 @@ class GUIv:
     def admin_page(self):
         global window_admin
         window_admin=Tk()
+        window_admin.title('1002')
+        window_admin.geometry('500x500')
         button1 = Button(window_admin, text = "list out all information", font = ('Arial', 15), command = self.list_all_page)
         button2 = Button(window_admin, text = "list out all people who haven't been vaccinated", font = ('Arial', 15), command = self.list_unv_page)
-        button3 = Button(window_admin, text = " displays the percentage", font = ('Arial', 15), command = self.display_page)
+        button3 = Button(window_admin, text = "Displays the percentage", font = ('Arial', 15), command = self.display_page)
         button4 = Button(window_admin, text = "Change password", font = ('Arial', 15), command = self.admin_change_page)
         button5 = Button(window_admin, text = "Add new vaccination", font = ('Arial', 15), command = self.add_page)
         button6 = Button(window_admin, text = "Log out", font = ('Arial', 15), command = window_admin.destroy)
-        button1.place(x = 180, y = 20)
-        button2.place(x = 180, y = 50)
-        button3.place(x = 180, y = 80)
-        button4.place(x = 180, y = 110)
-        button5.place(x = 180, y = 140)
-        button6.place(x = 180, y = 170)
+        button1.place(x = 50, y = 20)
+        button2.place(x = 50, y = 50)
+        button3.place(x = 50, y = 80)
+        button4.place(x = 50, y = 110)
+        button5.place(x = 50, y = 140)
+        button6.place(x = 50, y = 170)
         window_admin.mainloop()
 
     def list_all_page(self):
@@ -152,6 +157,7 @@ class GUIv:
         window_list_unv.mainloop()
 
     def display_page(self):
+        '''
         global window_display
         window_display=Tk()
         plt.figure(figsize=(6,9)) 
@@ -164,11 +170,12 @@ class GUIv:
         plt.legend()
         plt.show()
         window_display.mainloop()
+        '''
 
     def admin_change_page(self):
         global window_admin_change
         window_admin_change=Tk()
-
+        window_admin.geometry('500x500')
         window_admin_change.mainloop()
 
     def new_vacc(self):
@@ -183,20 +190,20 @@ class GUIv:
         dic={}
         for i in range(len(choose)):
             dic[i]=BooleanVar()
-            Checkbutton(window_register, text=choose[i], variable=dic[i]).grid(row=i+2)
+            Checkbutton(window_add, text=choose[i], variable=dic[i]).grid(row=i+2)
             if dic[i].get() == True:
                 s = i
         s = input("1. add a new recognised vaccines\n2. delete one vaccines\n3. quit\n")
         if(s == '1'):
-            label4=Label(window_register, text="Add Vaccination: ")
-            varvacc = StringVar(window_register, value='')
-            entryvacc = Entry(window_register,show='*', textvariable=varvacc)
+            label4=Label(window_add, text="Add Vaccination: ")
+            varvacc = StringVar(window_add, value='')
+            entryvacc = Entry(window_add,show='*', textvariable=varvacc)
             vac.append(entryvacc.get()).upper()
         elif (s == '2'):
             try:
-                label5=Label(window_register, text="Delete Vaccination: ")
-                varvacc = StringVar(window_register, value='')
-                entryvacc = Entry(window_register,show='*', textvariable=varvacc)
+                label5=Label(window_add, text="Delete Vaccination: ")
+                varvacc = StringVar(window_add, value='')
+                entryvacc = Entry(window_add,show='*', textvariable=varvacc)
                 vac.remove(entryvacc.get()).upper()
             except Exception:
                 messagebox.showerror(title='Warning', message='Invalid input, please try again!')
@@ -229,7 +236,7 @@ class GUIv:
             pwd = self.model.encode(entryPwd.get())
             if ID in self.model.password and pwd == self.model.password[ID]:
                 messagebox.showinfo(title = 'Congratulations', message='Login successfully!')
-                x = 1
+                self.user_page()
             else:
                 messagebox.showerror(title='Warning', message='Your ID or passport is wrong')
                 varID.set('')
@@ -238,41 +245,54 @@ class GUIv:
             pwd = self.model.encode(entryPwd.get())
             if pwd == self.model.admin_password:
                 messagebox.showinfo(title = 'Congratulations', message='Login successfully!')
-                x = 1
+                self.admin_page()
             else:
                 if pwd != self.model.password:
                     messagebox.showerror(title='Warning', message='Your ID or passport is wrong')
                     varID.set('')
                     varPwd.set('')
-        return x
     
     def get_who(self):
+        window_who =Tk()
+        window_who.geometry('500x500')
         res=''
-        who = {1: 'Student', 2: 'Stuff'}
-        dic={}
-        for i in range(len(who)):
-            dic[i]=BooleanVar()
-            Checkbutton(window_register, text=who[i], variable=dic[i]).grid(row=i+2)
-            if dic[i].get() == True:
-                res = who[i]
+        v2 = IntVar()
+        rbStudent = Radiobutton(window_who, text = "Student", bg = "red", variable = v2, value = 1)
+        rbStuff = Radiobutton(window_who, text = "Stuff", bg = "red", variable = v2, value = 2)
+        rbStudent.place(x=120, y=120)
+        rbStuff.place(x=120, y=160)
+        res = v2
+        buttonOk = Button(window_who, text='OK', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=window_who.destroy)
+        buttonOk.place(x=120, y = 220, width=200, height=30)
         return res
 
     def get_id(self):
-        """
-        gets a valid id from user.
-        Note: a id is valid when it consists of 8 bits leading numbers and 1 bit of alphabet.
-        """
+        window_id =Tk()
+        window_id.geometry('500x500')
+        global enums
         enums = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
-        label=Label(window_register, text='pealse input your identity card number formed by 8 bits of number and 1 bit of alphabet.')
-        label.pack()
-        varid = StringVar(window_register, value='')
-        entryid = Entry(window_register, textvariable=varid)
-        entryid.place(x=120, y=124)
+        label1=Label(window_id, text='please input your identity card number ')
+        label2=Label(window_id, text='formed by 8 bits of number and 1 bit of alphabet.')
+        label1.pack()
+        label2.pack()
+        varid = StringVar(window_id, value='')
+        entryid = Entry(window_id, textvariable=varid)
+        entryid.place(x=120, y=190)
         id = entryid.get()
-        if (len(id) != 9):
+        buttonOk = Button(window_id, text='OK', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=lambda:self.id_get(id))
+        buttonOk.place(x=120, y = 220, width=200, height=30)
+        if judgement == 0:
+            return id
+
+    
+    def id_get(self, x):
+        global judgement
+        judgement=0
+        if (len(x) != 9):
             messagebox.showerror(title='Warning', message='Invalid input, please try again!')
+            judgement=1
         ok = 1
-        for i, item in enumerate(id):
+        for i, item in enumerate(x):
             if (i <= 7):
                 if (item not in enums):
                     ok = 0
@@ -281,71 +301,85 @@ class GUIv:
                 ok = 0
         if (ok == 0):
             messagebox.showerror(title='Warning', message='Invalid input, please try again!')
-        if (id in self.model.password):
+            judgement=1
+        if (x in self.model.password):
             messagebox.showerror(title='Warning', message='ID is already exist, please try again.\n')
-        return id    
+            judgement=1
+        return judgement    
 
     def get_name(self):
         """ read user name for registration purpose. """
-        labelLast_Name = Label(window_register, text='Last Name  ', font=('Arial', 12), fg='grey', justify=tk.RIGHT)
-        labelLast_Name.place(x=65, y=120)
-        labelFirt_Name = Label(window_register, text='First Name  ', font=('Arial', 12), fg='grey', justify=tk.RIGHT)
-        labelFirt_Name.place(x=50, y=160)
-        global varlast
-        varlast = StringVar(window_register, value='')
-        global entrylast
-        entrylast = Entry(window_register, textvariable=varlast)
-        entrylast.place(x=120, y=124)
-        global varfirst
-        varfirst = StringVar(window_register, value='')
-        global entryfirst
-        entryfirst = Entry(window_register,show='*', textvariable=varPwd)
-        entryfirst.place(x=120, y=164)
+        window_name=Tk()
+        window_name.geometry('500x500')
+        labelLast_Name = Label(window_name, text='Last Name  ', font=('Arial', 12), fg='grey', justify=tk.RIGHT)
+        labelLast_Name.place(x=50, y=120)
+        labelFirt_Name = Label(window_name, text='First Name  ', font=('Arial', 12), fg='grey', justify=tk.RIGHT)
+        labelFirt_Name.place(x=45, y=160)
+        varlast = StringVar(window_name, value='')
+        entrylast = Entry(window_name, textvariable=varlast)
+        entrylast.place(x=130, y=124)
+        varfirst = StringVar(window_name, value='')
+        entryfirst = Entry(window_name,show='*', textvariable=varfirst)
+        entryfirst.place(x=130, y=164)
         last_n = entrylast.get()
         first_n = entryfirst.get()
+        buttonOk = Button(window_name, text='OK', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=window_name.destroy)
+        buttonOk.place(x=120, y = 220, width=200, height=30)
         return [last_n.lower(), first_n.lower()]
 
     def choose_dpt(self):
         """ returns a string of department name with upper case """
+        window_dpt=Tk()
+        window_dpt.geometry('500x500')
         res = ""
-        dpt = {1: 'AAE', 2: 'BME', 3: 'COMP', 4: 'EE', 5:'EIE', 6: 'ISE', 7: 'ME'}
-        dic={}
-        for i in range(len(dpt)):
-            dic[i]=BooleanVar()
-            Checkbutton(window_register, text=dpt[i], variable=dic[i]).grid(row=i+2)
-            if dic[i].get() == True:
-                res = dpt[i]
+        self.v3 = IntVar()
+        rbAAE = Radiobutton(window_dpt, text = "AAE", bg =  "red", variable = self.v3, value = 1)
+        rbBME = Radiobutton(window_dpt, text = "BME", bg =  "red", variable = self.v3, value = 2)
+        rbCOMP = Radiobutton(window_dpt, text = "COMP", bg =  "red", variable = self.v3, value = 3)
+        rbEE = Radiobutton(window_dpt, text = "EE", bg =  "red", variable = self.v3, value = 4)
+        rbEIE = Radiobutton(window_dpt, text = "EIE", bg =  "red", variable = self.v3, value = 5)
+        rbISE = Radiobutton(window_dpt, text = "ISE", bg =  "red", variable = self.v3, value = 6)
+        rbME = Radiobutton(window_dpt, text = "ME", bg =  "red", variable = self.v3, value = 7)
+        rbAAE.place(x=120,y=20)
+        rbBME.place(x=120,y=60)
+        rbCOMP.place(x=120,y=100)
+        rbEE.place(x=120,y=140)
+        rbEIE.place(x=120,y=180)
+        rbISE.place(x=120,y=220)
+        rbME.place(x=120,y=260)
+        res = self.v3   
+        buttonOk = Button(window_dpt, text='OK', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=window_dpt.destroy)
+        buttonOk.place(x=120, y = 300, width=200, height=30)   
         return res
 
     def get_inj_info(self):
         """ returns number of injection and the vaccination information in the format of string. """
-        labelinj = Label(window_register, text="Please input how many injections you have received: ")
+        window_inj=Tk()
+        window_inj.geometry('500x500')
+        labelinj = Label(window_inj, text="Please input how many injections you have received: ")
         global varinj
-        varinj = StringVar(window_register, value='')
+        varinj = StringVar(window_inj, value='')
         global entryinj
-        entryinj = Entry(window_register, textvariable=varinj)
+        entryinj = Entry(window_inj, textvariable=varinj)
         entryinj.place(x=120, y=124)
         num_inj = entryinj.get()
-        labelvac = Label(window_register, text="Below are some of the vaccines recognized by the Hong Kong government:")
+        labelvac = Label(window_inj, text="Below are some of the vaccines recognized by the Hong Kong government:")
         for i in enumerate(self.model.rec_vac[1:]):
-                print(str(i[0])+'. '+i[1])
+            labelx = Label(window_inj, text=str(i[0]+1)+'. '+i[1])
         global record
         record = []
         print("\nCurrent Record: \n")
         for i in enumerate(record):
-            label1 = Label(window_register, text=str(i[0]+1)+'. '+i[1])
-            label2 = Label(window_register, text="-------------------\n")
-            dpt = {1: 'create a new record\n', 2: 'delete the last record\n', 3: 'stop editing\n'}
-            dic={}
-            for i in range(len(dpt)):
-                dic[i]=BooleanVar()
-                Checkbutton(window_register, text=dpt[i], variable=dic[i]).grid(row=i+2)
-                if dic[i].get() == True:
-                    res = dpt[i]
-        s = input()
-        if(res == '3'):
-            window_register.destroy()
-        elif(res == '1'):
+            label1 = Label(window_inj, text=str(i[0]+1)+'. '+i[1])
+        label2 = Label(window_inj, text="-------------------\n")
+        self.v4 = IntVar()
+        rbinj1 = Radiobutton(window_inj, text = 'create a new record\n', bg =  "yellow", variable = self.v4, value = 1)
+        rbinj2 = Radiobutton(window_inj, text = 'delete the last record\n', bg =  "yellow", variable = self.v4, value = 2)
+        rbinj3 = Radiobutton(window_inj, text = 'stop editing\n', bg =  "yellow", variable = self.v4, value = 3)
+        s = self.v4
+        if(s == '3'):
+            window_inj.destroy()
+        elif(s == '1'):
             self.create_page()
         elif(s == '2'):
             if(len(record) > 0):
