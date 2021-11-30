@@ -4,6 +4,7 @@ from tkinter import *
 import tkinter as tk
 import tkinter.messagebox
 from tkinter import messagebox
+from matplotlib import pyplot as plt
 
 class GUIv:
     def __init__(self, model : Model) -> None: 
@@ -12,12 +13,12 @@ class GUIv:
     def main_page(self):
         global window_main
         window_main=Tk()
-        window_login_user.geometry('500x500')
+        window_main.geometry('500x500')
         button1 = Button(window_main, text = "User", font = ('Arial', 15), command = self.user_login_page)
         button2 = Button(window_main, text = "Administrator", font = ('Arial', 15), command = self.admin_login_page)
         button3 = Button(window_main, text = "Register", font = ('Arial', 15), command = self.register_page)
-        button1.place(x = 120, y = 210)
-        button2.place(x = 1700, y = 210)
+        button1.place(x = 90, y = 210)
+        button2.place(x = 170, y = 210)
         button3.place(x = 320, y = 210)
         window_main.mainloop()
 
@@ -29,7 +30,7 @@ class GUIv:
         labelID.place(x=65, y=120)
         labelPwd = Label(window_login_user, text='password  ', font=('Arial', 12), fg='grey', justify=RIGHT)
         labelPwd.place(x=50, y=160)
-        global verID
+        global varID
         varID = StringVar(window_login_user, value='')
         global entryID
         entryID = Entry(window_login_user, textvariable=varID)
@@ -70,12 +71,12 @@ class GUIv:
     def register_page(self):
         global window_register
         window_register=Tk()
-        window_login_user('1002')
-        window_login_user.geometry('500x500')
-        self.get_who()
-        self.get_id()
-        self.get_name()
-        self.choose_dpt()
+        window_register('1002')
+        window_register.geometry('500x500')
+        lambda:self.get_who()
+        lambda:self.get_id()
+        lambda:self.get_name()
+        lambda:self.choose_dpt()
         window_register.mainloop()
 
     def user_page(self):
@@ -84,18 +85,18 @@ class GUIv:
         button1 = Button(window_user, text = "Change Pass", font = ('Arial', 15), command = self.new_pass)
         button2 = Button(window_user, text = "User", font = ('Arial', 15), command = self.see_page)
         button3 = Button(window_user, text = "User", font = ('Arial', 15), command = self.update_page)
-        button4 = Button(window_user, text = "User", font = ('Arial', 15), command = self.log_out)
-        button1.place(x = 180, y = 210)
-        button2.place(x = 180, y = 210)
-        button3.place(x = 180, y = 210)
-        button4.place(x = 180, y = 210)
+        button4 = Button(window_user, text = "User", font = ('Arial', 15), command = window_user.destroy)
+        button1.place(x = 180, y = 50)
+        button2.place(x = 180, y = 100)
+        button3.place(x = 180, y = 150)
+        button4.place(x = 180, y = 200)
         window_user.mainloop()
 
     def new_pass(self):
         global window_user_change
         window_user_change=Tk()
         window_login_user('1002')
-        window_login_user.geometry('327x272')
+        window_login_user.geometry('500x500')
         label =Label(window_user_change, text = "Please enter the password formed by 6 ~ 20 bits of numbers and letters: ")
         varpass = tk.StringVar(window_user_change, value='')
         entrypass = tk.Entry(window_user_change, textvariable=varpass)
@@ -112,11 +113,13 @@ class GUIv:
     def see_page(self):
         global window_see
         window_see=Tk()
+
         window_see.mainloop()
 
     def update_page(self):
         global window_update
         window_update=Tk()
+        self.update_record
         window_update.mainloop()
 
     def admin_page(self):
@@ -127,13 +130,13 @@ class GUIv:
         button3 = Button(window_admin, text = " displays the percentage", font = ('Arial', 15), command = self.display_page)
         button4 = Button(window_admin, text = "Change password", font = ('Arial', 15), command = self.admin_change_page)
         button5 = Button(window_admin, text = "Add new vaccination", font = ('Arial', 15), command = self.add_page)
-        button6 = Button(window_admin, text = "Log out", font = ('Arial', 15), command = self.log_out)
-        button1.place(x = 180, y = 210)
-        button2.place(x = 180, y = 210)
-        button3.place(x = 180, y = 210)
-        button4.place(x = 180, y = 210)
-        button5.place(x = 180, y = 210)
-        button6.place(x = 180, y = 210)
+        button6 = Button(window_admin, text = "Log out", font = ('Arial', 15), command = window_admin.destroy)
+        button1.place(x = 180, y = 20)
+        button2.place(x = 180, y = 50)
+        button3.place(x = 180, y = 80)
+        button4.place(x = 180, y = 110)
+        button5.place(x = 180, y = 140)
+        button6.place(x = 180, y = 170)
         window_admin.mainloop()
 
     def list_all_page(self):
@@ -145,16 +148,27 @@ class GUIv:
     def list_unv_page(self):
         global window_list_unv
         window_list_unv = Tk()
+        
         window_list_unv.mainloop()
 
     def display_page(self):
         global window_display
         window_display=Tk()
+        plt.figure(figsize=(6,9)) 
+        labels = [u'Yes',u'No'] 
+        sizes = [46,253] 
+        colors = ['red','yellowgreen'] 
+        explode = (0,0.05) 
+        patches,text1,text2 = plt.pie(sizes, explode=explode, labels=labels, colors=colors, labeldistance = 1.2, autopct = '%3.2f%%', shadow = False, startangle =90, pctdistance = 0.6) 
+        plt.axis('equal')
+        plt.legend()
+        plt.show()
         window_display.mainloop()
 
     def admin_change_page(self):
         global window_admin_change
         window_admin_change=Tk()
+
         window_admin_change.mainloop()
 
     def new_vacc(self):
@@ -187,7 +201,7 @@ class GUIv:
             except Exception:
                 messagebox.showerror(title='Warning', message='Invalid input, please try again!')
         elif (s == '3'):
-            close
+            window_add.destroy()
         else:
             messagebox.showerror(title='Warning', message='Invalid input, please try again!')
         window_add.mainloop()
@@ -209,9 +223,6 @@ class GUIv:
                 messagebox.showerror(title='Warning', message='Invalid input, please try again!')
             record.append(rc)
 
-    def log_out(self):
-        window_admin.close()
-        
     def log_in(self, x):        
         if x == 0:
             ID = entryID.get()
@@ -253,6 +264,7 @@ class GUIv:
         """
         enums = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
         label=Label(window_register, text='pealse input your identity card number formed by 8 bits of number and 1 bit of alphabet.')
+        label.pack()
         varid = StringVar(window_register, value='')
         entryid = Entry(window_register, textvariable=varid)
         entryid.place(x=120, y=124)
@@ -282,7 +294,7 @@ class GUIv:
         global varlast
         varlast = StringVar(window_register, value='')
         global entrylast
-        entrylast = Entry(window_register, textvariable=varID)
+        entrylast = Entry(window_register, textvariable=varlast)
         entrylast.place(x=120, y=124)
         global varfirst
         varfirst = StringVar(window_register, value='')
@@ -311,7 +323,7 @@ class GUIv:
         global varinj
         varinj = StringVar(window_register, value='')
         global entryinj
-        entryinj = Entry(window_register, textvariable=varID)
+        entryinj = Entry(window_register, textvariable=varinj)
         entryinj.place(x=120, y=124)
         num_inj = entryinj.get()
         labelvac = Label(window_register, text="Below are some of the vaccines recognized by the Hong Kong government:")
@@ -332,7 +344,7 @@ class GUIv:
                     res = dpt[i]
         s = input()
         if(res == '3'):
-            close
+            window_register.destroy()
         elif(res == '1'):
             self.create_page()
         elif(s == '2'):
