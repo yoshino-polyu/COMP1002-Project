@@ -3,6 +3,7 @@ from model import Model
 from tkinter import *
 import tkinter as tk
 import tkinter.messagebox
+from tkinter import messagebox
 
 class GUIv:
     def __init__(self, model : Model) -> None: 
@@ -39,7 +40,7 @@ class GUIv:
         entryPwd = tk.Entry(window_login_user,show='*', textvariable=varPwd)
         entryPwd.place(x=120, y=164)
         res = 0
-        buttonOk = tk.Button(window_login_user, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=self.login(res))
+        buttonOk = tk.Button(window_login_user, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=self.log_in(res))
         buttonOk.place(x=65, y=200, width=200, height=30)
         if res == 1:
             self.user_page()

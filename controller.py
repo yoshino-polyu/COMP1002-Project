@@ -1,13 +1,15 @@
 import sys
 from model import Model
 from view import View
+from GUI import GUIv
 """
 The Controller class translates user actions into operations on the Model
 """
 class Controller:
-    def __init__(self, model : Model, view : View) -> None:
+    def __init__(self, model : Model, view : View, GUIv: GUIv) -> None:
         self.model = model
         self.view = view
+        self.GUIv = GUIv
     
     def run(self):
         if (self.model.init() == '0'): # read all info from txt, and store it into storage.
@@ -89,7 +91,7 @@ class Controller:
                         self.view.inv_info()
                         continue
             elif x == '2': # GUI
-                return 0
+                self.GUIv.main_page()
             elif x == '3':
                 return
             else:

@@ -7,7 +7,8 @@ import sys
 def main():
     model = Model()
     GUI = GUIv(model)
-    controller = Controller(model, GUI)
+    view = View(model)
+    controller = Controller(model, view, GUI)
     try:
         controller.run()
     except Exception:
