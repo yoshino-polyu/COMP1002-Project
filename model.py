@@ -82,7 +82,6 @@ class Model:
         Param: word -> the new password of admin
         """
         self.admin_password = word
-        pass
 
 
     def update_vacc(self, list_vacc : list):

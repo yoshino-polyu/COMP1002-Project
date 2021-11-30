@@ -333,7 +333,7 @@ class View:
         print("2. list out all the teaching staffs and students, who haven't been vaccinated, in the faculty of Engineering.")
         print("3. displays the percentage of fully vaccinated, and non-vaccinated users in a specific department")
         print("4. change password of administrator")
-        print("5. add new recognised vaccines into the the of recognised vaccines")
+        print("5. update the list of recognised vaccines")
         print("6. logout")
         print("7. exit program")
 
