@@ -226,7 +226,7 @@ class GUIv:
     def log_in(self, x):        
         if x == 0:
             ID = entryID.get()
-            pwd = entryPwd.get()
+            pwd = self.model.encode(entryPwd.get())
             if ID in self.model.password and pwd == self.model.password[ID]:
                 messagebox.showinfo(title = 'Congratulations', message='Login successfully!')
                 x = 1
@@ -235,7 +235,7 @@ class GUIv:
                 varID.set('')
                 varPwd.set('')
         if x == -1:
-            pwd = entryPwd.get()
+            pwd = self.model.encode(entryPwd.get())
             if pwd == self.model.admin_password:
                 messagebox.showinfo(title = 'Congratulations', message='Login successfully!')
                 x = 1
