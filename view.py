@@ -10,6 +10,9 @@ class View:
         self.model = model
     
     def id_validation(self):
+        """
+        
+        """
         res = ""
         while True:
             print("Please input your user id: (input 0 for exit this manu)")
@@ -315,6 +318,9 @@ class View:
         print("3. exit program")
 
     def command_line(self):
+        """
+        shows the login page
+        """
         print("Please input a number:")
         print("1. user login")
         print("2. administrator login")
@@ -327,7 +333,7 @@ class View:
         print("1. change the password")
         print("2. see current vaccination record")
         print("3. update vaccination record")
-        print("4. go back to the last page")
+        print("4. logout")
         print("5. exit program")
     
     def admin_page(self):
