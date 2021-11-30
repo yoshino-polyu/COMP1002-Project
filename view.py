@@ -78,7 +78,8 @@ class View:
             else:
                 print("Stuff", end = ' ')
             print(i[1] + " " + i[2] + " ("+ i[0]+") haven't been vaccinated.")
-        print(str(ncnt/cnt * 100) + "%" + " students/stuffs haven't been vaccinated.")
+        if(cnt > 0):
+            print(str(ncnt/cnt * 100) + "%" + " students/stuffs haven't been vaccinated.")
 
 
     def show_dep(self, dep):

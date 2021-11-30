@@ -27,12 +27,12 @@ class Model:
         self.admin_password = '' # password of admin
 
         self.id = dict()
-        self.nme = defaultdict(list)
-        self.dpt = defaultdict(list)
-        self.isInjected = defaultdict(list)
-        self.isStu = defaultdict(list)
-        self.userIndex = defaultdict(list)
-        self.password = dict()
+        self.nme = defaultdict(list) # a dictionary which's key is student/stuff's name
+        self.dpt = defaultdict(list) # a dictionary which's key is department, admin can search the department to get the information of its students and stuffs
+        self.isInjected = defaultdict(list) # a dictionary which's key is number of injection, admin can get the information that who have not been inejected
+        self.isStu = defaultdict(list) # a dictionary which's key is if the person is student
+        self.userIndex = defaultdict(list) # a dictionary help to get the one user's index of info[] and pass_info[], which can help update the information quickly
+        self.password = dict() # a dictionary help to confirm the user's password
 
 
     def encode(self, p):
