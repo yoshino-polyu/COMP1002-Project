@@ -71,7 +71,7 @@ class View:
         """
         cnt = len(self.model.info) - 1
         ncnt = 0
-        for i in self.model.isInjected[0]:
+        for i in self.model.isInjected['0']:
             ncnt += 1
             if(i[6] == 1):
                 print("Student", end = ' ')
@@ -79,7 +79,7 @@ class View:
                 print("Stuff", end = ' ')
             print(i[1] + " " + i[2] + " ("+ i[0]+") haven't been vaccinated.")
         if(cnt > 0):
-            print(str(ncnt/cnt * 100) + "%" + " students/stuffs haven't been vaccinated.")
+            print(str(round(ncnt/cnt * 100,2)) + "%" + " students/stuffs haven't been vaccinated.")
 
 
     def show_dep(self, dep):
@@ -134,8 +134,8 @@ class View:
             else:
                 print(" (Have "+str(j[4])+" vaccinations)")
         if(cnt > 0):
-            print(str(vcnt/cnt * 100)+"%"+" students/stuffs have been fully vaccinated")
-            print(str(ncnt/cnt * 100)+"%"+" students/stuffs haven't been vaccinated")
+            print(str(round(vcnt/cnt * 100,2))+"%"+" students/stuffs have been fully vaccinated")
+            print(str(round(ncnt/cnt * 100,2))+"%"+" students/stuffs haven't been vaccinated")
         print("---------------------------------")
     
     def new_vacc(self):
