@@ -15,32 +15,31 @@ class GUIv:
         button1 = Button(window_main, text = "User", font = ('Arial', 15), command = self.user_login_page)
         button2 = Button(window_main, text = "Administrator", font = ('Arial', 15), command = self.admin_login_page)
         button3 = Button(window_main, text = "Register", font = ('Arial', 15), command = self.register_page)
-        button1.place(x = 180, y = 210)
-        button2.place(x = 240, y = 210)
-        button3.place(x = 300, y = 210)
+        button1.place(x = 120, y = 210)
+        button2.place(x = 260, y = 210)
+        button3.place(x = 350, y = 210)
         window_main.mainloop()
 
     def user_login_page(self):
         global window_login_user
         window_login_user = Tk()
-        window_login_user('1002')
-        window_login_user.geometry('327x272')
-        labelID = tk.Label(window_login_user, text='netID  ', font=('Arial', 12), fg='grey', justify=tk.RIGHT)
+        window_login_user.geometry('500x500')
+        labelID = Label(window_login_user, text='netID  ', font=('Arial', 12), fg='grey', justify=RIGHT)
         labelID.place(x=65, y=120)
-        labelPwd = tk.Label(window_login_user, text='password  ', font=('Arial', 12), fg='grey', justify=tk.RIGHT)
+        labelPwd = Label(window_login_user, text='password  ', font=('Arial', 12), fg='grey', justify=RIGHT)
         labelPwd.place(x=50, y=160)
         global varID
-        varID = tk.StringVar(window_login_user, value='')
+        varID = StringVar(window_login_user, value='')
         global entryID
-        entryID = tk.Entry(window_login_user, textvariable=varID)
+        entryID = Entry(window_login_user, textvariable=varID)
         entryID.place(x=120, y=124)
         global varPwd
-        varPwd = tk.StringVar(window_login_user, value='')
-        global entryPwd;
-        entryPwd = tk.Entry(window_login_user,show='*', textvariable=varPwd)
+        varPwd = StringVar(window_login_user, value='')
+        global entryPwd
+        entryPwd = Entry(window_login_user,show='*', textvariable=varPwd)
         entryPwd.place(x=120, y=164)
         res = 0
-        buttonOk = tk.Button(window_login_user, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=self.log_in(res))
+        buttonOk = Button(window_login_user, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=self.log_in(res))
         buttonOk.place(x=65, y=200, width=200, height=30)
         if res == 1:
             self.user_page()
@@ -80,7 +79,7 @@ class GUIv:
     def user_page(self):
         global window_user
         window_user=Tk()
-        button1 = Button(window_user, text = "User", font = ('Arial', 15), command = self.new_pass)
+        button1 = Button(window_user, text = "Change Pass", font = ('Arial', 15), command = self.new_pass)
         button2 = Button(window_user, text = "User", font = ('Arial', 15), command = self.see_page)
         button3 = Button(window_user, text = "User", font = ('Arial', 15), command = self.update_page)
         button4 = Button(window_user, text = "User", font = ('Arial', 15), command = self.log_out)
@@ -101,10 +100,10 @@ class GUIv:
         entrypass.place(x=120, y=124)
         a = entrypass.get()
         if(len(a) < 6 or len(a) > 20):
-            tk.messagebox.showerror(title='Warning', message="Password is too Short or too long, please ensure it only contains 6 ~ 20 bits of numbers or letters")
+            messagebox.showerror(title='Warning', message="Password is too Short or too long, please ensure it only contains 6 ~ 20 bits of numbers or letters")
         for i in a:
             if (i.lower() > 'z' or i.lower() < 'a') and (i > '9' or i < '0'):
-                tk.messagebox.showerror(title='Warning', message="Password has unexpected characters, please ensure it only contains 6 ~ 20 bits of numbers or letters")
+                messagebox.showerror(title='Warning', message="Password has unexpected characters, please ensure it only contains 6 ~ 20 bits of numbers or letters")
         window_user_change.mainloop()
         return a
 
@@ -174,21 +173,21 @@ class GUIv:
         s = input("1. add a new recognised vaccines\n2. delete one vaccines\n3. quit\n")
         if(s == '1'):
             label4=Label(window_register, text="Add Vaccination: ")
-            varvacc = tk.StringVar(window_register, value='')
-            entryvacc = tk.Entry(window_register,show='*', textvariable=varvacc)
+            varvacc = StringVar(window_register, value='')
+            entryvacc = Entry(window_register,show='*', textvariable=varvacc)
             vac.append(entryvacc.get()).upper()
         elif (s == '2'):
             try:
                 label5=Label(window_register, text="Delete Vaccination: ")
-                varvacc = tk.StringVar(window_register, value='')
-                entryvacc = tk.Entry(window_register,show='*', textvariable=varvacc)
+                varvacc = StringVar(window_register, value='')
+                entryvacc = Entry(window_register,show='*', textvariable=varvacc)
                 vac.remove(entryvacc.get()).upper()
             except Exception:
-                tk.messagebox.showerror(title='Warning', message='Invalid input, please try again!')
+                messagebox.showerror(title='Warning', message='Invalid input, please try again!')
         elif (s == '3'):
             close
         else:
-            tk.messagebox.showerror(title='Warning', message='Invalid input, please try again!')
+            messagebox.showerror(title='Warning', message='Invalid input, please try again!')
         window_add.mainloop()
         return vac
        
@@ -199,13 +198,13 @@ class GUIv:
             rc = entryvac.get().upper()
             ck = rc.split('_')
             if(len(ck) != 4):
-                tk.messagebox.showerror(title='Warning', message='Invalid input, please try again!')
+                messagebox.showerror(title='Warning', message='Invalid input, please try again!')
             ligal = 0
             for i in self.model.rec_vac[1: ]:
                 if(i == ck[0]):
                     ligal = 1
             if(ligal == 0):
-                tk.messagebox.showerror(title='Warning', message='Invalid input, please try again!')
+                messagebox.showerror(title='Warning', message='Invalid input, please try again!')
             record.append(rc)
 
     def log_out(self):
@@ -216,20 +215,20 @@ class GUIv:
             ID = entryID.get()
             pwd = entryPwd.get()
             if ID in self.model.password and pwd == self.model.password[ID]:
-                tk.messagebox.showinfo(title = 'Congratulations', message='Login successfully!')
+                messagebox.showinfo(title = 'Congratulations', message='Login successfully!')
                 x = 1
             else:
-                tk.messagebox.showerror(title='Warning', message='Your ID or passport is wrong')
+                messagebox.showerror(title='Warning', message='Your ID or passport is wrong')
                 varID.set('')
                 varPwd.set('')
         if x == -1:
             pwd = entryPwd.get()
             if pwd == self.model.admin_password:
-                tk.messagebox.showinfo(title = 'Congratulations', message='Login successfully!')
+                messagebox.showinfo(title = 'Congratulations', message='Login successfully!')
                 x = 1
             else:
                 if pwd != self.model.password:
-                    tk.messagebox.showerror(title='Warning', message='Your ID or passport is wrong')
+                    messagebox.showerror(title='Warning', message='Your ID or passport is wrong')
                     varID.set('')
                     varPwd.set('')
         return x
@@ -252,12 +251,12 @@ class GUIv:
         """
         enums = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
         label=Label(window_register, text='pealse input your identity card number formed by 8 bits of number and 1 bit of alphabet.')
-        varid = tk.StringVar(window_register, value='')
-        entryid = tk.Entry(window_register, textvariable=varid)
+        varid = StringVar(window_register, value='')
+        entryid = Entry(window_register, textvariable=varid)
         entryid.place(x=120, y=124)
         id = entryid.get()
         if (len(id) != 9):
-            tk.messagebox.showerror(title='Warning', message='Invalid input, please try again!')
+            messagebox.showerror(title='Warning', message='Invalid input, please try again!')
         ok = 1
         for i, item in enumerate(id):
             if (i <= 7):
@@ -267,26 +266,26 @@ class GUIv:
             elif (ord(item) < ord('a') or ord(item) > ord('z')):
                 ok = 0
         if (ok == 0):
-            tk.messagebox.showerror(title='Warning', message='Invalid input, please try again!')
+            messagebox.showerror(title='Warning', message='Invalid input, please try again!')
         if (id in self.model.password):
-            tk.messagebox.showerror(title='Warning', message='ID is already exist, please try again.\n')
+            messagebox.showerror(title='Warning', message='ID is already exist, please try again.\n')
         return id    
 
     def get_name(self):
         """ read user name for registration purpose. """
-        labelLast_Name = tk.Label(window_register, text='Last Name  ', font=('Arial', 12), fg='grey', justify=tk.RIGHT)
+        labelLast_Name = Label(window_register, text='Last Name  ', font=('Arial', 12), fg='grey', justify=tk.RIGHT)
         labelLast_Name.place(x=65, y=120)
-        labelFirt_Name = tk.Label(window_register, text='First Name  ', font=('Arial', 12), fg='grey', justify=tk.RIGHT)
+        labelFirt_Name = Label(window_register, text='First Name  ', font=('Arial', 12), fg='grey', justify=tk.RIGHT)
         labelFirt_Name.place(x=50, y=160)
         global varlast
-        varlast = tk.StringVar(window_register, value='')
+        varlast = StringVar(window_register, value='')
         global entrylast
-        entrylast = tk.Entry(window_register, textvariable=varID)
+        entrylast = Entry(window_register, textvariable=varID)
         entrylast.place(x=120, y=124)
         global varfirst
-        varfirst = tk.StringVar(window_register, value='')
+        varfirst = StringVar(window_register, value='')
         global entryfirst
-        entryfirst = tk.Entry(window_register,show='*', textvariable=varPwd)
+        entryfirst = Entry(window_register,show='*', textvariable=varPwd)
         entryfirst.place(x=120, y=164)
         last_n = entrylast.get()
         first_n = entryfirst.get()
@@ -308,9 +307,9 @@ class GUIv:
         """ returns number of injection and the vaccination information in the format of string. """
         labelinj = Label(window_register, text="Please input how many injections you have received: ")
         global varinj
-        varinj = tk.StringVar(window_register, value='')
+        varinj = StringVar(window_register, value='')
         global entryinj
-        entryinj = tk.Entry(window_register, textvariable=varID)
+        entryinj = Entry(window_register, textvariable=varID)
         entryinj.place(x=120, y=124)
         num_inj = entryinj.get()
         labelvac = Label(window_register, text="Below are some of the vaccines recognized by the Hong Kong government:")
@@ -338,7 +337,7 @@ class GUIv:
             if(len(record) > 0):
                 record.pop()
         else:
-            tk.messagebox.showerror(title='Warning', message='Invalid input, please try again!')
+            messagebox.showerror(title='Warning', message='Invalid input, please try again!')
         return [num_inj,record]
 
     def list_all(self):
@@ -351,7 +350,7 @@ class GUIv:
         vcnt = 0
         ncnt = 0
         if(dep.lower() not in self.model.dpt):
-            tk.messagebox.showerror(title='Warning', message='Invalid input, please try again!')
+            messagebox.showerror(title='Warning', message='Invalid input, please try again!')
             return
         for j in self.model.dpt[dep.lower()]:
             if(str(j[6]) == '1'):
