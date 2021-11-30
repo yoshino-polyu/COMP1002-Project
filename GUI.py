@@ -49,16 +49,16 @@ class GUIv:
         global window_login_admin
         window_login_admin= Tk()
         window_login_admin.title('1002')
-        window_login_admin.geometry('327x272')
-        labelPwd = tk.Label(window_login_admin, text='passport  ', font=('Arial', 12), fg='grey', justify=tk.RIGHT)
+        window_login_admin.geometry('500x500')
+        labelPwd = Label(window_login_admin, text='passport  ', font=('Arial', 12), fg='grey', justify=RIGHT)
         labelPwd.place(x=50, y=160)
         global varPwd
-        varPwd = tk.StringVar(window_login_admin, value='')
+        varPwd = StringVar(window_login_admin, value='')
         global entryPwd
-        entryPwd = tk.Entry(window_login_admin,show='*', textvariable=varPwd)
+        entryPwd = Entry(window_login_admin,show='*', textvariable=varPwd)
         entryPwd.place(x=120, y=164)
         res = -1
-        buttonOk = tk.Button(window_login_admin, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=self.log_in(res))
+        buttonOk = Button(window_login_admin, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=self.log_in(res))
         buttonOk.place(x=65, y=200, width=200, height=30)
         if res == 1:
             self.admin_page()
