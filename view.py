@@ -114,7 +114,7 @@ class View:
         ncnt = 0
         if(dep.lower() not in self.model.dpt):
             print("---------------------------------")
-            return 
+            return
         for j in self.model.dpt[dep.lower()]:
             if(str(j[6]) == '1'):
                 print("    Student", end = ' ')
@@ -132,8 +132,9 @@ class View:
                 print(" (Haven't been vaccinated)")
             else:
                 print(" (Have "+str(j[4])+" vaccinations)")
-        print(str(vcnt/cnt * 100)+"%"+" students/stuffs have been fully vaccinated")
-        print(str(ncnt/cnt * 100)+"%"+" students/stuffs haven't been vaccinated")
+        if(cnt > 0):
+            print(str(vcnt/cnt * 100)+"%"+" students/stuffs have been fully vaccinated")
+            print(str(ncnt/cnt * 100)+"%"+" students/stuffs haven't been vaccinated")
         print("---------------------------------")
     
     def new_vacc(self):
