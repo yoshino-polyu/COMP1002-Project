@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import List, Tuple
 from model import Model
 from tkinter import *
 import tkinter as tk
@@ -19,10 +19,10 @@ class GUIv:
         window_main.geometry('500x500')
         button1 = Button(window_main, text = "User", font = ('Arial', 15), command = self.user_login_page)
         button2 = Button(window_main, text = "Administrator", font = ('Arial', 15), command = self.admin_login_page)
-        button3 = Button(window_main, text = "Register", font = ('Arial', 15), command = self.register_page)
+        #button3 = Button(window_main, text = "Register", font = ('Arial', 15), command = self.register_page)
         button1.place(x = 90, y = 210)
         button2.place(x = 170, y = 210)
-        button3.place(x = 320, y = 210)
+       # button3.place(x = 320, y = 210)
         window_main.mainloop()
 
     def user_login_page(self):
@@ -69,6 +69,8 @@ class GUIv:
         window_register=Tk()
         window_register.title('1002')
         window_register.geometry('500x500')
+        global reg
+        reg = [''] * 7
         button1 = Button(window_register, text = "Who", font = ('Arial', 15), command = lambda:self.get_who())
         button2 = Button(window_register, text = "ID", font = ('Arial', 15), command = lambda:self.get_id())
         button3 = Button(window_register, text = "Name", font = ('Arial', 15), command = lambda:self.get_name())
@@ -84,13 +86,13 @@ class GUIv:
         window_user=Tk()
         window_user.title('1002')
         window_user.geometry('500x500')
-        button1 = Button(window_user, text = "Change Password", font = ('Arial', 15), command = self.new_pass)
+        #button1 = Button(window_user, text = "Change Password", font = ('Arial', 15), command = self.new_pass)
         button2 = Button(window_user, text = "See Record", font = ('Arial', 15), command = self.see_page)
-        button3 = Button(window_user, text = "Update Record", font = ('Arial', 15), command = self.update_page)
+       # button3 = Button(window_user, text = "Update Record", font = ('Arial', 15), command = self.update_page)
         button4 = Button(window_user, text = "Log out", font = ('Arial', 15), command = window_user.destroy)
-        button1.place(x = 180, y = 50)
+        #button1.place(x = 180, y = 50)
         button2.place(x = 180, y = 100)
-        button3.place(x = 180, y = 150)
+        #button3.place(x = 180, y = 150)
         button4.place(x = 180, y = 200)
         window_user.mainloop()
 
@@ -114,17 +116,24 @@ class GUIv:
                 messagebox.showerror(title='Warning', message="Password has unexpected characters, please ensure it only contains 6 ~ 20 bits of numbers or letters")
         window_user_change.mainloop()
         buttonC = Button(window_user_change, text = "Change", font = ('Arial', 15), command = lambda:self.model.update_password(ID, a))
-        buttonC.place(300, 124)
+        buttonC.pack()
+        window_user_change.mainloop()
 
     def see_page(self):
         global window_see
         window_see=Tk()
         window_see.geometry('500x500')
-        if(self.model.info[4] == '-1'):
-            pass #user has full injected
+        ID = entryID.get()
+        if(self.model.info[self.model.userIndex[ID][0]][4] == '-1'):
+            label1 = Label(window_see, text = 'You have been full injected!')
+            label1.pack()
         else:
+            label2 = Label(window_see, text = str(self.model.info[self.model.userIndex[ID][0]][4]) + 'vaccinations have been recived.')
+            label2.pack()
             pass #str(self.model.info[4]) + vaccinations have been recived.
-        for i in self.model.info[5]:
+        for i in self.model.info[self.model.userIndex[ID][0]][5]:
+            label3 = Label(window_see, text = i)
+            label3.pack()
             pass # i = 'BTN_20_09_2021'
         window_see.mainloop()
 
@@ -139,11 +148,11 @@ class GUIv:
         window_admin=Tk()
         window_admin.title('1002')
         window_admin.geometry('500x500')
-        button1 = Button(window_admin, text = "list out all information", font = ('Arial', 15), command = lambda:self.list_all_page)
-        button2 = Button(window_admin, text = "list out all people who haven't been vaccinated", font = ('Arial', 15), command = lambda:self.list_unv_page)
-        button3 = Button(window_admin, text = "Displays the percentage", font = ('Arial', 15), command = self.display_page)
-        button4 = Button(window_admin, text = "Change password", font = ('Arial', 15), command = lambda:self.admin_change_page)
-        button5 = Button(window_admin, text = "Add new vaccination", font = ('Arial', 15), command = self.new_vacc)
+        button1 = Button(window_admin, text = "list out all information", font = ('Arial', 15), command = self.list_all_page)
+        #button2 = Button(window_admin, text = "list out all people who haven't been vaccinated", font = ('Arial', 15), command = lambda:self.list_unv_page)
+        #button3 = Button(window_admin, text = "Displays the percentage", font = ('Arial', 15), command = self.display_page)
+        #button4 = Button(window_admin, text = "Change password", font = ('Arial', 15), command = lambda:self.admin_change_page)
+        #button5 = Button(window_admin, text = "Add new vaccination", font = ('Arial', 15), command = self.new_vacc)
         button6 = Button(window_admin, text = "Log out", font = ('Arial', 15), command = window_admin.destroy)
         button1.place(x = 50, y = 20)
         button2.place(x = 50, y = 60)
@@ -154,10 +163,15 @@ class GUIv:
         window_admin.mainloop()
 
     def list_all_page(self):
-        global window_list_all
-        window_list_all = Tk()
+        #global window_list_all
+        #window_list_all = Tk()
+        #window_list_all.title('1002')
+        #window_list_all.geometry('500x500')
+        #s1 = Scrollbar(window_list_all, HORIZONTAL)
+        #s1.set(0.6, 0)
+        #s1.pack()
         self.list_all()
-        window_list_all.mainloop()
+        #window_list_all.mainloop()
 
     def list_unv_page(self):
         global window_list_unv
@@ -267,14 +281,14 @@ class GUIv:
         window_who.geometry('500x500')
         res=''
         v2 = IntVar()
-        rbStudent = Radiobutton(window_who, text = "Student", bg = "red", variable = v2, value = 1)
-        rbStuff = Radiobutton(window_who, text = "Stuff", bg = "red", variable = v2, value = 2)
+        rbStudent = Radiobutton(window_who, text = "Student", bg = "red", variable = v2, value = '1')
+        rbStuff = Radiobutton(window_who, text = "Stuff", bg = "red", variable = v2, value = '0')
         rbStudent.place(x=120, y=120)
         rbStuff.place(x=120, y=160)
         res = v2
         buttonOk = Button(window_who, text='OK', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=window_who.destroy)
         buttonOk.place(x=120, y = 220, width=200, height=30)
-        return res
+        reg[6] = res
 
     def get_id(self):
         window_id =Tk()
@@ -285,21 +299,25 @@ class GUIv:
         label2=Label(window_id, text='formed by 8 bits of number and 1 bit of alphabet.')
         label1.pack()
         label2.pack()
+
         varid = StringVar(window_id, value='')
         entryidr = Entry(window_id, textvariable=varid)
         entryidr.place(x=120, y=190)
-        id = entryidr.get()
-        buttonOk = Button(window_id, text='OK', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=lambda:self.id_get(id))
+        ID1 = entryidr.get()
+
+        global judgement
+        judgement = 0
+        buttonOk = Button(window_id, text='OK', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=lambda:self.id_get(ID1))
         buttonOk.place(x=120, y = 220, width=200, height=30)
         if judgement == 0:
-            return id
+            reg[0] = ID1
+        window_id.mainloop()
 
     
     def id_get(self, x):
-        global judgement
         judgement=0
         if (len(x) != 9):
-            messagebox.showerror(title='Warning', message='Invalid input, please try again!')
+            messagebox.showerror(title='Warning', message=x+str(len(x))+'Len Invalid input, please try again!')
             judgement=1
         ok = 1
         for i, item in enumerate(x):
@@ -310,10 +328,10 @@ class GUIv:
             elif (ord(item) < ord('a') or ord(item) > ord('z')):
                 ok = 0
         if (ok == 0):
-            messagebox.showerror(title='Warning', message='Invalid input, please try again!')
+            messagebox.showerror(title='Warning', message='shit Invalid input, please try again!')
             judgement=1
         if (x in self.model.password):
-            messagebox.showerror(title='Warning', message='ID is already exist, please try again.\n')
+            messagebox.showerror(title='Warning', message='char ID is already exist, please try again.\n')
             judgement=1
         return judgement    
 
@@ -390,7 +408,6 @@ class GUIv:
         if(s == '3'):
             window_inj.destroy()
         elif(s == '1'):
-            self.create_page()
             label3=Label(window_add, text="Please input the vaccination record: (vaccination_day_month_year, example: AZ_01_09_2021)\n")
             varvac = tk.StringVar(window_add, value='')
             entryvac = tk.Entry(window_add,show='*', textvariable=varvac)
@@ -414,17 +431,21 @@ class GUIv:
         return [num_inj,record]
 
     def list_all(self):
+        window_list_pre  = Tk()
+        window_list_pre.title('1002')
+        window_list_pre.geometry('500x500')
         for i in ['AAE', 'BME', 'COMP','EE', 'EIE', 'ISE', 'ME']:
-            self.show_dep(i)
+            button = Button(window_list_pre, text = i, font = ('Arial', 15), command = lambda: self.show_dep(i))
+            button.pack()
 
     def show_dep(self, dep):
-        # output 
-        #
-        #
-        #
-        #
-        #
-        print("Department: "+dep.upper())
+        window_list_all = Tk()
+        window_list_all.title('1002')
+        window_list_all.geometry('500x500')
+        sb = Scrollbar(window_list_all)
+        sb.pack(side = "right", fill ="y")
+        lb=Listbox(window_list_all, yscrollcommand=sb.set)
+        lb.insert("end" , "Department: "+dep.upper())
         cnt = 0
         vcnt = 0
         ncnt = 0
@@ -433,26 +454,29 @@ class GUIv:
             return
         for j in self.model.dpt[dep.lower()]:
             if(str(j[6]) == '1'):
-                print("    Student", end = ' ')
+                lb.insert("end", "    Student")
             else:
-                print("    Stuff", end = ' ')
-            print(j[1].upper()+" "+j[2]+" ("+j[0]+")"+" has the vaccination record ", end = '')
+                lb.insert("end", "    Stuff")
+            lb.insert("end", j[1].upper()+" "+j[2]+" ("+j[0]+")"+" has the vaccination record ")
             for k in j[5]:
-                print(k, end=', ')
+                lb.insert("end", k)
             cnt += 1
             if(str(j[4]) == '-1'):
                 vcnt += 1
-                print(" (Fully vaccinated)")
+                lb.insert("end", " (Fully vaccinated)")
             elif(str(j[4]) == '0'):
                 ncnt += 1
-                print(" (Haven't been vaccinated)")
+                lb.insert("end", " (Haven't been vaccinated)")
             else:
-                print(" (Have "+str(j[4])+" vaccinations)")
+                lb.insert("end", " (Have "+str(j[4])+" vaccinations)")
+                lb.insert("end", "——————————————————————————————")
         if(cnt > 0):
-            print(str(round(vcnt/cnt * 100,2))+"%"+" students/stuffs have been fully vaccinated")
-            print(str(round(ncnt/cnt * 100,2))+"%"+" students/stuffs haven't been vaccinated")
-            # show a picture
-        print("---------------------------------")
+            lb.insert("end", str(round(vcnt/cnt * 100,2))+"%"+" students/stuffs have been fully vaccinated")
+            lb.insert("end", str(round(ncnt/cnt * 100,2))+"%"+" students/stuffs haven't been vaccinated")
+        lb.pack(side = 'left', fill = 'both')
+        sb.config(command=lb.yview)
+        window_list_all.mainloop()
+
 
     def read_input(self):
         """ read input from user. """
@@ -469,13 +493,22 @@ class GUIv:
         self.record(ID)
         num_inj = self.model.id[ID][4]
         rd = self.model.id[ID][5]
+        label1 =Label(window_update,text = 'Please input how many injections you have received:')
+        label1.pack()
+        varnum = tk.StringVar(window_add, value='')
+        entrynum = tk.Entry(window_add,show='*', textvariable = varnum)
+        entrynum.pack()
 
-        # Please input how many injections you have received: num_inj
+        val = IntVar()
+        rbinj1 = Radiobutton(window_update, text = 'create a new record\n', bg =  "yellow", variable = val, value = 1)
+        rbinj2 = Radiobutton(window_update, text = 'delete the last record\n', bg =  "yellow", variable = val, value = 2)
+        rbinj3 = Radiobutton(window_update, text = 'stop editing\n', bg =  "yellow", variable = val, value = 3)
+        
+        if(val == 1):
+            pass
         # 1. create new, 2.delete last, 3.exit and ensure change # rd
         # 3. self.model.info[4] = str(num_inj)
         # 3. info[5] = rd
-
-
 
         if(input("Edit the number of injections? [y/n]: ").lower() == 'y'):
             print("Please input how many injections you have received:")
