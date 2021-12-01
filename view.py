@@ -3,6 +3,7 @@ from typing import Tuple
 from model import Model
 """
 The View is an observer of the Mddel, and it can observe the state of Model and then display it to user. 
+The object of View will not change the state of model directly, instead it delivers the lastest states to controller.
 """
 
 class View:

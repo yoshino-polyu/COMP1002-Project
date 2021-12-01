@@ -29,7 +29,7 @@ class Controller:
                             self.view.user_page()
                             manner = self.view.read_input()
                             if manner == '1': # change password
-                                new = self.model.encode(self.view.new_pass()) # password analysis???
+                                new = self.model.encode(self.view.new_pass())
                                 self.model.update_password(id, new)
                                 self.view.valid()
                             elif manner == '2': # check current vaccination record
@@ -53,35 +53,35 @@ class Controller:
                         while True:
                             self.view.admin_page()
                             ad_ac = self.view.read_input()
-                            if ad_ac == '1': # list out all information with indentation
+                            if ad_ac == '1':
                                 self.view.list_all()
-                            elif ad_ac == '2': # list out all the teaching staffs and students, who haven't been vaccinated, in the faculty of Engineering.
+                            elif ad_ac == '2':
                                 self.view.list_all_nova()
                             elif ad_ac == '3':
-                                self.view.show_dep('-1') # displays all the student and staff, together with the percentage of fully vaccinated and haven't vaccinated ones, of a specific department. 
-                            elif ad_ac == '4':
+                                self.view.show_dep('-1')
+                            elif ad_ac == '4': # change the passowrd of administrator
                                 secr = self.model.encode(self.view.new_pass())
                                 self.model.update_admin(secr)
                                 self.view.valid()
-                            elif ad_ac == '5':
+                            elif ad_ac == '5': # update the list of recognised vaccines
                                 recg = self.view.new_vacc()
                                 self.model.update_vacc(recg)
                                 self.view.valid()
-                            elif ad_ac == '6': #add new recognised vaccines into the the of recognised vaccines
+                            elif ad_ac == '6': # logout
                                 break
                             elif ad_ac == '7':
                                 return
                             else:
                                 self.view.inv_info()
                                 continue
-                    elif which == '3': # registration
+                    elif which == '3': # user registration
                         u_id = self.view.get_id()
                         l_n, f_n = self.view.get_name()
                         dep = self.view.choose_dpt()
                         inj_info = self.view.get_inj_info()
                         who = self.view.get_who()
                         secret = self.model.encode(self.view.new_pass())
-                        self.model.add_tuple(u_id, l_n, f_n, dep, inj_info, who, secret) # append all the information of this user to model fileds
+                        self.model.add_tuple(u_id, l_n, f_n, dep, inj_info, who, secret) # append all the information of this newly created user to model fileds
                         self.view.valid()
                     elif which == '4':
                         break
