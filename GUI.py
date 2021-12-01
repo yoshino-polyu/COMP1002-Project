@@ -81,7 +81,7 @@ class GUIv:
         window_user=Tk()
         window_user.title('1002')
         window_user.geometry('500x500')
-        button1 = Button(window_user, text = "Change Pass", font = ('Arial', 15), command = self.new_pass)
+        button1 = Button(window_user, text = "Change Password", font = ('Arial', 15), command = self.new_pass)
         button2 = Button(window_user, text = "See Record", font = ('Arial', 15), command = self.see_page)
         button3 = Button(window_user, text = "Update Record", font = ('Arial', 15), command = self.update_page)
         button4 = Button(window_user, text = "Log out", font = ('Arial', 15), command = window_user.destroy)
@@ -110,12 +110,19 @@ class GUIv:
             if (i.lower() > 'z' or i.lower() < 'a') and (i > '9' or i < '0'):
                 messagebox.showerror(title='Warning', message="Password has unexpected characters, please ensure it only contains 6 ~ 20 bits of numbers or letters")
         window_user_change.mainloop()
-        self.model.update_password(ID, a)
-        return a
+        buttonC = Button(window_user_change, text = "Change", font = ('Arial', 15), command = lambda:self.model.update_password(ID, a))
+        buttonC.place(300, 124)
 
     def see_page(self):
         global window_see
         window_see=Tk()
+        window_see.geometry('500x500')
+        if(self.model.info[4] == '-1'):
+            pass #user has full injected
+        else:
+            pass #str(self.model.info[4]) + vaccinations have been recived.
+        for i in self.model.info[5]:
+            pass # i = 'BTN_20_09_2021'
         window_see.mainloop()
 
     def update_page(self):
@@ -152,7 +159,21 @@ class GUIv:
     def list_unv_page(self):
         global window_list_unv
         window_list_unv = Tk()
-        
+        # self.model.isInject['0']
+        #
+        #
+        #
+        cnt = len(self.model.info) - 1
+        ncnt = 0
+        for i in self.model.isInjected['0']:
+            ncnt += 1
+            if(i[6] == 1):
+                print("Student", end = ' ')
+            else:
+                print("Stuff", end = ' ')
+            print(i[1] + " " + i[2] + " ("+ i[0]+") haven't been vaccinated.")
+        if(cnt > 0):
+            print(str(round(ncnt/cnt * 100,2)) + "%" + " students/stuffs haven't been vaccinated.")
         window_list_unv.mainloop()
 
     def display_page(self):
@@ -394,6 +415,12 @@ class GUIv:
             self.show_dep(i)
 
     def show_dep(self, dep):
+        # output 
+        #
+        #
+        #
+        #
+        #
         print("Department: "+dep.upper())
         cnt = 0
         vcnt = 0
@@ -421,6 +448,7 @@ class GUIv:
         if(cnt > 0):
             print(str(round(vcnt/cnt * 100,2))+"%"+" students/stuffs have been fully vaccinated")
             print(str(round(ncnt/cnt * 100,2))+"%"+" students/stuffs haven't been vaccinated")
+            # show a picture
         print("---------------------------------")
 
     def read_input(self):
@@ -438,6 +466,14 @@ class GUIv:
         self.record(ID)
         num_inj = self.model.id[ID][4]
         rd = self.model.id[ID][5]
+
+        # Please input how many injections you have received: num_inj
+        # 1. create new, 2.delete last, 3.exit and ensure change # rd
+        # 3. self.model.info[4] = str(num_inj)
+        # 3. info[5] = rd
+
+
+
         if(input("Edit the number of injections? [y/n]: ").lower() == 'y'):
             print("Please input how many injections you have received:")
             num_inj = input()
