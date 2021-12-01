@@ -35,16 +35,14 @@ class GUIv:
         global entryID
         entryID = Entry(window_login_user, textvariable=varID)
         entryID.place(x=120, y=124)
-        global uid
-        uid=entryID.get()
+        global ID
+        ID=entryID.get()
         global varPwd
         varPwd = StringVar(window_login_user, value='')
         global entryPwd
         entryPwd = Entry(window_login_user,show='*', textvariable=varPwd)
         entryPwd.place(x=120, y=164)
-        global judge
-        judge = 0
-        buttonOk = Button(window_login_user, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command = lambda:self.log_in(judge))
+        buttonOk = Button(window_login_user, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command = lambda:self.log_in_user())
         buttonOk.place(x=65, y=200, width=200, height=30)
         window_login_user.mainloop()
 
@@ -60,9 +58,7 @@ class GUIv:
         global entryPwd
         entryPwd = Entry(window_login_admin,show='*', textvariable=varPwd)
         entryPwd.place(x=120, y=164)
-        global judge
-        judge = -1
-        buttonOk = Button(window_login_admin, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=lambda:self.log_in(judge))
+        buttonOk = Button(window_login_admin, text='LOGIN', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=lambda:self.log_in_admin())
         buttonOk.place(x=65, y=200, width=200, height=30)
         window_login_admin.mainloop()
 
@@ -111,7 +107,7 @@ class GUIv:
                 messagebox.showerror(title='Warning', message="Password has unexpected characters, please ensure it only contains 6 ~ 20 bits of numbers or letters")
         window_user_change.mainloop()
         
-        self.model.update_password(uid, a)
+        self.model.update_password(ID, a)
 
     def see_page(self):
         global window_see
@@ -130,18 +126,18 @@ class GUIv:
         window_admin=Tk()
         window_admin.title('1002')
         window_admin.geometry('500x500')
-        button1 = Button(window_admin, text = "list out all information", font = ('Arial', 15), command = self.list_all_page)
-        button2 = Button(window_admin, text = "list out all people who haven't been vaccinated", font = ('Arial', 15), command = self.list_unv_page)
+        button1 = Button(window_admin, text = "list out all information", font = ('Arial', 15), command = lambda:self.list_all_page)
+        button2 = Button(window_admin, text = "list out all people who haven't been vaccinated", font = ('Arial', 15), command = lambda:self.list_unv_page)
         button3 = Button(window_admin, text = "Displays the percentage", font = ('Arial', 15), command = self.display_page)
-        button4 = Button(window_admin, text = "Change password", font = ('Arial', 15), command = self.admin_change_page)
-        button5 = Button(window_admin, text = "Add new vaccination", font = ('Arial', 15), command = self.add_page)
+        button4 = Button(window_admin, text = "Change password", font = ('Arial', 15), command = lambda:self.admin_change_page)
+        button5 = Button(window_admin, text = "Add new vaccination", font = ('Arial', 15), command = self.new_vacc)
         button6 = Button(window_admin, text = "Log out", font = ('Arial', 15), command = window_admin.destroy)
         button1.place(x = 50, y = 20)
-        button2.place(x = 50, y = 50)
-        button3.place(x = 50, y = 80)
-        button4.place(x = 50, y = 110)
-        button5.place(x = 50, y = 140)
-        button6.place(x = 50, y = 170)
+        button2.place(x = 50, y = 60)
+        button3.place(x = 50, y = 100)
+        button4.place(x = 50, y = 140)
+        button5.place(x = 50, y = 180)
+        button6.place(x = 50, y = 220)
         window_admin.mainloop()
 
     def list_all_page(self):
@@ -181,11 +177,15 @@ class GUIv:
     def new_vacc(self):
         global window_add
         window_add=Tk()
+        window_add.geometry('500x500')
         vac = self.model.rec_vac
         label1 = Label(window_add, text="Current recognised vaccines: ")
+        label1.pack()
         for i in enumerate(vac[1:]):
             label2 = Label(window_add, text=str(i[0]+1)+". "+i[1])
+            label2.pack()
         label3 = Label(window_add,text="----------------------")
+        label3.pack()
         choose = {1: 'add a new recognised vaccines\n',2: 'delete one vaccines\n',3: 'quit\n'}
         dic={}
         for i in range(len(choose)):
@@ -215,9 +215,9 @@ class GUIv:
         return vac
        
     def creat_page(self):
-            label=Label(window_register, text="Please input the vaccination record: (vaccination_day_month_year, example: AZ_01_09_2021)\n")
-            varvac = tk.StringVar(window_register, value='')
-            entryvac = tk.Entry(window_register,show='*', textvariable=varvac)
+            label=Label(window_add, text="Please input the vaccination record: (vaccination_day_month_year, example: AZ_01_09_2021)\n")
+            varvac = tk.StringVar(window_add, value='')
+            entryvac = tk.Entry(window_add,show='*', textvariable=varvac)
             rc = entryvac.get().upper()
             ck = rc.split('_')
             if(len(ck) != 4):
@@ -230,27 +230,26 @@ class GUIv:
                 messagebox.showerror(title='Warning', message='Invalid input, please try again!')
             record.append(rc)
 
-    def log_in(self, x):        
-        if x == 0:
-            ID = entryID.get()
-            pwd = self.model.encode(entryPwd.get())
-            if ID in self.model.password and pwd == self.model.password[ID]:
-                messagebox.showinfo(title = 'Congratulations', message='Login successfully!')
-                self.user_page()
-            else:
-                messagebox.showerror(title='Warning', message='Your ID or passport is wrong')
-                varID.set('')
-                varPwd.set('')
-        if x == -1:
-            pwd = self.model.encode(entryPwd.get())
-            if pwd == self.model.admin_password:
-                messagebox.showinfo(title = 'Congratulations', message='Login successfully!')
-                self.admin_page()
-            else:
-                if pwd != self.model.password:
-                    messagebox.showerror(title='Warning', message='Your ID or passport is wrong')
-                    varID.set('')
-                    varPwd.set('')
+    def log_in_user(self):        
+        ID = entryID.get()
+        pwd = self.model.encode(entryPwd.get())
+        if ID in self.model.password and pwd == self.model.password[ID]:
+            messagebox.showinfo(title = 'Congratulations', message='Login successfully!')
+            self.user_page()
+        else:
+            messagebox.showerror(title='Warning', message='Your ID or passport is wrong')
+            varID.set('')
+            varPwd.set('')
+        
+    def log_in_admin(self):
+        pwd = self.model.encode(entryPwd.get())
+        if pwd == self.model.admin_password:
+            messagebox.showinfo(title = 'Congratulations', message='Login successfully!')
+            self.admin_page()
+        else:
+            messagebox.showerror(title='Warning', message='Your ID or passport is wrong')
+            varID.set('')
+            varPwd.set('')
     
     def get_who(self):
         window_who =Tk()
@@ -276,9 +275,9 @@ class GUIv:
         label1.pack()
         label2.pack()
         varid = StringVar(window_id, value='')
-        entryid = Entry(window_id, textvariable=varid)
-        entryid.place(x=120, y=190)
-        id = entryid.get()
+        entryidr = Entry(window_id, textvariable=varid)
+        entryidr.place(x=120, y=190)
+        id = entryidr.get()
         buttonOk = Button(window_id, text='OK', bg='#%02x%02x%02x' %(5, 187, 251), fg='white', relief='flat', command=lambda:self.id_get(id))
         buttonOk.place(x=120, y = 220, width=200, height=30)
         if judgement == 0:
