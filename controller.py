@@ -3,7 +3,7 @@ from model import Model
 from view import View
 from GUI import GUIv
 """
-The Controller class translates user actions into operations on the Model
+The Controller class translates user actions into operations on the Model.
 """
 class Controller:
     def __init__(self, model : Model, view : View, GUIv: GUIv) -> None:

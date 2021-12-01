@@ -5,7 +5,10 @@ import tkinter as tk
 import tkinter.messagebox
 from tkinter import messagebox
 #from matplotlib import pyplot as plt
-
+"""
+The GUIv is both an observer and modifer of Model. Since it is difficult for GUI to return "values" to Controller, 
+the object of GUIv will change the state of self.model directly.
+"""
 class GUIv:
     def __init__(self, model : Model) -> None: 
         self.model = model
