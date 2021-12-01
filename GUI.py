@@ -62,7 +62,6 @@ class GUIv:
         buttonOk.place(x=65, y=200, width=200, height=30)
         window_login_admin.mainloop()
 
-
     def register_page(self):
         window_register=Tk()
         window_register.title('1002')
@@ -80,10 +79,12 @@ class GUIv:
     def user_page(self):
         global window_user
         window_user=Tk()
+        window_user.title('1002')
+        window_user.geometry('500x500')
         button1 = Button(window_user, text = "Change Pass", font = ('Arial', 15), command = self.new_pass)
-        button2 = Button(window_user, text = "User", font = ('Arial', 15), command = self.see_page)
-        button3 = Button(window_user, text = "User", font = ('Arial', 15), command = self.update_page)
-        button4 = Button(window_user, text = "User", font = ('Arial', 15), command = window_user.destroy)
+        button2 = Button(window_user, text = "See Record", font = ('Arial', 15), command = self.see_page)
+        button3 = Button(window_user, text = "Update Record", font = ('Arial', 15), command = self.update_page)
+        button4 = Button(window_user, text = "Log out", font = ('Arial', 15), command = window_user.destroy)
         button1.place(x = 180, y = 50)
         button2.place(x = 180, y = 100)
         button3.place(x = 180, y = 150)
@@ -93,9 +94,12 @@ class GUIv:
     def new_pass(self):
         global window_user_change
         window_user_change=Tk()
-        window_login_user('1002')
-        window_login_user.geometry('500x500')
-        label =Label(window_user_change, text = "Please enter the password formed by 6 ~ 20 bits of numbers and letters: ")
+        window_user_change.title('1002')
+        window_user_change.geometry('500x500')
+        label1=Label(window_user_change, text = "Please enter the password formed")
+        label2=Label(window_user_change,  text= "by 6 ~ 20 bits of numbers and letters: ")
+        label1.pack()
+        label2.pack()
         varpass = StringVar(window_user_change, value='')
         entrypass = Entry(window_user_change, textvariable=varpass)
         entrypass.place(x=120, y=124)
@@ -106,13 +110,12 @@ class GUIv:
             if (i.lower() > 'z' or i.lower() < 'a') and (i > '9' or i < '0'):
                 messagebox.showerror(title='Warning', message="Password has unexpected characters, please ensure it only contains 6 ~ 20 bits of numbers or letters")
         window_user_change.mainloop()
-        
         self.model.update_password(ID, a)
+        return a
 
     def see_page(self):
         global window_see
         window_see=Tk()
-
         window_see.mainloop()
 
     def update_page(self):
@@ -172,6 +175,7 @@ class GUIv:
         global window_admin_change
         window_admin_change=Tk()
         window_admin.geometry('500x500')
+
         window_admin_change.mainloop()
 
     def new_vacc(self):
@@ -186,49 +190,32 @@ class GUIv:
             label2.pack()
         label3 = Label(window_add,text="----------------------")
         label3.pack()
-        choose = {1: 'add a new recognised vaccines\n',2: 'delete one vaccines\n',3: 'quit\n'}
-        dic={}
-        for i in range(len(choose)):
-            dic[i]=BooleanVar()
-            Checkbutton(window_add, text=choose[i], variable=dic[i]).grid(row=i+2)
-            if dic[i].get() == True:
-                s = i
-        s = input("1. add a new recognised vaccines\n2. delete one vaccines\n3. quit\n")
+        self.v4=IntVar()
+        rb1 = Radiobutton(window_add, text = 'add a new recognised vaccines\n', bg =  "red", variable = self.v4, value = 1)
+        rb2 = Radiobutton(window_add, text = 'delete one vaccines\n', bg =  "red", variable = self.v4, value = 2)
+        rb3 = Radiobutton(window_add, text = 'quit\n', bg =  "red", variable = self.v4, value = 3)
+        s = self.v4
         if(s == '1'):
             label4=Label(window_add, text="Add Vaccination: ")
+            label4.pack()
             varvacc = StringVar(window_add, value='')
             entryvacc = Entry(window_add,show='*', textvariable=varvacc)
-            vac.append(entryvacc.get()).upper()
+            entryvacc.pack()
+            vac.append(entryvacc.get().upper())
         elif (s == '2'):
             try:
                 label5=Label(window_add, text="Delete Vaccination: ")
+                label5.pack()
                 varvacc = StringVar(window_add, value='')
                 entryvacc = Entry(window_add,show='*', textvariable=varvacc)
-                vac.remove(entryvacc.get()).upper()
+                entryvacc.pack()
+                vac.remove(entryvacc.get().upper())
             except Exception:
                 messagebox.showerror(title='Warning', message='Invalid input, please try again!')
         elif (s == '3'):
             window_add.destroy()
-        else:
-            messagebox.showerror(title='Warning', message='Invalid input, please try again!')
         window_add.mainloop()
         return vac
-       
-    def creat_page(self):
-            label=Label(window_add, text="Please input the vaccination record: (vaccination_day_month_year, example: AZ_01_09_2021)\n")
-            varvac = tk.StringVar(window_add, value='')
-            entryvac = tk.Entry(window_add,show='*', textvariable=varvac)
-            rc = entryvac.get().upper()
-            ck = rc.split('_')
-            if(len(ck) != 4):
-                messagebox.showerror(title='Warning', message='Invalid input, please try again!')
-            ligal = 0
-            for i in self.model.rec_vac[1: ]:
-                if(i == ck[0]):
-                    ligal = 1
-            if(ligal == 0):
-                messagebox.showerror(title='Warning', message='Invalid input, please try again!')
-            record.append(rc)
 
     def log_in_user(self):        
         ID = entryID.get()
@@ -354,8 +341,9 @@ class GUIv:
     def get_inj_info(self):
         """ returns number of injection and the vaccination information in the format of string. """
         window_inj=Tk()
-        window_inj.geometry('500x500')
+        window_inj.geometry('1000x1000')
         labelinj = Label(window_inj, text="Please input how many injections you have received: ")
+        labelinj.pack()
         global varinj
         varinj = StringVar(window_inj, value='')
         global entryinj
@@ -365,21 +353,35 @@ class GUIv:
         labelvac = Label(window_inj, text="Below are some of the vaccines recognized by the Hong Kong government:")
         for i in enumerate(self.model.rec_vac[1:]):
             labelx = Label(window_inj, text=str(i[0]+1)+'. '+i[1])
-        global record
         record = []
-        print("\nCurrent Record: \n")
+        labely=Lael(window_inj, text="\nCurrent Record: \n")
         for i in enumerate(record):
             label1 = Label(window_inj, text=str(i[0]+1)+'. '+i[1])
         label2 = Label(window_inj, text="-------------------\n")
-        self.v4 = IntVar()
-        rbinj1 = Radiobutton(window_inj, text = 'create a new record\n', bg =  "yellow", variable = self.v4, value = 1)
-        rbinj2 = Radiobutton(window_inj, text = 'delete the last record\n', bg =  "yellow", variable = self.v4, value = 2)
-        rbinj3 = Radiobutton(window_inj, text = 'stop editing\n', bg =  "yellow", variable = self.v4, value = 3)
-        s = self.v4
+        self.v5 = IntVar()
+        rbinj1 = Radiobutton(window_inj, text = 'create a new record\n', bg =  "yellow", variable = self.v5, value = 1)
+        rbinj2 = Radiobutton(window_inj, text = 'delete the last record\n', bg =  "yellow", variable = self.v5, value = 2)
+        rbinj3 = Radiobutton(window_inj, text = 'stop editing\n', bg =  "yellow", variable = self.v5, value = 3)
+        s = self.v5
         if(s == '3'):
             window_inj.destroy()
         elif(s == '1'):
             self.create_page()
+            label3=Label(window_add, text="Please input the vaccination record: (vaccination_day_month_year, example: AZ_01_09_2021)\n")
+            varvac = tk.StringVar(window_add, value='')
+            entryvac = tk.Entry(window_add,show='*', textvariable=varvac)
+            entryvac.pack()
+            rc = entryvac.get().upper()
+            ck = rc.split('_')
+            if(len(ck) != 4):
+                messagebox.showerror(title='Warning', message='Invalid input, please try again!')
+            ligal = 0
+            for i in self.model.rec_vac[1: ]:
+                if(i == ck[0]):
+                    ligal = 1
+            if(ligal == 0):
+                messagebox.showerror(title='Warning', message='Invalid input, please try again!')
+            record.append(rc)
         elif(s == '2'):
             if(len(record) > 0):
                 record.pop()
