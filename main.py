@@ -13,8 +13,8 @@ def main():
         controller.run()
     except Exception:
         print("Internal error exists!")
-        sys.exit()
     finally:
         model.write_file()
+        sys.exit()
         
 main()
